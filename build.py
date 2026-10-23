@@ -62,14 +62,15 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(var(--w)*1px),1fr));gap:12px;margin-top:14px}
 .c{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:8px;text-align:center;position:relative;transition:transform .15s,box-shadow .15s}
 .c:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.14)}
-.c img{width:100%;border-radius:8px;display:block}
+.c img{width:100%;aspect-ratio:488/680;border-radius:8px;display:block}
 .c .n{font-weight:600;margin-top:6px;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .c small{color:var(--mu)}.c a{color:inherit;text-decoration:none}
-.c{--b:clamp(36px,calc(var(--w)*.4px),90px)}
-.c.own>*{opacity:.55;filter:grayscale(1)}
-.c.own::after{content:"✓";position:absolute;left:50%;top:calc(8px + (var(--w)*1px - 16px)*.697);transform:translate(-50%,-50%);width:var(--b);height:var(--b);border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:calc(var(--b)*.6);font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none}
+.c{--b:clamp(36px,40cqw,90px);container-type:inline-size;content-visibility:auto;contain-intrinsic-block-size:auto 340px}
+.c.own>:not(.ok){opacity:.55;filter:grayscale(1)}
+.ok{display:none}
+.c.own>.ok{display:block;position:absolute;left:50%;top:calc(8px + 100cqw*.697);transform:translate(-50%,-50%);width:var(--b);height:var(--b);border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(15,17,21,.6) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/55% no-repeat;backdrop-filter:blur(6px);pointer-events:none}
 .vs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.v{flex:1 1 40%;position:relative;text-align:center;white-space:nowrap;cursor:pointer;padding:6px 2px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);font-size:clamp(9px,calc(var(--w)*.075px),13px);font-weight:600}
+.v{flex:1 1 40%;position:relative;text-align:center;white-space:nowrap;cursor:pointer;padding:6px 2px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);font-size:clamp(9px,7.5cqw,13px);font-weight:600}
 .v input{position:absolute;opacity:0;width:0;height:0}.v:focus-within{outline:2px solid var(--ac)}
 .v-foil{background:linear-gradient(120deg,#ff9aa2,#ffdf93,#b5ead7,#9ad0f5,#cdb4f6);color:#1c1e21;border-color:transparent}
 .v-etched{background:linear-gradient(120deg,#e5e7eb,#9ca3af);color:#1c1e21;border-color:transparent}
@@ -78,7 +79,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .g.list{display:flex;flex-direction:column;gap:6px}
 .list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
 .list .c img{width:36px}.list .c>a{flex:none}.list .c>.nm{flex:1}.list .c .n{min-height:0;-webkit-line-clamp:1}
-.list .vs{margin:0;width:230px;flex:none}.list .c.own::after{position:static;transform:none;width:24px;height:24px;font-size:15px;flex:none}.list .c:hover{transform:none;box-shadow:none}
+.list .vs{margin:0;width:230px;flex:none}.list .c.own>.ok{position:static;transform:none;width:24px;height:24px;flex:none}.list .c:hover{transform:none;box-shadow:none}
 .io{margin-top:24px}.io textarea{width:100%;max-width:520px}
 .hide{display:none!important}
 </style>
@@ -119,7 +120,7 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},N=D.reduce((a,d)=>a+d.fin.length,0);
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}</div>`).join("");
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i></div>`).join("");
 const els=[...g.children];
 function draw(){let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let all=true;
@@ -139,8 +140,9 @@ $("so").onchange=sort;
 const setV=()=>{const l=g.classList.contains("list");$("vw").innerHTML=l?IC.grid:IC.list;$("vw").title=l?"Grid view":"List view";$("sz").hidden=l};
 $("vw").onclick=()=>{g.classList.toggle("list");setV()};setV();
 let sz="150";try{sz=localStorage.getItem("ff-size")||sz}catch(e){}
-$("sz").value=sz;const setZ=()=>document.documentElement.style.setProperty("--w",$("sz").value);setZ();
-$("sz").oninput=()=>{setZ();try{localStorage.setItem("ff-size",$("sz").value)}catch(e){}};
+$("sz").value=sz;const setZ=()=>g.style.setProperty("--w",$("sz").value);setZ();
+let rz=0;$("sz").oninput=()=>{rz=rz||requestAnimationFrame(()=>{rz=0;setZ()})};
+$("sz").onchange=()=>{try{localStorage.setItem("ff-size",$("sz").value)}catch(e){}};
 $("ex").onclick=()=>$("t").value=D.flatMap(d=>d.fin.filter(f=>own.has(d.k+"-"+f)).map(f=>`1 ${d.n} (${d.s}) ${d.c}${f=="foil"?" *F*":f=="etched"?" *E*":""}`)).join("\\n");
 $("im").onclick=()=>{$("t").value.split("\\n").forEach(l=>{const m=l.match(/\\((\\w+)\\)\\s+(\\S+)(.*)$/);if(!m)return;
 const w=/\\*F\\*/.test(m[3])?"foil":/\\*E\\*/.test(m[3])?"etched":"nonfoil";
