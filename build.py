@@ -1,7 +1,7 @@
 """Builds docs/index.html: every tracked Final Fantasy card with art and per-finish owned checkboxes (saved in the browser)."""
 import html, json, os, urllib.parse, urllib.request
 
-QUERY = ("e:fin or e:fca or e:tfin or e:rfin or e:fic or e:tfic or e:afic or e:afin or e:pss5 or e:wfin"
+QUERY = ("e:fin or e:fca or e:pfin or e:tfin or e:rfin or e:fic or e:tfic or e:afic or e:afin or e:pss5 or e:wfin"
          " or (e:sch (cn:39 or cn:40 or cn:41))"
          " or (e:pw25 (cn:2 or cn:4 or cn:16))"
          " or (e:sld ((cn>=1858 cn<=1872) or (cn>=7001 cn<=7008)))")
@@ -67,7 +67,7 @@ th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
 const setT=t=>{th=t;document.documentElement.dataset.t=t;$("th").textContent=t=="dark"?"Light mode":"Dark mode"};
 $("th").onclick=()=>{setT(th=="dark"?"light":"dark");try{localStorage.setItem("ff-theme",th)}catch(e){}};setT(th);
 const save=()=>{try{localStorage.setItem("ff-owned",JSON.stringify([...own]))}catch(e){}};
-const ORDER=["FIN","FCA","TFIN","RFIN","FIC","TFIC","AFIC","AFIN","PSS5","WFIN","SCH","PW25","SLD"],have=new Set(D.map(d=>d.s)),
+const ORDER=["FIN","FCA","PFIN","TFIN","RFIN","FIC","TFIC","AFIC","AFIN","PSS5","WFIN","SCH","PW25","SLD"],have=new Set(D.map(d=>d.s)),
 sets=[...ORDER.filter(s=>have.has(s)),...[...have].filter(s=>!ORDER.includes(s))],rank=Object.fromEntries(sets.map((s,i)=>[s,i]));let cur="";
 $("tabs").innerHTML=["",...sets].map(s=>`<button class=t data-s="${s}" title="${esc((SI[s]||{n:s}).n)}">${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${s||"All"}</button>`).join("");
 $("tabs").onclick=e=>{const b=e.target.closest(".t");if(b){cur=b.dataset.s;draw()}};
