@@ -1,0 +1,1305 @@
+1 Garland, Royal Kidnapper // Garland, Royal Kidnapper (AFIC) 1
+1 The Destined Warrior // The Destined Warrior (AFIC) 2
+1 The Destined White Mage // The Destined White Mage (AFIC) 3
+1 Chaos Shrine's Black Crystal // Chaos Shrine's Black Crystal (AFIC) 4
+1 The Destined Thief // The Destined Thief (AFIC) 5
+1 The Destined Black Mage // The Destined Black Mage (AFIC) 6
+1 Edea, Possessed Sorceress // Edea, Possessed Sorceress (AFIC) 7
+1 Fated Clash // Fated Clash (AFIC) 8
+1 Rinoa, Angel Wing // Rinoa, Angel Wing (AFIC) 9
+1 Seifer, Balamb Rival // Seifer, Balamb Rival (AFIC) 10
+1 Duelist's Flame // Duelist's Flame (AFIC) 11
+1 Squall, Gunblade Duelist // Squall, Gunblade Duelist (AFIC) 12
+1 Brilliant Wings // Brilliant Wings (AFIC) 13
+1 Judgment of Alexander // Judgment of Alexander (AFIC) 14
+1 Mega Flare // Mega Flare (AFIC) 15
+1 Amarant Coral // Amarant Coral (AFIC) 16
+1 Vivi's Persistence // Vivi's Persistence (AFIC) 17
+1 Search for Dagger // Search for Dagger (AFIC) 18
+1 Noctis, Heir Apparent // Noctis, Heir Apparent (AFIC) 19
+1 Fishing Gear // Fishing Gear (AFIC) 20
+1 Chocobo Camp // Chocobo Camp (AFIC) 21
+1 Flash Photography // Flash Photography (AFIC) 22
+1 Campsite Cuisine // Campsite Cuisine (AFIC) 23
+1 Warrior's Resolve // Warrior's Resolve (AFIC) 24
+1 Delivery Moogle // Delivery Moogle (AFIN) 1
+1 Machinist's Arsenal // Machinist's Arsenal (AFIN) 2
+1 Stiltzkin, Moogle Merchant // Stiltzkin, Moogle Merchant (AFIN) 3
+1 Astrologian's Planisphere // Astrologian's Planisphere (AFIN) 4
+1 Sage's Nouliths // Sage's Nouliths (AFIN) 5
+1 The Final Days // The Final Days (AFIN) 6
+1 Yiazmat, Ultimate Mark // Yiazmat, Ultimate Mark (AFIN) 7
+1 Barret Wallace // Barret Wallace (AFIN) 8
+1 Sorceress's Schemes // Sorceress's Schemes (AFIN) 9
+1 Gysahl Greens // Gysahl Greens (AFIN) 10
+1 Quina, Qu Gourmet // Quina, Qu Gourmet (AFIN) 11
+1 Hades, Sorcerer of Eld // Hades, Sorcerer of Eld (AFIN) 12
+1 The Emperor of Palamecia // The Emperor of Palamecia (AFIN) 13
+1 Jenova, Ancient Calamity // Jenova, Ancient Calamity (AFIN) 14
+1 Locke Cole // Locke Cole (AFIN) 15
+1 Shantotto, Tactician Magician // Shantotto, Tactician Magician (AFIN) 16
+1 Vivi Ornitier // Vivi Ornitier (AFIN) 17
+1 Rabanastre, Royal City // Rabanastre, Royal City (AFIN) 18
+1 G'raha Tia, Scion Reborn // G'raha Tia, Scion Reborn (AFIN) 19
+1 Terra, Herald of Hope // Terra, Herald of Hope (AFIN) 20
+1 Y'shtola, Night's Blessed // Y'shtola, Night's Blessed (AFIN) 21
+1 Yuna, Grand Summoner // Yuna, Grand Summoner (AFIN) 22
+1 Cloud's Limit Break // Cloud's Limit Break (AFIN) 23
+1 Dancer's Chakrams // Dancer's Chakrams (AFIN) 24
+1 Tataru Taru // Tataru Taru (AFIN) 25
+1 Shadow, Mysterious Assassin // Shadow, Mysterious Assassin (AFIN) 26
+1 Edgar, Master Machinist // Edgar, Master Machinist (AFIN) 27
+1 Estinien Varlineau // Estinien Varlineau (AFIN) 28
+1 Kimahri, Valiant Guardian // Kimahri, Valiant Guardian (AFIN) 29
+1 Red XIII, Proud Warrior // Red XIII, Proud Warrior (AFIN) 30
+1 Farewell // Farewell (AFIN) 31
+1 Together Forever // Together Forever (AFIN) 32
+1 Ruinous Ultimatum // Ruinous Ultimatum (AFIN) 33
+1 Hydaelyn, the Mothercrystal // Hydaelyn, the Mothercrystal (AFIN) 34
+1 Nibelheim Aflame // Nibelheim Aflame (AFIN) 35
+1 Sin, Spira's Punishment // Sin, Spira's Punishment (AFIN) 36
+1 Summon: Bahamut // Summon: Bahamut (AFIN) 37
+1 Summon: Leviathan // Summon: Leviathan (AFIN) 38
+1 Braska's Final Aeon // Braska's Final Aeon (AFIN) 39
+1 Summon: Esper Ramuh // Summon: Esper Ramuh (AFIN) 40
+1 Summon: Good King Mog XII // Summon: Good King Mog XII (AFIN) 41
+1 Dion, Bahamut's Dominant // Dion, Bahamut's Dominant (AFIN) 42
+1 Jill, Shiva's Dominant // Jill, Shiva's Dominant (AFIN) 43
+1 Sephiroth, Fabled SOLDIER // Sephiroth, Fabled SOLDIER (AFIN) 44
+1 Golbez, Crystal Collector // Golbez, Crystal Collector (AFIN) 45
+1 Kefka, Court Mage // Kefka, Court Mage (AFIN) 46
+1 Squall, SeeD Mercenary // Squall, SeeD Mercenary (AFIN) 47
+1 Yuna, Hope of Spira // Yuna, Hope of Spira (AFIN) 48
+1 Zidane, Tantalus Thief // Zidane, Tantalus Thief (AFIN) 49
+1 Cloud, Ex-SOLDIER // Cloud, Ex-SOLDIER (AFIN) 50
+1 G'raha Tia, Scion Reborn // G'raha Tia, Scion Reborn (AFIN) 51
+1 Tifa, Martial Artist // Tifa, Martial Artist (AFIN) 52
+1 Y'shtola, Night's Blessed // Y'shtola, Night's Blessed (AFIN) 53
+1 Adeline, Resplendent Cathar (FCA) 1
+1 Ranger-Captain of Eos (FCA) 2
+1 Sram, Senior Edificer (FCA) 3
+1 Counterspell (FCA) 4
+1 Urza, Lord High Artificer (FCA) 5
+1 Venser, Shaper Savant (FCA) 6
+1 Bolas's Citadel (FCA) 7
+1 Dark Ritual (FCA) 8
+1 Fatal Push (FCA) 9
+1 Syr Konrad, the Grim (FCA) 10
+1 Yawgmoth, Thran Physician (FCA) 11
+1 Ancient Copper Dragon (FCA) 12
+1 Godo, Bandit Warlord (FCA) 13
+1 Purphoros, God of the Forge (FCA) 14
+1 Azusa, Lost but Seeking (FCA) 15
+1 Nyxbloom Ancient (FCA) 16
+1 Jodah, the Unifier (FCA) 17
+1 Tymna the Weaver (FCA) 18
+1 Winota, Joiner of Forces (FCA) 19
+1 Traxos, Scourge of Kroog (FCA) 20
+1 Akroma's Will (FCA) 21
+1 Danitha Capashen, Paragon (FCA) 22
+1 Kenrith, the Returned King (FCA) 23
+1 Loran of the Third Path (FCA) 24
+1 Mangara, the Diplomat (FCA) 25
+1 Stroke of Midnight (FCA) 26
+1 Wall of Omens (FCA) 27
+1 Brainstorm (FCA) 28
+1 Cryptic Command (FCA) 29
+1 Laboratory Maniac (FCA) 30
+1 Rhystic Study (FCA) 31
+1 Teferi, Mage of Zhalfir (FCA) 32
+1 Deadly Dispute (FCA) 33
+1 Diabolic Intent (FCA) 34
+1 Gix, Yawgmoth Praetor (FCA) 35
+1 K'rrik, Son of Yawgmoth (FCA) 36
+1 Varragoth, Bloodsky Sire (FCA) 37
+1 Captain Lannery Storm (FCA) 38
+1 Light Up the Stage (FCA) 39
+1 Lightning Bolt (FCA) 40
+1 Mizzix's Mastery (FCA) 41
+1 Najeela, the Blade-Blossom (FCA) 42
+1 Ragavan, Nimble Pilferer (FCA) 43
+1 Carpet of Flowers (FCA) 44
+1 Farseek (FCA) 45
+1 Fynn, the Fangbearer (FCA) 46
+1 Nature's Claim (FCA) 47
+1 Primeval Titan (FCA) 48
+1 Atraxa, Grand Unifier (FCA) 49
+1 Bruse Tarl, Boorish Herder (FCA) 50
+1 Dovin's Veto (FCA) 51
+1 Inalla, Archmage Ritualist (FCA) 52
+1 Ishai, Ojutai Dragonspeaker (FCA) 53
+1 Isshin, Two Heavens as One (FCA) 54
+1 Kinnan, Bonder Prodigy (FCA) 55
+1 Kraum, Ludevic's Opus (FCA) 56
+1 Muldrotha, the Gravetide (FCA) 57
+1 Thrasios, Triton Hero (FCA) 58
+1 Vial Smasher the Fierce (FCA) 59
+1 Yuriko, the Tiger's Shadow (FCA) 60
+1 Chromatic Lantern (FCA) 61
+1 Smuggler's Copter (FCA) 62
+1 Strixhaven Stadium (FCA) 63
+1 Command Beacon (FCA) 64
+1 Celes, Rune Knight (FIC) 1
+1 Cloud, Ex-SOLDIER (FIC) 2
+1 G'raha Tia, Scion Reborn (FIC) 3
+1 Terra, Herald of Hope (FIC) 4
+1 Tidus, Yuna's Guardian (FIC) 5
+1 Tifa, Martial Artist (FIC) 6
+1 Y'shtola, Night's Blessed (FIC) 7
+1 Yuna, Grand Summoner (FIC) 8
+1 Alisaie Leveilleur (FIC) 9
+1 Auron, Venerated Guardian (FIC) 10
+1 Champions from Beyond (FIC) 11
+1 Chocobo Knights (FIC) 12
+1 Cid, Freeflier Pilot (FIC) 13
+1 Cloud's Limit Break (FIC) 14
+1 Coin of Fate (FIC) 15
+1 Cyan, Vengeful Samurai (FIC) 16
+1 Dancer's Chakrams (FIC) 17
+1 Elena, Turk Recruit (FIC) 18
+1 Gatta and Luzzu (FIC) 19
+1 General Leo Cristophe (FIC) 20
+1 Heidegger, Shinra Executive (FIC) 21
+1 Helitrooper (FIC) 22
+1 Lord Jyscal Guado (FIC) 23
+1 Protection Magic (FIC) 24
+1 SOLDIER Military Program (FIC) 25
+1 Summon: Good King Mog XII (FIC) 26
+1 Summon: Ixion (FIC) 27
+1 Summon: Yojimbo (FIC) 28
+1 Summoner's Sending (FIC) 29
+1 Tataru Taru (FIC) 30
+1 Thancred Waters (FIC) 31
+1 Ultimate Magic: Holy (FIC) 32
+1 Alphinaud Leveilleur (FIC) 33
+1 Blitzball Stadium (FIC) 34
+1 Blue Mage's Cane (FIC) 35
+1 Hermes, Overseer of Elpis (FIC) 36
+1 Hraesvelgr of the First Brood (FIC) 37
+1 Lulu, Stern Guardian (FIC) 38
+1 O'aka, Traveling Merchant (FIC) 39
+1 Observed Stasis (FIC) 40
+1 Rikku, Resourceful Guardian (FIC) 41
+1 Summon: Valefor (FIC) 42
+1 Espers to Magicite (FIC) 43
+1 Eye of Nidhogg (FIC) 44
+1 The Falcon, Airship Restored (FIC) 45
+1 Fandaniel, Telophoroi Ascian (FIC) 46
+1 Interceptor, Shadow's Hound (FIC) 47
+1 Reaper's Scythe (FIC) 48
+1 Rejoin the Fight (FIC) 49
+1 Shadow, Mysterious Assassin (FIC) 50
+1 Siegfried, Famed Swordsman (FIC) 51
+1 Transpose (FIC) 52
+1 Avalanche of Sector 7 (FIC) 53
+1 Cait Sith, Fortune Teller (FIC) 54
+1 Gau, Feral Youth (FIC) 55
+1 Gogo, Mysterious Mime (FIC) 56
+1 Sabin, Master Monk (FIC) 57
+1 Snort (FIC) 58
+1 Strago and Relm (FIC) 59
+1 Summon: Esper Valigarmanda (FIC) 60
+1 Summon: Kujata (FIC) 61
+1 Ultimate Magic: Meteor (FIC) 62
+1 Umaro, Raging Yeti (FIC) 63
+1 Vincent, Vengeful Atoner (FIC) 64
+1 Yuffie, Materia Hunter (FIC) 65
+1 Bugenhagen, Wise Elder (FIC) 66
+1 Lifestream's Blessing (FIC) 67
+1 Maester Seymour (FIC) 68
+1 Professor Hojo (FIC) 69
+1 Sphere Grid (FIC) 70
+1 Summon: Magus Sisters (FIC) 71
+1 Summoning Materia (FIC) 72
+1 Tromell, Seymour's Butler (FIC) 73
+1 Yuna's Decision (FIC) 74
+1 Yuna's Whistle (FIC) 75
+1 Aerith, Last Ancient (FIC) 76
+1 Ardbert, Warrior of Darkness (FIC) 77
+1 Banon, the Returners' Leader (FIC) 78
+1 Barret, Avalanche Leader (FIC) 79
+1 Edgar, Master Machinist (FIC) 80
+1 Emet-Selch of the Third Seat (FIC) 81
+1 Estinien Varlineau (FIC) 82
+1 Hildibrand Manderville // Gentleman's Rise (FIC) 83
+1 Kefka, Dancing Mad (FIC) 84
+1 Kimahri, Valiant Guardian (FIC) 85
+1 Krile Baldesion (FIC) 86
+1 Locke, Treasure Hunter (FIC) 87
+1 Lyse Hext (FIC) 88
+1 Mog, Moogle Warrior (FIC) 89
+1 Papalymo Totolymo (FIC) 90
+1 Red XIII, Proud Warrior (FIC) 91
+1 Sephiroth, Fallen Hero (FIC) 92
+1 Setzer, Wandering Gambler (FIC) 93
+1 Shelinda, Yevon Acolyte (FIC) 94
+1 Sin, Unending Cataclysm (FIC) 95
+1 Urianger Augurelt (FIC) 96
+1 Wakka, Devoted Guardian (FIC) 97
+1 Conformer Shuriken (FIC) 98
+1 The Warring Triad (FIC) 99
+1 Wrecking Ball Arm (FIC) 100
+1 Champions from Beyond (FIC) 101
+1 Chocobo Knights (FIC) 102
+1 Cloud's Limit Break (FIC) 103
+1 Coin of Fate (FIC) 104
+1 Dancer's Chakrams (FIC) 105
+1 Helitrooper (FIC) 106
+1 Protection Magic (FIC) 107
+1 SOLDIER Military Program (FIC) 108
+1 Summoner's Sending (FIC) 109
+1 Ultimate Magic: Holy (FIC) 110
+1 Blitzball Stadium (FIC) 111
+1 Blue Mage's Cane (FIC) 112
+1 Observed Stasis (FIC) 113
+1 Espers to Magicite (FIC) 114
+1 Eye of Nidhogg (FIC) 115
+1 The Falcon, Airship Restored (FIC) 116
+1 Reaper's Scythe (FIC) 117
+1 Rejoin the Fight (FIC) 118
+1 Transpose (FIC) 119
+1 Snort (FIC) 120
+1 Ultimate Magic: Meteor (FIC) 121
+1 Lifestream's Blessing (FIC) 122
+1 Sphere Grid (FIC) 123
+1 Summoning Materia (FIC) 124
+1 Yuna's Decision (FIC) 125
+1 Yuna's Whistle (FIC) 126
+1 Conformer Shuriken (FIC) 127
+1 Wrecking Ball Arm (FIC) 128
+1 Alisaie Leveilleur (FIC) 129
+1 Auron, Venerated Guardian (FIC) 130
+1 Cid, Freeflier Pilot (FIC) 131
+1 Cyan, Vengeful Samurai (FIC) 132
+1 Elena, Turk Recruit (FIC) 133
+1 Gatta and Luzzu (FIC) 134
+1 General Leo Cristophe (FIC) 135
+1 Heidegger, Shinra Executive (FIC) 136
+1 Lord Jyscal Guado (FIC) 137
+1 Tataru Taru (FIC) 138
+1 Thancred Waters (FIC) 139
+1 Alphinaud Leveilleur (FIC) 140
+1 Hermes, Overseer of Elpis (FIC) 141
+1 Hraesvelgr of the First Brood (FIC) 142
+1 Lulu, Stern Guardian (FIC) 143
+1 O'aka, Traveling Merchant (FIC) 144
+1 Rikku, Resourceful Guardian (FIC) 145
+1 Fandaniel, Telophoroi Ascian (FIC) 146
+1 Interceptor, Shadow's Hound (FIC) 147
+1 Shadow, Mysterious Assassin (FIC) 148
+1 Siegfried, Famed Swordsman (FIC) 149
+1 Avalanche of Sector 7 (FIC) 150
+1 Cait Sith, Fortune Teller (FIC) 151
+1 Gau, Feral Youth (FIC) 152
+1 Gogo, Mysterious Mime (FIC) 153
+1 Sabin, Master Monk (FIC) 154
+1 Strago and Relm (FIC) 155
+1 Umaro, Raging Yeti (FIC) 156
+1 Vincent, Vengeful Atoner (FIC) 157
+1 Yuffie, Materia Hunter (FIC) 158
+1 Bugenhagen, Wise Elder (FIC) 159
+1 Maester Seymour (FIC) 160
+1 Professor Hojo (FIC) 161
+1 Tromell, Seymour's Butler (FIC) 162
+1 Aerith, Last Ancient (FIC) 163
+1 Ardbert, Warrior of Darkness (FIC) 164
+1 Banon, the Returners' Leader (FIC) 165
+1 Barret, Avalanche Leader (FIC) 166
+1 Celes, Rune Knight (FIC) 167
+1 Cloud, Ex-SOLDIER (FIC) 168
+1 Edgar, Master Machinist (FIC) 169
+1 Emet-Selch of the Third Seat (FIC) 170
+1 Estinien Varlineau (FIC) 171
+1 G'raha Tia, Scion Reborn (FIC) 172
+1 Hildibrand Manderville // Gentleman's Rise (FIC) 173
+1 Kefka, Dancing Mad (FIC) 174
+1 Kimahri, Valiant Guardian (FIC) 175
+1 Krile Baldesion (FIC) 176
+1 Locke, Treasure Hunter (FIC) 177
+1 Lyse Hext (FIC) 178
+1 Mog, Moogle Warrior (FIC) 179
+1 Papalymo Totolymo (FIC) 180
+1 Red XIII, Proud Warrior (FIC) 181
+1 Sephiroth, Fallen Hero (FIC) 182
+1 Setzer, Wandering Gambler (FIC) 183
+1 Shelinda, Yevon Acolyte (FIC) 184
+1 Sin, Unending Cataclysm (FIC) 185
+1 Terra, Herald of Hope (FIC) 186
+1 Tidus, Yuna's Guardian (FIC) 187
+1 Tifa, Martial Artist (FIC) 188
+1 Urianger Augurelt (FIC) 189
+1 Wakka, Devoted Guardian (FIC) 190
+1 Y'shtola, Night's Blessed (FIC) 191
+1 Yuna, Grand Summoner (FIC) 192
+1 The Warring Triad (FIC) 193
+1 Summon: Good King Mog XII (FIC) 194
+1 Summon: Ixion (FIC) 195
+1 Summon: Yojimbo (FIC) 196
+1 Summon: Valefor (FIC) 197
+1 Summon: Esper Valigarmanda (FIC) 198
+1 Summon: Kujata (FIC) 199
+1 Summon: Magus Sisters (FIC) 200
+1 Celes, Rune Knight (FIC) 201
+1 Cloud, Ex-SOLDIER (FIC) 202
+1 G'raha Tia, Scion Reborn (FIC) 203
+1 Terra, Herald of Hope (FIC) 204
+1 Tidus, Yuna's Guardian (FIC) 205
+1 Tifa, Martial Artist (FIC) 206
+1 Y'shtola, Night's Blessed (FIC) 207
+1 Yuna, Grand Summoner (FIC) 208
+1 Celes, Rune Knight (FIC) 209
+1 Cloud, Ex-SOLDIER (FIC) 210
+1 G'raha Tia, Scion Reborn (FIC) 211
+1 Terra, Herald of Hope (FIC) 212
+1 Tidus, Yuna's Guardian (FIC) 213
+1 Tifa, Martial Artist (FIC) 214
+1 Y'shtola, Night's Blessed (FIC) 215
+1 Yuna, Grand Summoner (FIC) 216
+1 Secret Rendezvous (FIC) 217
+1 Secret Rendezvous (FIC) 218
+1 Secret Rendezvous (FIC) 219
+1 Celes, Rune Knight (FIC) 220
+1 Cloud, Ex-SOLDIER (FIC) 221
+1 G'raha Tia, Scion Reborn (FIC) 222
+1 Terra, Herald of Hope (FIC) 223
+1 Tidus, Yuna's Guardian (FIC) 224
+1 Tifa, Martial Artist (FIC) 225
+1 Y'shtola, Night's Blessed (FIC) 226
+1 Yuna, Grand Summoner (FIC) 227
+1 Herald's Horn (FIC) 228
+1 Angel of the Ruins (FIC) 229
+1 Archaeomancer's Map (FIC) 230
+1 Austere Command (FIC) 231
+1 Authority of the Consuls (FIC) 232
+1 Bastion Protector (FIC) 233
+1 Bronze Guardian (FIC) 234
+1 Cleansing Nova (FIC) 235
+1 Clever Concealment (FIC) 236
+1 Collective Effort (FIC) 237
+1 Cut a Deal (FIC) 238
+1 Damning Verdict (FIC) 239
+1 Destroy Evil (FIC) 240
+1 Dispatch (FIC) 241
+1 Farewell (FIC) 242
+1 Final Judgment (FIC) 243
+1 Grateful Apparition (FIC) 244
+1 Lingering Souls (FIC) 245
+1 Luminous Broodmoth (FIC) 246
+1 Palace Jailer (FIC) 247
+1 Path to Exile (FIC) 248
+1 Promise of Loyalty (FIC) 249
+1 Puresteel Paladin (FIC) 250
+1 Resourceful Defense (FIC) 251
+1 Scholar of New Horizons (FIC) 252
+1 Secret Rendezvous (FIC) 253
+1 Sun Titan (FIC) 254
+1 Sunscorch Regent (FIC) 255
+1 Swords to Plowshares (FIC) 256
+1 Together Forever (FIC) 257
+1 Tragic Arrogance (FIC) 258
+1 Unfinished Business (FIC) 259
+1 Vanquish the Horde (FIC) 260
+1 Archmage Emeritus (FIC) 261
+1 Chasm Skulker (FIC) 262
+1 Dig Through Time (FIC) 263
+1 Hypnotic Sprite // Mesmeric Glare (FIC) 264
+1 Inexorable Tide (FIC) 265
+1 Into the Story (FIC) 266
+1 An Offer You Can't Refuse (FIC) 267
+1 Propaganda (FIC) 268
+1 Pull from Tomorrow (FIC) 269
+1 Rite of Replication (FIC) 270
+1 Sublime Epiphany (FIC) 271
+1 Torrential Gearhulk (FIC) 272
+1 Archfiend of Depravity (FIC) 273
+1 Bastion of Remembrance (FIC) 274
+1 Crux of Fate (FIC) 275
+1 Exsanguinate (FIC) 276
+1 Lethal Scheme (FIC) 277
+1 Morbid Opportunist (FIC) 278
+1 Murderous Rider // Swift End (FIC) 279
+1 Night's Whisper (FIC) 280
+1 Pitiless Plunderer (FIC) 281
+1 Reanimate (FIC) 282
+1 Rise of the Dark Realms (FIC) 283
+1 Sepulchral Primordial (FIC) 284
+1 Snuff Out (FIC) 285
+1 Stitch Together (FIC) 286
+1 Stitcher's Supplier (FIC) 287
+1 Syphon Mind (FIC) 288
+1 Anger (FIC) 289
+1 Big Score (FIC) 290
+1 Chaos Warp (FIC) 291
+1 Combustible Gearhulk (FIC) 292
+1 Flayer of the Hatebound (FIC) 293
+1 Furious Rise (FIC) 294
+1 Hellkite Tyrant (FIC) 295
+1 Professional Face-Breaker (FIC) 296
+1 Ruin Grinder (FIC) 297
+1 Vandalblast (FIC) 298
+1 Bane of Progress (FIC) 299
+1 Cultivate (FIC) 300
+1 Duskshell Crawler (FIC) 301
+1 Farseek (FIC) 302
+1 Fight Rigging (FIC) 303
+1 Forgotten Ancient (FIC) 304
+1 Generous Patron (FIC) 305
+1 Gyre Sage (FIC) 306
+1 Hardened Scales (FIC) 307
+1 Harmonize (FIC) 308
+1 Incubation Druid (FIC) 309
+1 Inspiring Call (FIC) 310
+1 Nature's Lore (FIC) 311
+1 Path of Discovery (FIC) 312
+1 Rampant Growth (FIC) 313
+1 Rampant Rejuvenator (FIC) 314
+1 Three Visits (FIC) 315
+1 Tireless Tracker (FIC) 316
+1 Altered Ego (FIC) 317
+1 Baleful Strix (FIC) 318
+1 Bedevil (FIC) 319
+1 Behemoth Sledge (FIC) 320
+1 Bred for the Hunt (FIC) 321
+1 Crackling Doom (FIC) 322
+1 Decimate (FIC) 323
+1 Endless Detour (FIC) 324
+1 Fathom Mage (FIC) 325
+1 Legions to Ashes (FIC) 326
+1 Mortify (FIC) 327
+1 Priest of Fell Rites (FIC) 328
+1 Ruinous Ultimatum (FIC) 329
+1 Vindicate (FIC) 330
+1 Void Rend (FIC) 331
+1 Arcane Signet (FIC) 332
+1 Arcane Signet (FIC) 333
+1 Arcane Signet (FIC) 334
+1 Arcane Signet (FIC) 335
+1 Armory Automaton (FIC) 336
+1 Champion's Helm (FIC) 337
+1 Colossus Hammer (FIC) 338
+1 Commander's Sphere (FIC) 339
+1 Conqueror's Flail (FIC) 340
+1 Coveted Jewel (FIC) 341
+1 Darksteel Plate (FIC) 342
+1 Everflowing Chalice (FIC) 343
+1 Explorer's Scope (FIC) 344
+1 Hero's Blade (FIC) 345
+1 Hero's Heirloom (FIC) 346
+1 Inspiring Statuary (FIC) 347
+1 Key to the City (FIC) 348
+1 Lightning Greaves (FIC) 349
+1 Mask of Memory (FIC) 350
+1 Meteor Golem (FIC) 351
+1 Millikin (FIC) 352
+1 Mind Stone (FIC) 353
+1 Relic of Legends (FIC) 354
+1 Skullclamp (FIC) 355
+1 Sol Ring (FIC) 356
+1 Sol Ring (FIC) 357
+1 Sol Ring (FIC) 358
+1 Sol Ring (FIC) 359
+1 Solemn Simulacrum (FIC) 360
+1 Swiftfoot Boots (FIC) 361
+1 Sword of the Animist (FIC) 362
+1 Talisman of Conviction (FIC) 363
+1 Talisman of Dominance (FIC) 364
+1 Talisman of Hierarchy (FIC) 365
+1 Talisman of Indulgence (FIC) 366
+1 Talisman of Progress (FIC) 367
+1 Thought Vessel (FIC) 368
+1 Tome of Legends (FIC) 369
+1 Trailblazer's Boots (FIC) 370
+1 Walking Ballista (FIC) 371
+1 Wayfarer's Bauble (FIC) 372
+1 Arcane Sanctum (FIC) 373
+1 Ash Barrens (FIC) 374
+1 Battlefield Forge (FIC) 375
+1 Bonders' Enclave (FIC) 376
+1 Brushland (FIC) 377
+1 Canopy Vista (FIC) 378
+1 Choked Estuary (FIC) 379
+1 Cinder Glade (FIC) 380
+1 Clifftop Retreat (FIC) 381
+1 Command Tower (FIC) 382
+1 Contaminated Aquifer (FIC) 383
+1 Darkwater Catacombs (FIC) 384
+1 Demolition Field (FIC) 385
+1 Desolate Mire (FIC) 386
+1 Dragonskull Summit (FIC) 387
+1 Drowned Catacomb (FIC) 388
+1 Evolving Wilds (FIC) 389
+1 Exotic Orchard (FIC) 390
+1 Fetid Heath (FIC) 391
+1 Fire-Lit Thicket (FIC) 392
+1 Flooded Grove (FIC) 393
+1 Foreboding Ruins (FIC) 394
+1 Forge of Heroes (FIC) 395
+1 Fortified Village (FIC) 396
+1 Furycalm Snarl (FIC) 397
+1 Game Trail (FIC) 398
+1 Geothermal Bog (FIC) 399
+1 Glacial Fortress (FIC) 400
+1 Graven Cairns (FIC) 401
+1 High Market (FIC) 402
+1 Hinterland Harbor (FIC) 403
+1 Idyllic Beachfront (FIC) 404
+1 Isolated Chapel (FIC) 405
+1 Jungle Shrine (FIC) 406
+1 Mossfire Valley (FIC) 407
+1 Nesting Grounds (FIC) 408
+1 Nomad Outpost (FIC) 409
+1 Overflowing Basin (FIC) 410
+1 Path of Ancestry (FIC) 411
+1 Port Town (FIC) 412
+1 Prairie Stream (FIC) 413
+1 Radiant Grove (FIC) 414
+1 Rogue's Passage (FIC) 415
+1 Rootbound Crag (FIC) 416
+1 Rugged Prairie (FIC) 417
+1 Sacred Peaks (FIC) 418
+1 Scavenger Grounds (FIC) 419
+1 Seaside Citadel (FIC) 420
+1 Shadowblood Ridge (FIC) 421
+1 Shineshadow Snarl (FIC) 422
+1 Skycloud Expanse (FIC) 423
+1 Slayers' Stronghold (FIC) 424
+1 Smoldering Marsh (FIC) 425
+1 Spire of Industry (FIC) 426
+1 Sulfurous Springs (FIC) 427
+1 Sungrass Prairie (FIC) 428
+1 Sunken Hollow (FIC) 429
+1 Sunken Ruins (FIC) 430
+1 Sunlit Marsh (FIC) 431
+1 Sunpetal Grove (FIC) 432
+1 Sunscorched Divide (FIC) 433
+1 Tangled Islet (FIC) 434
+1 Temple of Enlightenment (FIC) 435
+1 Temple of Mystery (FIC) 436
+1 Temple of Plenty (FIC) 437
+1 Temple of the False God (FIC) 438
+1 Underground River (FIC) 439
+1 Vineglimmer Snarl (FIC) 440
+1 Wooded Ridgeline (FIC) 441
+1 Garland, Royal Kidnapper (FIC) 442
+1 The Destined Warrior (FIC) 443
+1 The Destined White Mage (FIC) 444
+1 Chaos Shrine's Black Crystal (FIC) 445
+1 The Destined Thief (FIC) 446
+1 The Destined Black Mage (FIC) 447
+1 Edea, Possessed Sorceress (FIC) 448
+1 Fated Clash (FIC) 449
+1 Rinoa, Angel Wing (FIC) 450
+1 Seifer, Balamb Rival (FIC) 451
+1 Duelist's Flame (FIC) 452
+1 Squall, Gunblade Duelist (FIC) 453
+1 Brilliant Wings (FIC) 454
+1 Judgment of Alexander (FIC) 455
+1 Mega Flare (FIC) 456
+1 Amarant Coral (FIC) 457
+1 Vivi's Persistence (FIC) 458
+1 Search for Dagger (FIC) 459
+1 Noctis, Heir Apparent (FIC) 460
+1 Fishing Gear (FIC) 461
+1 Chocobo Camp (FIC) 462
+1 Flash Photography (FIC) 463
+1 Campsite Cuisine (FIC) 464
+1 Warrior's Resolve (FIC) 465
+1 Tataru Taru (FIC) 466
+1 Lulu, Stern Guardian (FIC) 467
+1 Rikku, Resourceful Guardian (FIC) 468
+1 Snapcaster Mage (FIC) 469
+1 Yuffie, Materia Hunter (FIC) 470
+1 Aerith, Last Ancient (FIC) 471
+1 Barret, Avalanche Leader (FIC) 472
+1 Emet-Selch of the Third Seat (FIC) 473
+1 Estinien Varlineau (FIC) 474
+1 Locke, Treasure Hunter (FIC) 475
+1 Mog, Moogle Warrior (FIC) 476
+1 Wakka, Devoted Guardian (FIC) 477
+1 Plains (FIC) 478
+1 Island (FIC) 479
+1 Swamp (FIC) 480
+1 Mountain (FIC) 481
+1 Forest (FIC) 482
+1 Birds of Paradise (FIC) 483
+1 Command Tower (FIC) 484
+1 Command Tower (FIC) 485
+1 Command Tower (FIC) 486
+1 Summon: Bahamut (FIN) 1
+1 Ultima, Origin of Oblivion (FIN) 2
+1 Adelbert Steiner (FIN) 3
+1 Aerith Gainsborough (FIN) 4
+1 Aerith Rescue Mission (FIN) 5
+1 Ambrosia Whiteheart (FIN) 6
+1 Ashe, Princess of Dalmasca (FIN) 7
+1 Auron's Inspiration (FIN) 8
+1 Battle Menu (FIN) 9
+1 Cloud, Midgar Mercenary (FIN) 10
+1 Cloudbound Moogle (FIN) 11
+1 Coeurl (FIN) 12
+1 Crystal Fragments // Summon: Alexander (FIN) 13
+1 The Crystal's Chosen (FIN) 14
+1 Delivery Moogle (FIN) 15
+1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 16
+1 Dragoon's Lance (FIN) 17
+1 Dwarven Castle Guard (FIN) 18
+1 Fate of the Sun-Cryst (FIN) 19
+1 From Father to Son (FIN) 20
+1 G'raha Tia (FIN) 21
+1 Gaelicat (FIN) 22
+1 Machinist's Arsenal (FIN) 23
+1 Magitek Armor (FIN) 24
+1 Magitek Infantry (FIN) 25
+1 Minwu, White Mage (FIN) 26
+1 Moogles' Valor (FIN) 27
+1 Paladin's Arms (FIN) 28
+1 Phoenix Down (FIN) 29
+1 Restoration Magic (FIN) 30
+1 Sidequest: Catch a Fish // Cooking Campsite (FIN) 31
+1 Slash of Light (FIN) 32
+1 Snow Villiers (FIN) 33
+1 Stiltzkin, Moogle Merchant (FIN) 34
+1 Summon: Choco/Mog (FIN) 35
+1 Summon: Knights of Round (FIN) 36
+1 Summon: Primal Garuda (FIN) 37
+1 Ultima (FIN) 38
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (FIN) 39
+1 Weapons Vendor (FIN) 40
+1 White Auracite (FIN) 41
+1 White Mage's Staff (FIN) 42
+1 The Wind Crystal (FIN) 43
+1 You're Not Alone (FIN) 44
+1 Zack Fair (FIN) 45
+1 Astrologian's Planisphere (FIN) 46
+1 Cargo Ship (FIN) 47
+1 Combat Tutorial (FIN) 48
+1 Dragoon's Wyvern (FIN) 49
+1 Dreams of Laguna (FIN) 50
+1 Edgar, King of Figaro (FIN) 51
+1 Eject (FIN) 52
+1 Ether (FIN) 53
+1 Gogo, Master of Mimicry (FIN) 54
+1 Ice Flan (FIN) 55
+1 Ice Magic (FIN) 56
+1 Il Mheg Pixie (FIN) 57
+1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 58
+1 Louisoix's Sacrifice (FIN) 59
+1 The Lunar Whale (FIN) 60
+1 Magic Damper (FIN) 61
+1 Matoya, Archon Elder (FIN) 62
+1 Memories Returning (FIN) 63
+1 The Prima Vista (FIN) 64
+1 Qiqirn Merchant (FIN) 65
+1 Quistis Trepe (FIN) 66
+1 Relm's Sketching (FIN) 67
+1 Retrieve the Esper (FIN) 68
+1 Rook Turret (FIN) 69
+1 Sage's Nouliths (FIN) 70
+1 Sahagin (FIN) 71
+1 Scorpion Sentinel (FIN) 72
+1 Sidequest: Card Collection // Magicked Card (FIN) 73
+1 Sleep Magic (FIN) 74
+1 Stolen Uniform (FIN) 75
+1 Stuck in Summoner's Sanctum (FIN) 76
+1 Summon: Leviathan (FIN) 77
+1 Summon: Shiva (FIN) 78
+1 Swallowed by Leviathan (FIN) 79
+1 Syncopate (FIN) 80
+1 Thief's Knife (FIN) 81
+1 Travel the Overworld (FIN) 82
+1 Ultros, Obnoxious Octopus (FIN) 83
+1 Valkyrie Aerial Unit (FIN) 84
+1 The Water Crystal (FIN) 85
+1 Y'shtola Rhul (FIN) 86
+1 Ahriman (FIN) 87
+1 Al Bhed Salvagers (FIN) 88
+1 Ardyn, the Usurper (FIN) 89
+1 Black Mage's Rod (FIN) 90
+1 Cecil, Dark Knight // Cecil, Redeemed Paladin (FIN) 91
+1 Circle of Power (FIN) 92
+1 Cornered by Black Mages (FIN) 93
+1 Dark Confidant (FIN) 94
+1 Dark Knight's Greatsword (FIN) 95
+1 The Darkness Crystal (FIN) 96
+1 Demon Wall (FIN) 97
+1 Evil Reawakened (FIN) 98
+1 Fang, Fearless l'Cie (FIN) 99
+1 Ragnarok, Divine Deliverance (FIN) 99b
+1 Fight On! (FIN) 100
+1 The Final Days (FIN) 101
+1 Gaius van Baelsar (FIN) 102
+1 Hecteyes (FIN) 103
+1 Jecht, Reluctant Guardian // Braska's Final Aeon (FIN) 104
+1 Kain, Traitorous Dragoon (FIN) 105
+1 Malboro (FIN) 106
+1 Namazu Trader (FIN) 107
+1 Ninja's Blades (FIN) 108
+1 Overkill (FIN) 109
+1 Phantom Train (FIN) 110
+1 Poison the Waters (FIN) 111
+1 Qutrub Forayer (FIN) 112
+1 Reno and Rude (FIN) 113
+1 Resentful Revelation (FIN) 114
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (FIN) 115
+1 Sephiroth's Intervention (FIN) 116
+1 Shambling Cie'th (FIN) 117
+1 Shinra Reinforcements (FIN) 118
+1 Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark (FIN) 119
+1 Summon: Anima (FIN) 120
+1 Summon: Primal Odin (FIN) 121
+1 Tonberry (FIN) 122
+1 Undercity Dire Rat (FIN) 123
+1 Vayne's Treachery (FIN) 124
+1 Vincent Valentine // Galian Beast (FIN) 125
+1 Vincent's Limit Break (FIN) 126
+1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 127
+1 Zodiark, Umbral God (FIN) 128
+1 Barret Wallace (FIN) 129
+1 Blazing Bomb (FIN) 130
+1 Call the Mountain Chocobo (FIN) 131
+1 Choco-Comet (FIN) 132
+1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 133
+1 Coral Sword (FIN) 134
+1 The Fire Crystal (FIN) 135
+1 Fire Magic (FIN) 136
+1 Firion, Wild Rose Warrior (FIN) 137
+1 Freya Crescent (FIN) 138
+1 Gilgamesh, Master-at-Arms (FIN) 139
+1 Haste Magic (FIN) 140
+1 Hill Gigas (FIN) 141
+1 Item Shopkeep (FIN) 142
+1 Laughing Mad (FIN) 143
+1 Light of Judgment (FIN) 144
+1 Mysidian Elder (FIN) 145
+1 Nibelheim Aflame (FIN) 146
+1 Opera Love Song (FIN) 147
+1 Prompto Argentum (FIN) 148
+1 Queen Brahne (FIN) 149
+1 Random Encounter (FIN) 150
+1 Raubahn, Bull of Ala Mhigo (FIN) 151
+1 Red Mage's Rapier (FIN) 152
+1 Sabotender (FIN) 153
+1 Samurai's Katana (FIN) 154
+1 Sandworm (FIN) 155
+1 Seifer Almasy (FIN) 156
+1 Self-Destruct (FIN) 157
+1 Sidequest: Play Blitzball // World Champion, Celestial Weapon (FIN) 158
+1 Sorceress's Schemes (FIN) 159
+1 Summon: Brynhildr (FIN) 160
+1 Summon: Esper Ramuh (FIN) 161
+1 Summon: G.F. Cerberus (FIN) 162
+1 Summon: G.F. Ifrit (FIN) 163
+1 Suplex (FIN) 164
+1 Thunder Magic (FIN) 165
+1 Triple Triad (FIN) 166
+1 Unexpected Request (FIN) 167
+1 Vaan, Street Thief (FIN) 168
+1 Warrior's Sword (FIN) 169
+1 Zell Dincht (FIN) 170
+1 Airship Crash (FIN) 171
+1 Ancient Adamantoise (FIN) 172
+1 Balamb T-Rexaur (FIN) 173
+1 Bard's Bow (FIN) 174
+1 Bartz and Boko (FIN) 175
+1 Blitzball Shot (FIN) 176
+1 Cactuar (FIN) 177
+1 Chocobo Kick (FIN) 178
+1 Chocobo Racetrack (FIN) 179
+1 Clash of the Eikons (FIN) 180
+1 Coliseum Behemoth (FIN) 181
+1 Commune with Beavers (FIN) 182
+1 Diamond Weapon (FIN) 183
+1 The Earth Crystal (FIN) 184
+1 Esper Origins // Summon: Esper Maduin (FIN) 185
+1 Galuf's Final Act (FIN) 186
+1 Gigantoad (FIN) 187
+1 Goobbue Gardener (FIN) 188
+1 Gran Pulse Ochu (FIN) 189
+1 Gysahl Greens (FIN) 190
+1 Jumbo Cactuar (FIN) 191
+1 Loporrit Scout (FIN) 192
+1 Prishe's Wanderings (FIN) 193
+1 Quina, Qu Gourmet (FIN) 194
+1 Reach the Horizon (FIN) 195
+1 A Realm Reborn (FIN) 196
+1 Ride the Shoopuf (FIN) 197
+1 Rydia's Return (FIN) 198
+1 Sazh Katzroy (FIN) 199
+1 Sazh's Chocobo (FIN) 200
+1 Sidequest: Raise a Chocobo // Black Chocobo (FIN) 201
+1 Summon: Fat Chocobo (FIN) 202
+1 Summon: Fenrir (FIN) 203
+1 Summon: Titan (FIN) 204
+1 Summoner's Grimoire (FIN) 205
+1 Tifa Lockhart (FIN) 206
+1 Tifa's Limit Break (FIN) 207
+1 Torgal, A Fine Hound (FIN) 208
+1 Town Greeter (FIN) 209
+1 Traveling Chocobo (FIN) 210
+1 Vanille, Cheerful l'Cie (FIN) 211
+1 Absolute Virtue (FIN) 212
+1 Balthier and Fran (FIN) 213
+1 Black Waltz No. 3 (FIN) 214
+1 Choco, Seeker of Paradise (FIN) 215
+1 Cid, Timeless Artificer (FIN) 216
+1 Cloud of Darkness (FIN) 217
+1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 218
+1 The Emperor of Palamecia // The Lord Master of Hell (FIN) 219
+1 Exdeath, Void Warlock // Neo Exdeath, Dimension's End (FIN) 220
+1 Garland, Knight of Cornelia // Chaos, the Endless (FIN) 221
+1 Garnet, Princess of Alexandria (FIN) 222
+1 Giott, King of the Dwarves (FIN) 223
+1 Gladiolus Amicitia (FIN) 224
+1 Golbez, Crystal Collector (FIN) 225
+1 Hope Estheim (FIN) 226
+1 Ignis Scientia (FIN) 227
+1 Jenova, Ancient Calamity (FIN) 228
+1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 229
+1 Judge Magister Gabranth (FIN) 230
+1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 231
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 232
+1 Lightning, Army of One (FIN) 233
+1 Locke Cole (FIN) 234
+1 Noctis, Prince of Lucis (FIN) 235
+1 Omega, Heartless Evolution (FIN) 236
+1 Rinoa Heartilly (FIN) 237
+1 Rufus Shinra (FIN) 238
+1 Rydia, Summoner of Mist (FIN) 239
+1 Serah Farron // Crystallized Serah (FIN) 240
+1 Shantotto, Tactician Magician (FIN) 241
+1 Sin, Spira's Punishment (FIN) 242
+1 Squall, SeeD Mercenary (FIN) 243
+1 Tellah, Great Sage (FIN) 244
+1 Terra, Magical Adept // Esper Terra (FIN) 245
+1 Tidus, Blitzball Star (FIN) 246
+1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 247
+1 Vivi Ornitier (FIN) 248
+1 The Wandering Minstrel (FIN) 249
+1 Yuna, Hope of Spira (FIN) 250
+1 Zidane, Tantalus Thief (FIN) 251
+1 Adventurer's Airship (FIN) 252
+1 Aettir and Priwen (FIN) 253
+1 Blitzball (FIN) 254
+1 Buster Sword (FIN) 255
+1 Elixir (FIN) 256
+1 Excalibur II (FIN) 257
+1 Genji Glove (FIN) 258
+1 Instant Ramen (FIN) 259
+1 Iron Giant (FIN) 260
+1 Lion Heart (FIN) 261
+1 Lunatic Pandora (FIN) 262
+1 Magic Pot (FIN) 263
+1 The Masamune (FIN) 264
+1 Monk's Fist (FIN) 265
+1 PuPu UFO (FIN) 266
+1 The Regalia (FIN) 267
+1 Relentless X-ATM092 (FIN) 268
+1 Ring of the Lucii (FIN) 269
+1 World Map (FIN) 270
+1 Adventurer's Inn (FIN) 271
+1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (FIN) 272
+1 Baron, Airship Kingdom (FIN) 273
+1 Capital City (FIN) 274
+1 Clive's Hideaway (FIN) 275
+1 Crossroads Village (FIN) 276
+1 Eden, Seat of the Sanctum (FIN) 277
+1 Gohn, Town of Ruin (FIN) 278
+1 The Gold Saucer (FIN) 279
+1 Gongaga, Reactor Town (FIN) 280
+1 Guadosalam, Farplane Gateway (FIN) 281
+1 Insomnia, Crown City (FIN) 282
+1 Ishgard, the Holy See // Faith & Grief (FIN) 283
+1 Jidoor, Aristocratic Capital // Overture (FIN) 284
+1 Lindblum, Industrial Regency // Mage Siege (FIN) 285
+1 Midgar, City of Mako // Reactor Raid (FIN) 286
+1 Rabanastre, Royal City (FIN) 287
+1 Sharlayan, Nation of Scholars (FIN) 288
+1 Starting Town (FIN) 289
+1 Treno, Dark City (FIN) 290
+1 Vector, Imperial Capital (FIN) 291
+1 Windurst, Federation Center (FIN) 292
+1 Zanarkand, Ancient Metropolis // Lasting Fayth (FIN) 293
+1 Plains (FIN) 294
+1 Plains (FIN) 295
+1 Plains (FIN) 296
+1 Island (FIN) 297
+1 Island (FIN) 298
+1 Island (FIN) 299
+1 Swamp (FIN) 300
+1 Swamp (FIN) 301
+1 Swamp (FIN) 302
+1 Mountain (FIN) 303
+1 Mountain (FIN) 304
+1 Mountain (FIN) 305
+1 Forest (FIN) 306
+1 Forest (FIN) 307
+1 Forest (FIN) 308
+1 Wastes (FIN) 309
+1 Ishgard, the Holy See // Faith & Grief (FIN) 310
+1 Jidoor, Aristocratic Capital // Overture (FIN) 311
+1 Lindblum, Industrial Regency // Mage Siege (FIN) 312
+1 Midgar, City of Mako // Reactor Raid (FIN) 313
+1 Zanarkand, Ancient Metropolis // Lasting Fayth (FIN) 314
+1 Ardyn, the Usurper (FIN) 315
+1 Kain, Traitorous Dragoon (FIN) 316
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (FIN) 317
+1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 318
+1 Balthier and Fran (FIN) 319
+1 Lightning, Army of One (FIN) 320
+1 Vivi Ornitier (FIN) 321
+1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 322
+1 Terra, Magical Adept // Esper Terra (FIN) 323
+1 Ultima, Origin of Oblivion (FIN) 324
+1 Ambrosia Whiteheart (FIN) 325
+1 Moogles' Valor (FIN) 326
+1 Stiltzkin, Moogle Merchant (FIN) 327
+1 Ultima (FIN) 328
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (FIN) 329
+1 The Wind Crystal (FIN) 330
+1 Memories Returning (FIN) 331
+1 Stolen Uniform (FIN) 332
+1 The Water Crystal (FIN) 333
+1 Dark Confidant (FIN) 334
+1 The Darkness Crystal (FIN) 335
+1 Zodiark, Umbral God (FIN) 336
+1 The Fire Crystal (FIN) 337
+1 Gilgamesh, Master-at-Arms (FIN) 338
+1 Nibelheim Aflame (FIN) 339
+1 Triple Triad (FIN) 340
+1 Clash of the Eikons (FIN) 341
+1 The Earth Crystal (FIN) 342
+1 Jumbo Cactuar (FIN) 343
+1 A Realm Reborn (FIN) 344
+1 Torgal, A Fine Hound (FIN) 345
+1 Jenova, Ancient Calamity (FIN) 346
+1 Omega, Heartless Evolution (FIN) 347
+1 Sin, Spira's Punishment (FIN) 348
+1 Tellah, Great Sage (FIN) 349
+1 Aettir and Priwen (FIN) 350
+1 Buster Sword (FIN) 351
+1 Excalibur II (FIN) 352
+1 The Masamune (FIN) 353
+1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (FIN) 354
+1 Eden, Seat of the Sanctum (FIN) 355
+1 Summon: Bahamut (FIN) 356
+1 Crystal Fragments // Summon: Alexander (FIN) 357
+1 Summon: Choco/Mog (FIN) 358
+1 Summon: Knights of Round (FIN) 359
+1 Summon: Primal Garuda (FIN) 360
+1 Summon: Leviathan (FIN) 361
+1 Summon: Shiva (FIN) 362
+1 Jecht, Reluctant Guardian // Braska's Final Aeon (FIN) 363
+1 Summon: Anima (FIN) 364
+1 Summon: Primal Odin (FIN) 365
+1 Summon: Brynhildr (FIN) 366
+1 Summon: Esper Ramuh (FIN) 367
+1 Summon: G.F. Cerberus (FIN) 368
+1 Summon: G.F. Ifrit (FIN) 369
+1 Esper Origins // Summon: Esper Maduin (FIN) 370
+1 Summon: Fat Chocobo (FIN) 371
+1 Summon: Fenrir (FIN) 372
+1 Summon: Titan (FIN) 373
+1 Aerith Gainsborough (FIN) 374
+1 Cloud, Midgar Mercenary (FIN) 375
+1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 376
+1 Gogo, Master of Mimicry (FIN) 377
+1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 378
+1 Ardyn, the Usurper (FIN) 379
+1 Cecil, Dark Knight // Cecil, Redeemed Paladin (FIN) 380
+1 Fang, Fearless l'Cie (FIN) 381
+1 Ragnarok, Divine Deliverance (FIN) 381b
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (FIN) 382
+1 Vincent Valentine // Galian Beast (FIN) 383
+1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 384
+1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 385
+1 Firion, Wild Rose Warrior (FIN) 386
+1 Prompto Argentum (FIN) 387
+1 Raubahn, Bull of Ala Mhigo (FIN) 388
+1 Seifer Almasy (FIN) 389
+1 Vaan, Street Thief (FIN) 390
+1 Tifa Lockhart (FIN) 391
+1 Vanille, Cheerful l'Cie (FIN) 392
+1 Balthier and Fran (FIN) 393
+1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 394
+1 Golbez, Crystal Collector (FIN) 395
+1 Hope Estheim (FIN) 396
+1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 397
+1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 398
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 399
+1 Lightning, Army of One (FIN) 400
+1 Noctis, Prince of Lucis (FIN) 401
+1 Squall, SeeD Mercenary (FIN) 402
+1 The Wandering Minstrel (FIN) 403
+1 Yuna, Hope of Spira (FIN) 404
+1 Zidane, Tantalus Thief (FIN) 405
+1 Traveling Chocobo (FIN) 406
+1 Cid, Timeless Artificer (FIN) 407
+1 Cid, Timeless Artificer (FIN) 408
+1 Cid, Timeless Artificer (FIN) 409
+1 Cid, Timeless Artificer (FIN) 410
+1 Cid, Timeless Artificer (FIN) 411
+1 Cid, Timeless Artificer (FIN) 412
+1 Cid, Timeless Artificer (FIN) 413
+1 Cid, Timeless Artificer (FIN) 414
+1 Cid, Timeless Artificer (FIN) 415
+1 Cid, Timeless Artificer (FIN) 416
+1 Cid, Timeless Artificer (FIN) 417
+1 Cid, Timeless Artificer (FIN) 418
+1 Cid, Timeless Artificer (FIN) 419
+1 Cid, Timeless Artificer (FIN) 420
+1 Ultima, Origin of Oblivion (FIN) 421
+1 Adelbert Steiner (FIN) 422
+1 Aerith Gainsborough (FIN) 423
+1 Ambrosia Whiteheart (FIN) 424
+1 Ashe, Princess of Dalmasca (FIN) 425
+1 Beatrix, Loyal General (FIN) 426
+1 Cloud, Midgar Mercenary (FIN) 427
+1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 428
+1 G'raha Tia (FIN) 429
+1 Minwu, White Mage (FIN) 430
+1 Rosa, Resolute White Mage (FIN) 431
+1 Snow Villiers (FIN) 432
+1 Stiltzkin, Moogle Merchant (FIN) 433
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (FIN) 434
+1 Zack Fair (FIN) 435
+1 Edgar, King of Figaro (FIN) 436
+1 Gogo, Master of Mimicry (FIN) 437
+1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 438
+1 Matoya, Archon Elder (FIN) 439
+1 Quistis Trepe (FIN) 440
+1 Ultimecia, Temporal Threat (FIN) 441
+1 Ultros, Obnoxious Octopus (FIN) 442
+1 Y'shtola Rhul (FIN) 443
+1 Ardyn, the Usurper (FIN) 444
+1 Cecil, Dark Knight // Cecil, Redeemed Paladin (FIN) 445
+1 Fang, Fearless l'Cie (FIN) 446
+1 Ragnarok, Divine Deliverance (FIN) 446b
+1 Gaius van Baelsar (FIN) 447
+1 Jecht, Reluctant Guardian // Braska's Final Aeon (FIN) 448
+1 Kain, Traitorous Dragoon (FIN) 449
+1 Reno and Rude (FIN) 450
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (FIN) 451
+1 Seymour Flux (FIN) 452
+1 Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark (FIN) 453
+1 Vincent Valentine // Galian Beast (FIN) 454
+1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 455
+1 Zodiark, Umbral God (FIN) 456
+1 Barret Wallace (FIN) 457
+1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 458
+1 Firion, Wild Rose Warrior (FIN) 459
+1 Freya Crescent (FIN) 460
+1 Gilgamesh, Master-at-Arms (FIN) 461
+1 Lightning, Security Sergeant (FIN) 462
+1 Prompto Argentum (FIN) 463
+1 Queen Brahne (FIN) 464
+1 Raubahn, Bull of Ala Mhigo (FIN) 465
+1 Seifer Almasy (FIN) 466
+1 Vaan, Street Thief (FIN) 467
+1 Zell Dincht (FIN) 468
+1 Bartz and Boko (FIN) 469
+1 Diamond Weapon (FIN) 470
+1 Quina, Qu Gourmet (FIN) 471
+1 Sazh Katzroy (FIN) 472
+1 Tifa Lockhart (FIN) 473
+1 Torgal, A Fine Hound (FIN) 474
+1 Vanille, Cheerful l'Cie (FIN) 475
+1 Absolute Virtue (FIN) 476
+1 Balthier and Fran (FIN) 477
+1 Black Waltz No. 3 (FIN) 478
+1 Choco, Seeker of Paradise (FIN) 479
+1 Cid, Timeless Artificer (FIN) 480
+1 Cloud of Darkness (FIN) 481
+1 Cloud, Planet's Champion (FIN) 482
+1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 483
+1 The Emperor of Palamecia // The Lord Master of Hell (FIN) 484
+1 Exdeath, Void Warlock // Neo Exdeath, Dimension's End (FIN) 485
+1 Garland, Knight of Cornelia // Chaos, the Endless (FIN) 486
+1 Garnet, Princess of Alexandria (FIN) 487
+1 Giott, King of the Dwarves (FIN) 488
+1 Gladiolus Amicitia (FIN) 489
+1 Golbez, Crystal Collector (FIN) 490
+1 Hope Estheim (FIN) 491
+1 Ignis Scientia (FIN) 492
+1 Jenova, Ancient Calamity (FIN) 493
+1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 494
+1 Judge Magister Gabranth (FIN) 495
+1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 496
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 497
+1 Lightning, Army of One (FIN) 498
+1 Locke Cole (FIN) 499
+1 Noctis, Prince of Lucis (FIN) 500
+1 Omega, Heartless Evolution (FIN) 501
+1 Rinoa Heartilly (FIN) 502
+1 Rufus Shinra (FIN) 503
+1 Rydia, Summoner of Mist (FIN) 504
+1 Sephiroth, Planet's Heir (FIN) 505
+1 Serah Farron // Crystallized Serah (FIN) 506
+1 Shantotto, Tactician Magician (FIN) 507
+1 Sin, Spira's Punishment (FIN) 508
+1 Squall, SeeD Mercenary (FIN) 509
+1 Tellah, Great Sage (FIN) 510
+1 Terra, Magical Adept // Esper Terra (FIN) 511
+1 Tidus, Blitzball Star (FIN) 512
+1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 513
+1 Vivi Ornitier (FIN) 514
+1 The Wandering Minstrel (FIN) 515
+1 Xande, Dark Mage (FIN) 516
+1 Yuna, Hope of Spira (FIN) 517
+1 Zidane, Tantalus Thief (FIN) 518
+1 Aerith Gainsborough (FIN) 519
+1 Cloud, Midgar Mercenary (FIN) 520
+1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 521
+1 Gogo, Master of Mimicry (FIN) 522
+1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 523
+1 Ardyn, the Usurper (FIN) 524
+1 Cecil, Dark Knight // Cecil, Redeemed Paladin (FIN) 525
+1 Fang, Fearless l'Cie (FIN) 526
+1 Ragnarok, Divine Deliverance (FIN) 526b
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (FIN) 527
+1 Vincent Valentine // Galian Beast (FIN) 528
+1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 529
+1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 530
+1 Firion, Wild Rose Warrior (FIN) 531
+1 Prompto Argentum (FIN) 532
+1 Raubahn, Bull of Ala Mhigo (FIN) 533
+1 Seifer Almasy (FIN) 534
+1 Vaan, Street Thief (FIN) 535
+1 Tifa Lockhart (FIN) 536
+1 Vanille, Cheerful l'Cie (FIN) 537
+1 Balthier and Fran (FIN) 538
+1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 539
+1 Golbez, Crystal Collector (FIN) 540
+1 Hope Estheim (FIN) 541
+1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 542
+1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 543
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544
+1 Lightning, Army of One (FIN) 545
+1 Noctis, Prince of Lucis (FIN) 546
+1 Squall, SeeD Mercenary (FIN) 547
+1 The Wandering Minstrel (FIN) 548
+1 Yuna, Hope of Spira (FIN) 549
+1 Zidane, Tantalus Thief (FIN) 550
+1 Traveling Chocobo (FIN) 551
+1 Traveling Chocobo (FIN) 551a
+1 Traveling Chocobo (FIN) 551b
+1 Traveling Chocobo (FIN) 551c
+1 Traveling Chocobo (FIN) 551d
+1 Traveling Chocobo (FIN) 551f
+1 Cloud, Planet's Champion (FIN) 552
+1 Sephiroth, Planet's Heir (FIN) 553
+1 Beatrix, Loyal General (FIN) 554
+1 Rosa, Resolute White Mage (FIN) 555
+1 Ultimecia, Temporal Threat (FIN) 556
+1 Deadly Embrace (FIN) 557
+1 Seymour Flux (FIN) 558
+1 Judgment Bolt (FIN) 559
+1 Lightning, Security Sergeant (FIN) 560
+1 Xande, Dark Mage (FIN) 561
+1 Magitek Scythe (FIN) 562
+1 Ultima Weapon (FIN) 563
+1 Cloud, Midgar Mercenary (FIN) 564
+1 Stiltzkin, Moogle Merchant (FIN) 565
+1 A Realm Reborn (FIN) 566
+1 Tifa Lockhart (FIN) 567
+1 Traveling Chocobo (FIN) 568
+1 Choco, Seeker of Paradise (FIN) 569
+1 Vivi Ornitier (FIN) 570
+1 Yuna, Hope of Spira (FIN) 571
+1 Plains (FIN) 572
+1 Island (FIN) 573
+1 Swamp (FIN) 574
+1 Mountain (FIN) 575
+1 Forest (FIN) 576
+1 Y'shtola Rhul (FIN) 577
+1 Phoenix Down (FIN) 578
+1 White Auracite (FIN) 579
+1 Zack Fair (FIN) 580
+1 Astrologian's Planisphere (FIN) 581
+1 Sage's Nouliths (FIN) 582
+1 Circle of Power (FIN) 583
+1 Barret Wallace (FIN) 584
+1 Laughing Mad (FIN) 585
+1 Ultima (PSS5) 1
+1 Squall, SeeD Mercenary (PSS5) 2
+1 Despark (PW25) 2
+1 Culling Ritual (PW25) 4
+1 Yuna, Grand Summoner (PW25) 16
+1 Force of Negation (RFIN) J1
+1 Arcane Denial (RFIN) J2
+1 Preordain (SCH) 39
+1 Death's Shadow (SCH) 40
+1 City of Brass (SCH) 41
+1 Day of Judgment (SLD) 1858
+1 Temporal Extortion (SLD) 1859
+1 Toxic Deluge (SLD) 1860
+1 Praetor's Grasp (SLD) 1861
+1 Star of Extinction (SLD) 1862
+1 Staff of the Storyteller (SLD) 1863
+1 Blade of Selves (SLD) 1864
+1 Umezawa's Jitte (SLD) 1865
+1 Colossus Hammer (SLD) 1866
+1 Sword of Truth and Justice (SLD) 1867
+1 Prismatic Ending (SLD) 1868
+1 Cyclonic Rift (SLD) 1869
+1 Damn (SLD) 1870
+1 Lightning Bolt (SLD) 1871
+1 Heroic Intervention (SLD) 1872
+1 Feed the Swarm (SLD) 7001
+1 Forge Anew (SLD) 7002
+1 Silence (SLD) 7003
+1 Solitude (SLD) 7004
+1 Subtlety (SLD) 7005
+1 Grief (SLD) 7006
+1 Fury (SLD) 7007
+1 Endurance (SLD) 7008
+1 Human Soldier (TFIC) 1
+1 Soldier (TFIC) 2
+1 Spirit (TFIC) 3
+1 Bird (TFIC) 4
+1 Squid (TFIC) 5
+1 Zombie (TFIC) 6
+1 Rebel (TFIC) 7
+1 The Blackjack (TFIC) 8
+1 Clue (TFIC) 9
+1 Foretell (TFIC) 10
+1 The Monarch (TFIC) 11
+1 Copy (TFIN) 1
+1 Hero (TFIN) 2
+1 Hero (TFIN) 3
+1 Hero (TFIN) 4
+1 Hero (TFIN) 5
+1 Hero (TFIN) 6
+1 Hero (TFIN) 7
+1 Hero (TFIN) 8
+1 Hero (TFIN) 9
+1 Knight (TFIN) 10
+1 Moogle (TFIN) 11
+1 Robot Warrior (TFIN) 12
+1 Horror (TFIN) 13
+1 Wizard (TFIN) 14
+1 Wizard (TFIN) 15
+1 Bird (TFIN) 16
+1 Bird (TFIN) 17
+1 Frog (TFIN) 18
+1 Angelo (TFIN) 19
+1 Darkstar (TFIN) 20
+1 Elemental (TFIN) 21
+1 Food (TFIN) 22
+1 Treasure (TFIN) 23
+1 Sephiroth, One-Winged Angel Emblem (TFIN) 24
+1 Copy (TFIN) 25
+1 Hero (TFIN) 26
+1 Hero (TFIN) 27
+1 Hero (TFIN) 28
+1 Hero (TFIN) 29
+1 Hero (TFIN) 30
+1 Hero (TFIN) 31
+1 Hero (TFIN) 32
+1 Hero (TFIN) 33
+1 Moogle (TFIN) 34
+1 Wizard (TFIN) 35
+1 Treasure (TFIN) 36
+1 Punchcard // Punchcard (TFIN) 37
+1 Sephiroth, One-Winged Angel Emblem (WFIN) 1
+1 Clue (WFIN) 2
+1 Treasure (WFIN) 3
