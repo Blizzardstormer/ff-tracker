@@ -2,11 +2,16 @@
 import html, json, os, urllib.parse, urllib.request
 
 QUERY = ("e:fin or e:fca or e:pfin or e:tfin or e:rfin or e:fic or e:tfic or e:afic or e:afin or e:pss5 or e:wfin"
+         " or (e:pmei (" + " or ".join(f'cn:"{c}"' for c in ['2027-1', '2026-3', '2026-17', '2025-11', '2025-12', '2025-13', '2025-14', '2025-21', '2025-26']) + "))"
          " or (e:sch (cn:39 or cn:40 or cn:41))"
          " or (e:pw25 (cn:2 or cn:4 or cn:16))"
          " or (e:sld ((cn>=1858 cn<=1872) or (cn>=7001 cn<=7008)))")
 
 HDR = {"User-Agent": "ff-tracker/1.0", "Accept": "application/json"}
+
+def query():  # extra.txt (optional): more Scryfall searches, one per line; "#" lines are comments
+    extra = [l.strip() for l in open("extra.txt", encoding="utf-8")] if os.path.exists("extra.txt") else []
+    return QUERY + "".join(f" or ({l})" for l in extra if l and not l.startswith("#"))
 
 def fetch_sets(codes):  # set names + icons, so tabs match Scryfall
     req = urllib.request.Request("https://api.scryfall.com/sets", headers=HDR)
@@ -14,7 +19,7 @@ def fetch_sets(codes):  # set names + icons, so tabs match Scryfall
             for s in json.load(urllib.request.urlopen(req))["data"] if s["code"].upper() in codes}
 
 def fetch_cards():
-    url = "https://api.scryfall.com/cards/search?unique=prints&include_extras=true&include_variations=true&order=set&q=" + urllib.parse.quote(QUERY)
+    url = "https://api.scryfall.com/cards/search?unique=prints&include_extras=true&include_variations=true&order=set&q=" + urllib.parse.quote(query())
     cards = []
     while url:
         req = urllib.request.Request(url, headers=HDR)
@@ -93,6 +98,9 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 #ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0}#q,#vw,#th,#sz{order:0}
 input[type=range]{width:160px}}
 #rs{font-size:12px;color:var(--mu)}
+.wl{position:absolute;top:12px;right:12px;z-index:1;display:grid;place-items:center;width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(15,17,21,.55);color:#fff;backdrop-filter:blur(4px);cursor:pointer}
+.c.w .wl{color:#facc15}.c.w .wl svg{fill:currentColor}.ro .c:not(.w) .wl{display:none}.ro .wl{pointer-events:none}
+.list .wl{position:static;width:24px;height:24px;flex:none}#mp{text-align:center;margin:18px 0}
 .hide{display:none!important}
 </style>
 <main><div class=hd><h1>Final Fantasy Collection</h1><div class=hr><span id=ss></span><span id=pc></span></div></div><div id=pb><i></i></div>
@@ -102,17 +110,20 @@ input[type=range]{width:160px}}
 <select id=so><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
 <button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size"></div></div>
 <div class=g id=g></div>
-<details class=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
-<button id=ex>Export owned</button> <button id=im>Import pasted text</button> <input type=file id=fl accept=".csv,.txt"><p id=rs>Import adds to what you own; it never removes anything. Accepts a ManaBox CSV or Moxfield text.</p></details>
+<p id=mp hidden><button id=more>Show everything I'm still missing</button></p>
+<details class=io id=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
+<button id=ex>Export owned</button> <button id=im>Import pasted text</button> <input type=file id=fl accept=".csv,.txt"><p id=rs>Import adds to what you own; it never removes anything. Accepts a ManaBox CSV or Moxfield text.</p>
+<hr><button id=rs0>Reset collection to 0 (debug)</button></details>
 <p><button id=lk></button></p></main>
 <script>
 const D=__DATA__,SI=__SETS__;
-let own=new Set;
+let own=new Set,want=new Set;
 const $=id=>document.getElementById(id),g=$("g"),esc=s=>s.replace(/[&<>"]/g,c=>"&#"+c.charCodeAt(0)+";");
 const svg=p=>`<svg viewBox="0 0 24 24" width=18 height=18 fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>${p}</svg>`,
 IC={sun:svg('<circle cx=12 cy=12 r=4></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>'),
 moon:svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>'),
 list:svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>'),
+star:svg('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>'),
 grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>')};
 let th="";try{th=localStorage.getItem("ff-theme")||""}catch(e){}
 th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -123,18 +134,19 @@ const REPO="__REPO__",API="https://api.github.com/repos/"+REPO+"/contents/docs/o
 let tok="";try{tok=localStorage.getItem("ff-token")||""}catch(e){}
 let owner=!!tok&&!!REPO,sha="",timer=0,busy=0,again=0;
 const hdr=()=>({Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"}),say=t=>$("ss").textContent=t;
+const take=j=>{if(Array.isArray(j))own=new Set(j);else{own=new Set(j.o||[]);want=new Set(j.w||[])}};
 async function load(){
  try{
   if(owner){const r=await fetch(API,{headers:hdr(),cache:"no-store"});
-   if(r.ok){const j=await r.json();sha=j.sha;own=new Set(JSON.parse(atob(j.content.replace(/\\s/g,""))));return draw()}
+   if(r.ok){const j=await r.json();sha=j.sha;take(JSON.parse(atob(j.content.replace(/\\s/g,""))));return draw()}
    if(r.status==404){sha="";return draw()}
    owner=false;try{localStorage.removeItem("ff-token")}catch(e){}say("Owner login expired")}
-  const r=await fetch("owned.json?"+Date.now());if(r.ok)own=new Set(await r.json())
+  const r=await fetch("owned.json?"+Date.now());if(r.ok)take(await r.json())
  }catch(e){say("Couldn't load progress")}
- draw()}
+ if(!owner&&want.size)cur="*";draw()}
 async function flush(){say("Saving…");
  for(let i=0;i<2;i++){try{
-  const r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"progress",content:btoa(JSON.stringify([...own].sort())),sha:sha||undefined})});
+  const r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"progress",content:btoa(JSON.stringify({o:[...own].sort(),w:[...want].sort()})),sha:sha||undefined})});
   if(r.ok){sha=(await r.json()).content.sha;return say("Saved")}
   if(r.status!=409&&r.status!=422)return say("Save failed ("+r.status+")");
   const q=await fetch(API,{headers:hdr(),cache:"no-store"});sha=q.ok?(await q.json()).sha:""
@@ -148,9 +160,9 @@ $("lk").onclick=async()=>{
  if(!r.ok)return alert("That token doesn't work for this repo.");
  try{localStorage.setItem("ff-token",t)}catch(e){return alert("This browser can't save the login.")}
  location.reload()};
-const ORDER=["FIN","FCA","PFIN","TFIN","RFIN","FIC","TFIC","AFIC","AFIN","PSS5","WFIN","SCH","PW25","SLD"],have=new Set(D.map(d=>d.s)),
+const ORDER=["FIN","FCA","PFIN","TFIN","RFIN","FIC","TFIC","AFIC","AFIN","PSS5","WFIN","PMEI","SCH","PW25","SLD"],have=new Set(D.map(d=>d.s)),
 sets=[...ORDER.filter(s=>have.has(s)),...[...have].filter(s=>!ORDER.includes(s))],rank=Object.fromEntries(sets.map((s,i)=>[s,i]));let cur="";
-$("tabs").innerHTML=["",...sets].map(s=>`<button class=t data-s="${s}" title="${esc((SI[s]||{n:s}).n)}">${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${s||"All"}</button>`).join("");
+$("tabs").innerHTML=["","*",...sets].map(s=>`<button class=t data-s="${s}" title="${s=="*"?"Cards I'm looking for":esc((SI[s]||{n:s}).n)}">${s=="*"?IC.star+" Wishlist":`${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${s||"All"}`}</button>`).join("");
 $("tabs").onclick=e=>{const b=e.target.closest(".t");if(b){cur=b.dataset.s;draw()}};
 const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield={q}&search=GO"],
 ["Hideout","https://hideoutcg.com/search?page=1&q=%2A{q}%2A"],["Cards Citadel","https://cardscitadel.com/search?q=%2A{q}%2A"],
@@ -163,17 +175,21 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},N=D.reduce((a,d)=>a+d.fin.length,0);
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i></div>`).join("");
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
-function draw(){$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
+function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let all=true;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);o+=h;all=all&&h});
-e.classList.toggle("own",all);e.querySelector("details").classList.toggle("hide",all);
-const show=(!s||d.s==s)&&(!st||(st=="o")==all)&&d.n.toLowerCase().includes(q);e.classList.toggle("hide",!show);v+=show});
+e.classList.toggle("own",all);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
+const show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&(!st||(st=="o")==all)&&d.n.toLowerCase().includes(q);e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
+const wt=$("tabs").children[1];if(wt)wt.hidden=!owner&&!want.size;$("mp").hidden=!(cur=="*"&&!owner);
 $("pb").firstChild.style.width=100*o/N+"%";$("pc").textContent=(100*o/N).toFixed(1)+"% complete";
 $("cnt").textContent=`Owned ${o}/${N} versions · showing ${v} cards`}
-g.onclick=e=>{const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
+g.onclick=e=>{const w=e.target.closest(".wl");
+ if(w){if(owner){const k=D[els.indexOf(w.closest(".c"))].k;want.has(k)?want.delete(k):want.add(k);queue();draw()}return}
+ const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
+$("more").onclick=()=>{cur="";$("st").value="m";draw();scrollTo(0,0)};
 g.onchange=e=>{if(!owner)return;const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);queue();draw()};
 $("st").onchange=draw;$("q").oninput=draw;
 const num=(a,b)=>a.c.localeCompare(b.c,undefined,{numeric:true}),
@@ -211,6 +227,7 @@ function doImport(txt){if(!owner)return;const before=own.size;let rows=0,skip=0;
  $("rs").textContent=`Matched ${rows} rows (${own.size-before} newly owned versions). Skipped ${skip} rows that aren't in the tracked sets.`}
 $("im").onclick=()=>doImport($("t").value);
 $("fl").onchange=()=>{const f=$("fl").files[0];if(f)f.text().then(doImport);$("fl").value=""};
+$("rs0").onclick=()=>{if(!owner||prompt("This clears ALL your progress. Export first if unsure. Type RESET to continue")!=="RESET")return;own.clear();queue();draw();$("rs").textContent="Collection reset to 0."};
 $("st").value=owner?"":"m";sort();draw();load();
 </script>"""
 
