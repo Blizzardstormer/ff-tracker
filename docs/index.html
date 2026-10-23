@@ -42,14 +42,23 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .list .vs{margin:0;width:230px;flex:none}.list .c.own>.ok{position:static;transform:none;width:24px;height:24px;flex:none}.list .c:hover{transform:none;box-shadow:none}
 .io{margin-top:24px}.io textarea{width:100%;max-width:520px}
 .g.m{grid-template-columns:repeat(var(--n,3),1fr)}
-@media(max-width:700px){#bar{position:static}input[type=range]{width:160px}}
+#sk,#ctl{display:contents}#q,#vw,#th,#sz{order:1}
+.ro .c details{display:none}
+@media(max-width:700px){
+#bar{display:contents}
+#sk{position:sticky;top:0;z-index:2;display:flex;flex-direction:column;gap:6px;background:var(--bg);padding:8px 0;margin-top:8px;border-bottom:1px solid var(--bd)}
+#tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#tabs::-webkit-scrollbar{display:none}
+.t{padding:6px 9px;flex:none}#q{width:100%;order:0;padding:6px 10px}
+#ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0}#q,#vw,#th,#sz{order:0}
+input[type=range]{width:160px}}
 .hide{display:none!important}
 </style>
 <main><div class=hd><h1>Final Fantasy Collection</h1><div class=hr><span id=ss></span><span id=pc></span></div></div><div id=pb><i></i></div>
-<div id=bar><div id=tabs></div><b id=cnt></b>
+<div id=bar><div id=sk><div id=tabs></div><input id=q placeholder="Search name"></div>
+<div id=ctl><b id=cnt></b>
 <select id=st><option value="">All</option><option value=m>Missing a version</option><option value=o>Complete</option></select>
 <select id=so><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
-<input id=q placeholder="Search name"><button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size"></div>
+<button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size"></div></div>
 <div class=g id=g></div>
 <details class=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
 <button id=ex>Export owned</button> <button id=im>Import (adds to owned)</button></details>
