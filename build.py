@@ -98,6 +98,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 #ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0}#q,#vw,#th,#sz{order:0}
 input[type=range]{width:160px}}
 #rs{font-size:12px;color:var(--mu)}
+#up{position:fixed;right:16px;bottom:16px;z-index:3;width:44px;height:44px;padding:0;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .wl{position:absolute;top:12px;right:12px;z-index:1;display:grid;place-items:center;width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(15,17,21,.55);color:#fff;backdrop-filter:blur(4px);cursor:pointer}
 .c.w .wl{color:#facc15}.c.w .wl svg{fill:currentColor}.ro .c:not(.w) .wl{display:none}.ro .wl{pointer-events:none}
 .list .wl{position:static;width:24px;height:24px;flex:none}#mp{text-align:center;margin:18px 0}
@@ -114,7 +115,7 @@ input[type=range]{width:160px}}
 <details class=io id=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
 <button id=ex>Export owned</button> <button id=im>Import pasted text</button> <input type=file id=fl accept=".csv,.txt"><p id=rs>Import adds to what you own; it never removes anything. Accepts a ManaBox CSV or Moxfield text.</p>
 <hr><button id=rs0>Reset collection to 0 (debug)</button></details>
-<p><button id=lk></button></p></main>
+<p><button id=lk></button></p><button id=up class=hide title="Back to top"></button></main>
 <script>
 const D=__DATA__,SI=__SETS__;
 let own=new Set,want=new Set;
@@ -124,6 +125,7 @@ IC={sun:svg('<circle cx=12 cy=12 r=4></circle><path d="M12 2v2M12 20v2M4.9 4.9l1
 moon:svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>'),
 list:svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>'),
 star:svg('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>'),
+up:svg('<path d="M12 19V5M5 12l7-7 7 7"></path>'),
 grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>')};
 let th="";try{th=localStorage.getItem("ff-theme")||""}catch(e){}
 th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -228,7 +230,9 @@ function doImport(txt){if(!owner)return;const before=own.size;let rows=0,skip=0;
 $("im").onclick=()=>doImport($("t").value);
 $("fl").onchange=()=>{const f=$("fl").files[0];if(f)f.text().then(doImport);$("fl").value=""};
 $("rs0").onclick=()=>{if(!owner||prompt("This clears ALL your progress. Export first if unsure. Type RESET to continue")!=="RESET")return;own.clear();queue();draw();$("rs").textContent="Collection reset to 0."};
-$("st").value=owner?"":"m";sort();draw();load();
+$("st").value=owner?"":"m";$("up").innerHTML=IC.up;$("up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+addEventListener("scroll",()=>$("up").classList.toggle("hide",scrollY<600),{passive:true});
+sort();draw();load();
 </script>"""
 
 if __name__ == "__main__":
