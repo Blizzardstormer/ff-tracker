@@ -92,6 +92,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .t{padding:6px 9px;flex:none}#q{width:100%;order:0;padding:6px 10px}
 #ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0}#q,#vw,#th,#sz{order:0}
 input[type=range]{width:160px}}
+#rs{font-size:12px;color:var(--mu)}
 .hide{display:none!important}
 </style>
 <main><div class=hd><h1>Final Fantasy Collection</h1><div class=hr><span id=ss></span><span id=pc></span></div></div><div id=pb><i></i></div>
@@ -102,7 +103,7 @@ input[type=range]{width:160px}}
 <button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size"></div></div>
 <div class=g id=g></div>
 <details class=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
-<button id=ex>Export owned</button> <button id=im>Import (adds to owned)</button></details>
+<button id=ex>Export owned</button> <button id=im>Import pasted text</button> <input type=file id=fl accept=".csv,.txt"><p id=rs>Import adds to what you own; it never removes anything. Accepts a ManaBox CSV or Moxfield text.</p></details>
 <p><button id=lk></button></p></main>
 <script>
 const D=__DATA__,SI=__SETS__;
@@ -164,7 +165,7 @@ const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check pric
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},N=D.reduce((a,d)=>a+d.fin.length,0);
 g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i></div>`).join("");
 const els=[...g.children];
-function draw(){$("im").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
+function draw(){$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let all=true;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);o+=h;all=all&&h});
 e.classList.toggle("own",all);e.querySelector("details").classList.toggle("hide",all);
@@ -189,9 +190,27 @@ mq.addEventListener("change",initZ);initZ();
 let rz=0;$("sz").oninput=()=>{rz=rz||requestAnimationFrame(()=>{rz=0;setZ()})};
 $("sz").onchange=()=>{try{localStorage.setItem(zk(),$("sz").value)}catch(e){}};
 $("ex").onclick=()=>$("t").value=D.flatMap(d=>d.fin.filter(f=>own.has(d.k+"-"+f)).map(f=>`1 ${d.n} (${d.s}) ${d.c}${f=="foil"?" *F*":f=="etched"?" *E*":""}`)).join("\\n");
-$("im").onclick=()=>{if(!owner)return;$("t").value.split("\\n").forEach(l=>{const m=l.match(/\\((\\w+)\\)\\s+(\\S+)(.*)$/);if(!m)return;
-const w=/\\*F\\*/.test(m[3])?"foil":/\\*E\\*/.test(m[3])?"etched":"nonfoil";
-const d=D.find(d=>d.s.toLowerCase()==m[1].toLowerCase()&&d.c.toLowerCase()==m[2].toLowerCase());if(d)own.add(d.k+"-"+(d.fin.includes(w)?w:d.fin[0]))});queue();draw()};
+const idx=new Map;D.forEach(d=>{const k=d.s.toLowerCase()+"|"+d.c.toLowerCase();if(!idx.has(k))idx.set(k,d)});
+const csv=t=>{const R=[];let r=[],f="",q=0;for(let i=0;i<t.length;i++){const c=t[i];
+ if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=0}else f+=c}
+ else if(c=='"')q=1;else if(c==","){r.push(f);f=""}
+ else if(c=="\\n"||c=="\\r"){if(c=="\\r"&&t[i+1]=="\\n")i++;r.push(f);f="";R.push(r);r=[]}else f+=c}
+ if(f||r.length){r.push(f);R.push(r)}return R};
+function doImport(txt){if(!owner)return;const before=own.size;let rows=0,skip=0;
+ const add=(set,cn,w)=>{const d=idx.get(String(set).trim().toLowerCase()+"|"+String(cn).trim().toLowerCase());if(!d){skip++;return}const alt=w=="etched"?"foil":"etched";own.add(d.k+"-"+(d.fin.includes(w)?w:d.fin.includes(alt)?alt:d.fin[0]));rows++};
+ const first=txt.split(/\\r?\\n/).find(l=>l.trim())||"";
+ if(/set code|collector number/i.test(first)){ // ManaBox CSV; rows from wishlists ("list" binder type) don't count as owned
+  const R=csv(txt),H=R.shift().map(h=>h.trim().toLowerCase()),c=n=>H.indexOf(n),
+  iS=c("set code"),iN=c("collector number"),iF=c("foil"),iQ=c("quantity"),iT=H.findIndex(h=>/binder.?type/.test(h));
+  if(iS<0||iN<0)return $("rs").textContent="That CSV needs 'Set code' and 'Collector number' columns.";
+  R.forEach(r=>{if(r.length<2||(iQ>=0&&!(+r[iQ]>0))||(iT>=0&&/list|wish/i.test(r[iT]||"")))return;
+   const f=(r[iF]||"").trim().toLowerCase();add(r[iS],r[iN],["foil","true","yes","1"].includes(f)?"foil":f=="etched"?"etched":"nonfoil")})
+ }else txt.split(/\\r?\\n/).forEach(l=>{const m=l.match(/\\((\\w+)\\)\\s+(\\S+)(.*)$/);if(!m)return;
+  add(m[1],m[2],/\\*F\\*/.test(m[3])?"foil":/\\*E\\*/.test(m[3])?"etched":"nonfoil")});
+ queue();draw();
+ $("rs").textContent=`Matched ${rows} rows (${own.size-before} newly owned versions). Skipped ${skip} rows that aren't in the tracked sets.`}
+$("im").onclick=()=>doImport($("t").value);
+$("fl").onchange=()=>{const f=$("fl").files[0];if(f)f.text().then(doImport);$("fl").value=""};
 $("st").value=owner?"":"m";sort();draw();load();
 </script>"""
 
