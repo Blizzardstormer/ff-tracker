@@ -1318,6 +1318,15 @@
 1 Midgar, City of Mako // Reactor Raid (PFIN) 286s
 1 Starting Town (PFIN) 289s
 1 Zanarkand, Ancient Metropolis // Lasting Fayth (PFIN) 293s
+1 Zack Fair (PMEI) 2026-3
+1 Final Showdown (PMEI) 2027-1
+1 Ultimecia, Temporal Threat (PMEI) 2025-11
+1 Lightning, Security Sergeant (PMEI) 2025-12
+1 Cloud, Planet's Champion (PMEI) 2025-13
+1 Sephiroth, Planet's Heir (PMEI) 2025-14
+1 Cloud, Midgar Mercenary (PMEI) 2025-21
+1 Zidane, Tantalus Thief (PMEI) 2025-26
+1 Sazh's Chocobo (PMEI) 2026-17
 1 Ultima (PSS5) 1
 1 Squall, SeeD Mercenary (PSS5) 2
 1 Despark (PW25) 2
