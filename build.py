@@ -25,7 +25,7 @@ def fetch_cards():
 
 def img(c):
     u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
-    return u.get("small", "")  # a few extras have no image yet; don't crash the whole build
+    return u.get("normal", "")  # a few extras have no image yet; don't crash the whole build
 
 def tiles(cards):
     seen, out = {}, []
@@ -70,7 +70,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .v input{position:absolute;opacity:0;width:0;height:0}.v:focus-within{outline:2px solid var(--ac)}
 .v-foil{background:linear-gradient(120deg,#ff9aa2,#ffdf93,#b5ead7,#9ad0f5,#cdb4f6);color:#1c1e21;border-color:transparent}
 .v-etched{background:linear-gradient(120deg,#e5e7eb,#9ca3af);color:#1c1e21;border-color:transparent}
-.v.on{background:var(--ok);border-color:var(--ok);color:#fff}.v.on::before{content:"✓ "}
+.v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5}.v.on::before{content:"✓ "}
 .c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--ac)}.c details a{display:block;padding:2px 0;color:var(--ac)}
 .g.list{display:flex;flex-direction:column;gap:6px}
 .list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
@@ -116,7 +116,7 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},N=D.reduce((a,d)=>a+d.fin.length,0);
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}</div>`).join("");
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}</div>`).join("");
 const els=[...g.children];
 function draw(){let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let all=true;
