@@ -46,8 +46,8 @@ PAGE = """<!doctype html><meta charset=utf-8><meta name=robots content="noindex,
 body{font:14px sans-serif;margin:1em;background:var(--bg);color:var(--fg)}
 #bar{position:sticky;top:0;background:var(--bg);padding:6px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;z-index:1}
 .g{display:flex;flex-wrap:wrap;gap:8px}.c{width:146px;text-align:center}.c img{width:100%;border-radius:6px}
-.c.own img{opacity:.3}#tabs{display:flex;gap:6px;width:100%;overflow-x:auto;padding-bottom:4px}
-.t{font:12px monospace;text-transform:uppercase;padding:9px 14px;border:1px solid var(--tb);border-radius:10px;background:var(--tab);color:var(--fg);cursor:pointer;white-space:nowrap}.t.on{border-color:var(--on)}.ic{width:16px;height:16px;vertical-align:-3px;filter:var(--ic)}
+.c.own img{opacity:.3}#tabs{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.t{font:12px monospace;text-transform:uppercase;padding:8px 10px;border:1px solid var(--tb);border-radius:10px;background:var(--tab);color:var(--fg);cursor:pointer;white-space:nowrap}.t.on{border-color:var(--on)}.ic{width:16px;height:16px;vertical-align:-3px;filter:var(--ic)}
 .g.list{flex-direction:column;gap:2px}.list .c{width:auto;display:flex;align-items:center;gap:12px;text-align:left;border-bottom:1px solid var(--ln)}
 .list .c img{width:36px}.list .c>a{flex:none}.list .c>div{flex:1}.list .c label{display:inline}.c details{font-size:12px}.c details a{display:block}.c a{color:inherit;text-decoration:none}.c label{display:block;cursor:pointer}.hide{display:none}
 </style>
@@ -69,7 +69,7 @@ $("th").onclick=()=>{setT(th=="dark"?"light":"dark");try{localStorage.setItem("f
 const save=()=>{try{localStorage.setItem("ff-owned",JSON.stringify([...own]))}catch(e){}};
 const ORDER=["FIN","FCA","TFIN","RFIN","FIC","TFIC","AFIC","AFIN","PSS5","WFIN","SCH","PW25","SLD"],have=new Set(D.map(d=>d.s)),
 sets=[...ORDER.filter(s=>have.has(s)),...[...have].filter(s=>!ORDER.includes(s))],rank=Object.fromEntries(sets.map((s,i)=>[s,i]));let cur="";
-$("tabs").innerHTML=["",...sets].map(s=>`<button class=t data-s="${s}">${s?`${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${esc((SI[s]||{n:s}).n)}`:"All"} <small>${s?D.filter(d=>d.s==s).length:D.length}</small></button>`).join("");
+$("tabs").innerHTML=["",...sets].map(s=>`<button class=t data-s="${s}" title="${esc((SI[s]||{n:s}).n)}">${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${s||"All"}</button>`).join("");
 $("tabs").onclick=e=>{const b=e.target.closest(".t");if(b){cur=b.dataset.s;draw()}};
 const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield={q}&search=GO"],
 ["Hideout","https://hideoutcg.com/search?page=1&q=%2A{q}%2A"],["Cards Citadel","https://cardscitadel.com/search?q=%2A{q}%2A"],
