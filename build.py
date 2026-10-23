@@ -41,23 +41,47 @@ def moxfield(cards):
 
 PAGE = """<!doctype html><meta charset=utf-8><meta name=robots content="noindex,nofollow"><meta name=viewport content="width=device-width,initial-scale=1">
 <title>FF tracker</title><style>
-:root{--bg:#fff;--fg:#111;--tab:#f6f1dc;--tb:#c9c3a5;--ln:#eee;--on:#b3202c;--ic:none;color-scheme:light}
-:root[data-t=dark]{--bg:#17171a;--fg:#e8e8e8;--tab:#2a2a2f;--tb:#47474f;--ln:#2e2e33;--on:#e05561;--ic:invert(1);color-scheme:dark}
-body{font:14px sans-serif;margin:1em;background:var(--bg);color:var(--fg)}
-#bar{position:sticky;top:0;background:var(--bg);padding:6px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;z-index:1}
-.g{display:flex;flex-wrap:wrap;gap:8px}.c{width:146px;text-align:center}.c img{width:100%;border-radius:6px}
-.c.own img{opacity:.3}#tabs{display:flex;flex-wrap:wrap;gap:6px;width:100%}
-.t{font:12px monospace;text-transform:uppercase;padding:8px 10px;border:1px solid var(--tb);border-radius:10px;background:var(--tab);color:var(--fg);cursor:pointer;white-space:nowrap}.t.on{border-color:var(--on)}.ic{width:16px;height:16px;vertical-align:-3px;filter:var(--ic)}
-.g.list{flex-direction:column;gap:2px}.list .c{width:auto;display:flex;align-items:center;gap:12px;text-align:left;border-bottom:1px solid var(--ln)}
-.list .c img{width:36px}.list .c>a{flex:none}.list .c>div{flex:1}.list .c label{display:inline}.c details{font-size:12px}.c details a{display:block}.c a{color:inherit;text-decoration:none}.c label{display:block;cursor:pointer}.hide{display:none}
+:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#6b7280;--bd:#e3e5ea;--ac:#4f46e5;--ok:#16a34a;--ic:none;color-scheme:light}
+:root[data-t=dark]{--bg:#0f1115;--sf:#181b21;--fg:#e7e9ee;--mu:#9aa1ad;--bd:#2a2f38;--ac:#6366f1;--ok:#4ade80;--ic:invert(1);color-scheme:dark}
+*{box-sizing:border-box}
+body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
+main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
+h1{font-size:20px;margin:18px 0 8px}
+#pb{height:6px;border-radius:3px;background:var(--bd);overflow:hidden}#pb i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+#bar{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0;margin-top:8px;border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#cnt{color:var(--mu);font-weight:500}
+select,input:not([type=checkbox]),button,textarea{font:inherit;color:var(--fg);background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:7px 10px}
+button{cursor:pointer}button:hover,select:hover{border-color:var(--ac)}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+input[type=checkbox]{accent-color:var(--ac)}
+#tabs{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.t{font:600 12px ui-monospace,Consolas,monospace;padding:7px 11px;border-radius:999px}
+.t.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.ic{width:16px;height:16px;vertical-align:-3px;filter:var(--ic)}.t.on .ic{filter:invert(1)}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+.c{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:8px;text-align:center;position:relative;transition:transform .15s,box-shadow .15s}
+.c:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.14)}
+.c img{width:100%;border-radius:8px;display:block}
+.c .n{font-weight:600;margin-top:6px;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.c small{color:var(--mu)}.c label{display:block;cursor:pointer;padding:2px 0}.c a{color:inherit;text-decoration:none}
+.c.own{border-color:var(--ok)}.c.own img{opacity:.45}
+.c.own::after{content:"✓";position:absolute;top:12px;right:12px;background:var(--ok);color:#fff;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+.c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--ac)}.c details a{display:block;padding:2px 0;color:var(--ac)}
+.g.list{display:flex;flex-direction:column;gap:6px}
+.list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
+.list .c img{width:36px}.list .c>a{flex:none}.list .c>.nm{flex:1}.list .c .n{min-height:0;-webkit-line-clamp:1}
+.list .c label{display:inline-block}.list .c.own::after{display:none}.list .c:hover{transform:none;box-shadow:none}
+.io{margin-top:24px}.io textarea{width:100%;max-width:520px}
+.hide{display:none!important}
 </style>
+<main><h1>Final Fantasy collection</h1><div id=pb><i></i></div>
 <div id=bar><div id=tabs></div><b id=cnt></b>
 <select id=st><option value="">All</option><option value=m>Missing a version</option><option value=o>Complete</option></select>
 <select id=so><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
 <input id=q placeholder="Search name"><button id=vw>List view</button><button id=th></button></div>
 <div class=g id=g></div>
-<details><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8 cols=50></textarea><br>
-<button id=ex>Export owned</button> <button id=im>Import (adds to owned)</button></details>
+<details class=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
+<button id=ex>Export owned</button> <button id=im>Import (adds to owned)</button></details></main>
 <script>
 const D=__DATA__,SI=__SETS__;
 let own=new Set;try{own=new Set(JSON.parse(localStorage.getItem("ff-owned")||"[]"))}catch(e){}
@@ -82,7 +106,7 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
 const FN={nonfoil:"Non-foil",foil:"Foil",etched:"Etched"},N=D.reduce((a,d)=>a+d.fin.length,0);
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy alt="" src="${d.i}"></a><div>${esc(d.n)}<br><small>${d.s} ${d.c}</small></div>${d.fin.map(f=>`<label><input type=checkbox data-f=${f}> ${FN[f]||f}</label>`).join("")}${menu(d)}</div>`).join("");
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div>${d.fin.map(f=>`<label><input type=checkbox data-f=${f}> ${FN[f]||f}</label>`).join("")}${menu(d)}</div>`).join("");
 const els=[...g.children];
 function draw(){let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let all=true;
@@ -90,6 +114,7 @@ e.querySelectorAll("input").forEach(x=>{const h=own.has(d.k+"-"+x.dataset.f);x.c
 e.classList.toggle("own",all);e.querySelector("details").classList.toggle("hide",all);
 const show=(!s||d.s==s)&&(!st||(st=="o")==all)&&d.n.toLowerCase().includes(q);e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
+$("pb").firstChild.style.width=100*o/N+"%";
 $("cnt").textContent=`Owned ${o}/${N} versions · showing ${v} cards`}
 g.onclick=e=>{const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
 g.onchange=e=>{const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);save();draw()};
