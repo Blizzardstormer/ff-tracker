@@ -138,6 +138,7 @@
 1 Chromatic Lantern (FCA) 61
 1 Smuggler's Copter (FCA) 62
 1 Strixhaven Stadium (FCA) 63
+1 Strixhaven Stadium (FCA) 63†
 1 Command Beacon (FCA) 64
 1 Celes, Rune Knight (FIC) 1
 1 Cloud, Ex-SOLDIER (FIC) 2
@@ -858,6 +859,7 @@
 1 Judge Magister Gabranth (FIN) 230
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 231
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 232
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 232†
 1 Lightning, Army of One (FIN) 233
 1 Locke Cole (FIN) 234
 1 Noctis, Prince of Lucis (FIN) 235
@@ -1026,6 +1028,7 @@
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 397
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 398
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 399
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 399†
 1 Lightning, Army of One (FIN) 400
 1 Noctis, Prince of Lucis (FIN) 401
 1 Squall, SeeD Mercenary (FIN) 402
@@ -1125,6 +1128,7 @@
 1 Judge Magister Gabranth (FIN) 495
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 496
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 497
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 497†
 1 Lightning, Army of One (FIN) 498
 1 Locke Cole (FIN) 499
 1 Noctis, Prince of Lucis (FIN) 500
@@ -1173,6 +1177,7 @@
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 542
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 543
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544†
 1 Lightning, Army of One (FIN) 545
 1 Noctis, Prince of Lucis (FIN) 546
 1 Squall, SeeD Mercenary (FIN) 547
