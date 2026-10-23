@@ -5,7 +5,8 @@
 *{box-sizing:border-box}
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
-h1{font-size:20px;margin:18px 0 8px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
+#pc{font-size:15px;font-weight:400;color:var(--mu);font-variant-numeric:tabular-nums}
 #pb{height:6px;border-radius:3px;background:var(--bd);overflow:hidden}#pb i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
 #bar{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0;margin-top:8px;border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 #cnt{color:var(--mu);font-weight:500}
@@ -23,7 +24,9 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .c img{width:100%;border-radius:8px;display:block}
 .c .n{font-weight:600;margin-top:6px;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .c small{color:var(--mu)}.c a{color:inherit;text-decoration:none}
-.c.own{opacity:.55;filter:grayscale(1)}
+.c{--b:clamp(36px,calc(var(--w)*.4px),90px)}
+.c.own>*{opacity:.55;filter:grayscale(1)}
+.c.own::after{content:"✓";position:absolute;left:50%;top:calc(8px + (var(--w)*1px - 16px)*.697);transform:translate(-50%,-50%);width:var(--b);height:var(--b);border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:calc(var(--b)*.6);font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none}
 .vs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 .v{flex:1 1 40%;position:relative;text-align:center;white-space:nowrap;cursor:pointer;padding:6px 2px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);font-size:clamp(9px,calc(var(--w)*.075px),13px);font-weight:600}
 .v input{position:absolute;opacity:0;width:0;height:0}.v:focus-within{outline:2px solid var(--ac)}
@@ -34,11 +37,11 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .g.list{display:flex;flex-direction:column;gap:6px}
 .list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
 .list .c img{width:36px}.list .c>a{flex:none}.list .c>.nm{flex:1}.list .c .n{min-height:0;-webkit-line-clamp:1}
-.list .vs{margin:0;width:230px;flex:none}.list .c:hover{transform:none;box-shadow:none}
+.list .vs{margin:0;width:230px;flex:none}.list .c.own::after{position:static;transform:none;width:24px;height:24px;font-size:15px;flex:none}.list .c:hover{transform:none;box-shadow:none}
 .io{margin-top:24px}.io textarea{width:100%;max-width:520px}
 .hide{display:none!important}
 </style>
-<main><h1>Final Fantasy Collection</h1><div id=pb><i></i></div>
+<main><div class=hd><h1>Final Fantasy Collection</h1><span id=pc></span></div><div id=pb><i></i></div>
 <div id=bar><div id=tabs></div><b id=cnt></b>
 <select id=st><option value="">All</option><option value=m>Missing a version</option><option value=o>Complete</option></select>
 <select id=so><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
@@ -83,7 +86,7 @@ e.querySelectorAll("input").forEach(x=>{const h=own.has(d.k+"-"+x.dataset.f);x.c
 e.classList.toggle("own",all);e.querySelector("details").classList.toggle("hide",all);
 const show=(!s||d.s==s)&&(!st||(st=="o")==all)&&d.n.toLowerCase().includes(q);e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
-$("pb").firstChild.style.width=100*o/N+"%";
+$("pb").firstChild.style.width=100*o/N+"%";$("pc").textContent=(100*o/N).toFixed(1)+"% complete";
 $("cnt").textContent=`Owned ${o}/${N} versions · showing ${v} cards`}
 g.onclick=e=>{const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
 g.onchange=e=>{const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);save();draw()};
