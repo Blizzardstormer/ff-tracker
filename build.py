@@ -24,7 +24,8 @@ def fetch_cards():
     return cards
 
 def img(c):
-    return (c.get("image_uris") or c["card_faces"][0]["image_uris"])["small"]
+    u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
+    return u.get("small", "")  # a few extras have no image yet; don't crash the whole build
 
 def tiles(cards):
     seen, out = {}, []
