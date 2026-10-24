@@ -32,6 +32,14 @@ def img(c):
     u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
     return u.get("normal", "")  # a few extras have no image yet; don't crash the whole build
 
+ODD_SETS = {"tfin", "tfic", "wfin", "afin", "afic"}  # tokens, art cards, scene box
+ODD_LAYOUTS = {"token", "double_faced_token", "emblem", "art_series"}
+
+def rarity(c):
+    if c["set"] in ODD_SETS or c.get("layout") in ODD_LAYOUTS:
+        return "o"
+    return {"common": "c", "uncommon": "u", "rare": "r", "mythic": "m"}.get(c.get("rarity"), "o")
+
 def tiles(cards):
     seen, out = {}, []
     for c in cards:
@@ -40,7 +48,7 @@ def tiles(cards):
         out.append({"k": k if seen[k] == 1 else f"{k}-v{seen[k]}", "n": c["name"], "s": c["set"].upper(),
                     "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"],
                     "ci": "".join(c.get("color_identity") or []),
-                    "r": {"common": "c", "uncommon": "u", "rare": "r", "mythic": "m"}.get(c.get("rarity"), "o")})
+                    "r": rarity(c)})
     return out
 
 def moxfield(cards):
@@ -116,8 +124,8 @@ input[type=range]{width:160px}}
 .hide{display:none!important}
 </style>
 <main><div class=hd><h1>Final Fantasy Collection</h1><span id=ss></span></div>
-<div class=bars><div class=bb><div class=bt><span>Master set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
-<div class=bb><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
+<div class=bars><div class=bb title="Every card number, either finish"><div class=bt><span>Master set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
+<div class=bb title="Every foil and non-foil version"><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
 <div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
 <div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
 <div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=o>Other</button></div>
@@ -199,7 +207,7 @@ const els=[...g.children];
 function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let c0=0;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
-const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=all;
+const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;
 e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
 const stOk=!st||(st=="n"&&!c0)||(st=="p"&&part)||(st=="b"&&all),
 fOk=(!fc.size||(fc.has("C")&&!d.ci)||[...fc].some(x=>d.ci.includes(x)))&&(!fr.size||fr.has(d.r)),
@@ -207,8 +215,8 @@ show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerC
 e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
 const wt=$("tabs").children[1];if(wt)wt.hidden=!owner&&!want.size;$("mp").hidden=!(cur=="*"&&!owner);
-const T=D.length,pc=x=>(100*x/T).toFixed(1),bar=(b,t,x)=>{$(b).style.width=pc(x)+"%";$(t).innerHTML=`<b>${pc(x)}%</b><span class=cn> · ${x.toLocaleString()} / ${T.toLocaleString()}</span>`};
-bar("mb","mt",m);bar("gb","gt",gm);
+const T=D.length,N=D.reduce((a,d)=>a+d.fin.length,0),bar=(b,t,x,n)=>{const p=(100*x/n).toFixed(1);$(b).style.width=p+"%";$(t).innerHTML=`<b>${p}%</b><span class=cn> · ${x.toLocaleString()} / ${n.toLocaleString()}</span>`};
+bar("mb","mt",m,T);bar("gb","gt",gm,N);
 const n=fc.size+fr.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
 $("cnt").textContent=`Showing ${v} cards`}
 g.onclick=e=>{const w=e.target.closest(".wl");
