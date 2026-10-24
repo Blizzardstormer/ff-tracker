@@ -38,7 +38,9 @@ def tiles(cards):
         k = f'{c["set"]}-{c["collector_number"]}'
         seen[k] = seen.get(k, 0) + 1  # variations can share a number; keep keys unique
         out.append({"k": k if seen[k] == 1 else f"{k}-v{seen[k]}", "n": c["name"], "s": c["set"].upper(),
-                    "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"]})
+                    "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"],
+                    "ci": "".join(c.get("color_identity") or []),
+                    "r": {"common": "c", "uncommon": "u", "rare": "r", "mythic": "m"}.get(c.get("rarity"), "o")})
     return out
 
 def moxfield(cards):
@@ -46,15 +48,23 @@ def moxfield(cards):
 
 PAGE = """<!doctype html><meta charset=utf-8><meta name=robots content="noindex,nofollow"><meta name=viewport content="width=device-width,initial-scale=1">
 <title>FF tracker</title><style>
-:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#6b7280;--bd:#e3e5ea;--ac:#4f46e5;--ok:#16a34a;--ic:none;--w:150;color-scheme:light}
-:root[data-t=dark]{--bg:#0f1115;--sf:#181b21;--fg:#e7e9ee;--mu:#9aa1ad;--bd:#2a2f38;--ac:#6366f1;--ok:#4ade80;--ic:invert(1);color-scheme:dark}
+:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#6b7280;--bd:#e3e5ea;--ac:#4f46e5;--ok:#16a34a;--ic:none;--w:150;--gold:#d9a400;color-scheme:light}
+:root[data-t=dark]{--bg:#0f1115;--sf:#181b21;--fg:#e7e9ee;--mu:#9aa1ad;--bd:#2a2f38;--ac:#6366f1;--ok:#4ade80;--ic:invert(1);--gold:#facc15;color-scheme:dark}
 *{box-sizing:border-box}
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
-.hr{display:flex;gap:12px;align-items:baseline}#ss{font-size:12px;color:var(--mu)}.ro .v{cursor:default}
+#ss{font-size:12px;color:var(--mu)}.ro .v{cursor:default}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
-#pc{font-size:15px;font-weight:400;color:var(--mu);font-variant-numeric:tabular-nums}
-#pb{height:6px;border-radius:3px;background:var(--bd);overflow:hidden}#pb i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.bars{display:flex;gap:16px}.bb{flex:1;min-width:0}
+.bt{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mu);margin-bottom:4px;white-space:nowrap}.bt b{font-weight:400;color:var(--fg)}
+.pb{height:6px;border-radius:3px;background:var(--bd);overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}.pb.gm i{background:var(--gold)}
+#qr{display:flex;gap:6px;position:relative}#q{flex:1;min-width:0}
+#fb{display:inline-flex;align-items:center;gap:6px;padding:7px 9px}#fi{display:inline-flex}
+#fc{background:var(--ac);color:#fff;border-radius:999px;font-size:11px;min-width:18px;padding:0 5px;text-align:center}
+#fp{position:absolute;top:calc(100% + 6px);left:0;z-index:5;width:300px;max-width:92vw;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.fl{font-size:12px;color:var(--mu);margin:8px 0 6px}.fr{display:flex;flex-wrap:wrap;gap:6px}
+.ch{padding:6px 10px;border-radius:999px;display:inline-flex;align-items:center}.ch img{width:18px;height:18px}
+.ch.on{background:var(--ac);border-color:var(--ac);color:#fff}#fx{margin-top:12px}
 #bar{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0;margin-top:8px;border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 #cnt{color:var(--mu);font-weight:500}
 select,input:not([type=range]),button,textarea{font:inherit;color:var(--fg);background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:7px 10px}
@@ -73,6 +83,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .c small{color:var(--mu)}.c a{color:inherit;text-decoration:none}
 .c{--b:clamp(36px,40cqw,90px);container-type:inline-size;content-visibility:auto;contain-intrinsic-block-size:auto 340px}
 .c.own>:not(.ok){opacity:.55;filter:grayscale(1)}
+.c.part{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
 .ok{display:none}
 .c.own>.ok{display:block;position:absolute;left:50%;top:calc(8px + 100cqw*.697);transform:translate(-50%,-50%);width:var(--b);height:var(--b);border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(15,17,21,.6) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/55% no-repeat;backdrop-filter:blur(6px);pointer-events:none}
 .vs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
@@ -85,17 +96,17 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .g.list{display:flex;flex-direction:column;gap:6px}
 .list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
 .list .c img{width:36px}.list .c>a{flex:none}.list .c>.nm{flex:1}.list .c .n{min-height:0;-webkit-line-clamp:1}
-.list .vs{margin:0;width:230px;flex:none}.list .c.own>.ok{position:static;transform:none;width:24px;height:24px;flex:none}.list .c:hover{transform:none;box-shadow:none}
+.list .vs{margin:0;width:230px;flex:none}.list .c.own>.ok{position:static;transform:none;width:24px;height:24px;flex:none}.list .c:hover{transform:none;box-shadow:none}.list .c.part{box-shadow:none;border-left:4px solid var(--ok)}
 .io{margin-top:24px}.io textarea{width:100%;max-width:520px}
 .g.m{grid-template-columns:repeat(var(--n,3),1fr)}
-#sk,#ctl{display:contents}#q,#vw,#th,#sz{order:1}
+#sk,#ctl{display:contents}#qr,#vw,#th,#sz{order:1}
 .ro .c details{display:none}
 @media(max-width:700px){
 #bar{display:contents}
 #sk{position:sticky;top:0;z-index:2;display:flex;flex-direction:column;gap:6px;background:var(--bg);padding:8px 0;margin-top:8px;border-bottom:1px solid var(--bd)}
 #tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#tabs::-webkit-scrollbar{display:none}
-.t{padding:6px 9px;flex:none}#q{width:100%;order:0;padding:6px 10px}
-#ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0}#q,#vw,#th,#sz{order:0}
+.t{padding:6px 9px;flex:none}#qr{width:100%;order:0}#q{padding:6px 10px}.cn{display:none}#fp{right:0;width:auto}
+#ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0}#qr,#vw,#th,#sz{order:0}
 input[type=range]{width:160px}}
 #rs{font-size:12px;color:var(--mu)}
 #up{position:fixed;right:16px;bottom:16px;z-index:3;width:44px;height:44px;padding:0;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}
@@ -104,10 +115,15 @@ input[type=range]{width:160px}}
 .list .wl{position:static;width:24px;height:24px;flex:none}#mp{text-align:center;margin:18px 0}
 .hide{display:none!important}
 </style>
-<main><div class=hd><h1>Final Fantasy Collection</h1><div class=hr><span id=ss></span><span id=pc></span></div></div><div id=pb><i></i></div>
-<div id=bar><div id=sk><div id=tabs></div><input id=q placeholder="Search name"></div>
+<main><div class=hd><h1>Final Fantasy Collection</h1><span id=ss></span></div>
+<div class=bars><div class=bb><div class=bt><span>Master set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
+<div class=bb><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
+<div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
+<div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
+<div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=o>Other</button></div>
+<button id=fx>Clear</button></div></div></div>
 <div id=ctl><b id=cnt></b>
-<select id=st><option value="">All</option><option value=m>Missing a version</option><option value=o>Complete</option></select>
+<select id=st><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
 <select id=so><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
 <button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size"></div></div>
 <div class=g id=g></div>
@@ -126,6 +142,7 @@ moon:svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>'),
 list:svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>'),
 star:svg('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>'),
 up:svg('<path d="M12 19V5M5 12l7-7 7 7"></path>'),
+filter:svg('<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>'),
 grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>')};
 let th="";try{th=localStorage.getItem("ff-theme")||""}catch(e){}
 th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -176,22 +193,33 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 ["MTGAsia (copies name)","https://mtg-asia.com/"],["TCG Marketplace (copies name)","https://thetcgmarketplace.com/"]];
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
-const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},N=D.reduce((a,d)=>a+d.fin.length,0);
+const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set;
 g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
-function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let o=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
-els.forEach((e,i)=>{const d=D[i];let all=true;
-e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);o+=h;all=all&&h});
-e.classList.toggle("own",all);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
-const show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&(!st||(st=="o")==all)&&d.n.toLowerCase().includes(q);e.classList.toggle("hide",!show);v+=show});
+function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
+els.forEach((e,i)=>{const d=D[i];let c0=0;
+e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
+const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=all;
+e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
+const stOk=!st||(st=="n"&&!c0)||(st=="p"&&part)||(st=="b"&&all),
+fOk=(!fc.size||(fc.has("C")&&!d.ci)||[...fc].some(x=>d.ci.includes(x)))&&(!fr.size||fr.has(d.r)),
+show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
+e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
 const wt=$("tabs").children[1];if(wt)wt.hidden=!owner&&!want.size;$("mp").hidden=!(cur=="*"&&!owner);
-$("pb").firstChild.style.width=100*o/N+"%";$("pc").textContent=(100*o/N).toFixed(1)+"% complete";
-$("cnt").textContent=`Owned ${o}/${N} versions · showing ${v} cards`}
+const T=D.length,pc=x=>(100*x/T).toFixed(1),bar=(b,t,x)=>{$(b).style.width=pc(x)+"%";$(t).innerHTML=`<b>${pc(x)}%</b><span class=cn> · ${x.toLocaleString()} / ${T.toLocaleString()}</span>`};
+bar("mb","mt",m);bar("gb","gt",gm);
+const n=fc.size+fr.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
+$("cnt").textContent=`Showing ${v} cards`}
 g.onclick=e=>{const w=e.target.closest(".wl");
  if(w){if(owner){const k=D[els.indexOf(w.closest(".c"))].k;want.has(k)?want.delete(k):want.add(k);queue();draw()}return}
  const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
-$("more").onclick=()=>{cur="";$("st").value="m";draw();scrollTo(0,0)};
+$("more").onclick=()=>{cur="";$("st").value="n";draw();scrollTo(0,0)};
+$("fi").innerHTML=IC.filter;$("fb").onclick=()=>{$("fp").hidden=!$("fp").hidden};
+document.addEventListener("click",e=>{if(!$("qr").contains(e.target))$("fp").hidden=true});
+$("fp").onclick=e=>{const b=e.target.closest(".ch,#fx");if(!b)return;
+ if(b.id=="fx"){fc.clear();fr.clear()}else{const t=b.dataset.c?fc:fr,k=b.dataset.c||b.dataset.r;t.has(k)?t.delete(k):t.add(k)}
+ $("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",fc.has(x.dataset.c)||fr.has(x.dataset.r)));draw()};
 g.onchange=e=>{if(!owner)return;const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);queue();draw()};
 $("st").onchange=draw;$("q").oninput=draw;
 const num=(a,b)=>a.c.localeCompare(b.c,undefined,{numeric:true}),
@@ -230,7 +258,7 @@ function doImport(txt){if(!owner)return;const before=own.size;let rows=0,skip=0;
 $("im").onclick=()=>doImport($("t").value);
 $("fl").onchange=()=>{const f=$("fl").files[0];if(f)f.text().then(doImport);$("fl").value=""};
 $("rs0").onclick=()=>{if(!owner||prompt("This clears ALL your progress. Export first if unsure. Type RESET to continue")!=="RESET")return;own.clear();queue();draw();$("rs").textContent="Collection reset to 0."};
-$("st").value=owner?"":"m";$("up").innerHTML=IC.up;$("up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+$("st").value=owner?"":"n";$("up").innerHTML=IC.up;$("up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
 addEventListener("scroll",()=>$("up").classList.toggle("hide",scrollY<600),{passive:true});
 sort();draw();load();
 </script>"""
