@@ -32,23 +32,39 @@ def img(c):
     u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
     return u.get("normal", "")  # a few extras have no image yet; don't crash the whole build
 
-ODD_SETS = {"tfin", "tfic", "wfin", "afin", "afic"}  # tokens, art cards, scene box
-ODD_LAYOUTS = {"token", "double_faced_token", "emblem", "art_series"}
+TOKEN_SETS = {"tfin", "tfic", "wfin"}
+TOKEN_LAYOUTS = {"token", "double_faced_token", "emblem"}
+SUSPECT_SETS = {"fin", "fic", "fca", "pfin"}  # surge foils live here; foil-only cards Scryfall didn't tag get listed for checking
+
+def kind(c):  # Type filter: art cards, scene box, tokens (these have no rarity chip)
+    if c["set"] == "afin" or c.get("layout") == "art_series":
+        return "ar"
+    if c["set"] == "afic":
+        return "sb"
+    if c["set"] in TOKEN_SETS or c.get("layout") in TOKEN_LAYOUTS:
+        return "tk"
+    return ""
 
 def rarity(c):
-    if c["set"] in ODD_SETS or c.get("layout") in ODD_LAYOUTS:
-        return "o"
-    return {"common": "c", "uncommon": "u", "rare": "r", "mythic": "m"}.get(c.get("rarity"), "o")
+    return "" if kind(c) else {"common": "c", "uncommon": "u", "rare": "r", "mythic": "m", "special": "s", "bonus": "b"}.get(c.get("rarity"), "")
+
+def surge_override():  # surge.txt (optional): lines like "fin 580" force the Surge Foil label
+    if not os.path.exists("surge.txt"):
+        return set()
+    return {tuple(l.lower().split()[:2]) for l in open("surge.txt", encoding="utf-8") if l.strip() and not l.startswith("#")}
+
+def is_surge(c, ov):
+    return "surgefoil" in (c.get("promo_types") or []) or (c["set"], c["collector_number"].lower()) in ov
 
 def tiles(cards):
-    seen, out = {}, []
+    seen, out, ov = {}, [], surge_override()
     for c in cards:
         k = f'{c["set"]}-{c["collector_number"]}'
         seen[k] = seen.get(k, 0) + 1  # variations can share a number; keep keys unique
         out.append({"k": k if seen[k] == 1 else f"{k}-v{seen[k]}", "n": c["name"], "s": c["set"].upper(),
                     "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"],
                     "ci": "".join(c.get("color_identity") or []),
-                    "r": rarity(c)})
+                    "r": rarity(c), "ty": kind(c), "sg": int(is_surge(c, ov))})
     return out
 
 def moxfield(cards):
@@ -98,8 +114,9 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .v{flex:1 1 40%;position:relative;text-align:center;white-space:nowrap;cursor:pointer;padding:6px 2px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);font-size:clamp(9px,7.5cqw,13px);font-weight:600}
 .v input{position:absolute;opacity:0;width:0;height:0}.v:focus-within{outline:2px solid var(--ac)}
 .v-foil{background:linear-gradient(120deg,#ff9aa2,#ffdf93,#b5ead7,#9ad0f5,#cdb4f6);color:#1c1e21;border-color:transparent}
+.v-surge{background:linear-gradient(120deg,#00e5ff,#5b8cff,#c04bff,#ff3df2);color:#fff;border-color:transparent;text-shadow:0 1px 2px rgba(0,0,0,.45);box-shadow:0 0 8px rgba(0,229,255,.55)}
 .v-etched{background:linear-gradient(120deg,#e5e7eb,#9ca3af);color:#1c1e21;border-color:transparent}
-.v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5}.v.on::before{content:"✓ "}
+.v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5;text-shadow:none;box-shadow:none}.v.on::before{content:"✓ "}
 .c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--ac)}.c details a{display:block;padding:2px 0;color:var(--ac)}
 .g.list{display:flex;flex-direction:column;gap:6px}
 .list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
@@ -128,7 +145,9 @@ input[type=range]{width:160px}}
 <div class=bb title="Every foil and non-foil version"><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
 <div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
 <div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
-<div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=o>Other</button></div>
+<div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=s>Special</button><button class=ch data-r=b>Bonus</button></div>
+<div class=fl>Finish</div><div class=fr><button class=ch data-f=n>Non-Foil</button><button class=ch data-f=f>Foil</button><button class=ch data-f=s>Surge Foil</button></div>
+<div class=fl>Type</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
 <button id=fx>Clear</button></div></div></div>
 <div id=ctl><b id=cnt></b>
 <select id=st><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
@@ -201,23 +220,24 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 ["MTGAsia (copies name)","https://mtg-asia.com/"],["TCG Marketplace (copies name)","https://thetcgmarketplace.com/"]];
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
-const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set;
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}"><input type=checkbox data-f=${f}><span>${FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
+const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set;
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
 function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let c0=0;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
 const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;
 e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
-const stOk=!st||(st=="n"&&!c0)||(st=="p"&&part)||(st=="b"&&all),
-fOk=(!fc.size||(fc.has("C")&&!d.ci)||[...fc].some(x=>d.ci.includes(x)))&&(!fr.size||fr.has(d.r)),
+const mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
+stOk=!st||(st=="n"&&mine.some(f=>!own.has(d.k+"-"+f)))||(st=="p"&&part)||(st=="b"&&all),
+fOk=(!fc.size||(fc.has("C")&&!d.ci)||[...fc].some(x=>d.ci.includes(x)))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty)),
 show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
 e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
 const wt=$("tabs").children[1];if(wt)wt.hidden=!owner&&!want.size;$("mp").hidden=!(cur=="*"&&!owner);
 const T=D.length,N=D.reduce((a,d)=>a+d.fin.length,0),bar=(b,t,x,n)=>{const p=(100*x/n).toFixed(1);$(b).style.width=p+"%";$(t).innerHTML=`<b>${p}%</b><span class=cn> · ${x.toLocaleString()} / ${n.toLocaleString()}</span>`};
 bar("mb","mt",m,T);bar("gb","gt",gm,N);
-const n=fc.size+fr.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
+const n=fc.size+fr.size+ff.size+fy.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
 $("cnt").textContent=`Showing ${v} cards`}
 g.onclick=e=>{const w=e.target.closest(".wl");
  if(w){if(owner){const k=D[els.indexOf(w.closest(".c"))].k;want.has(k)?want.delete(k):want.add(k);queue();draw()}return}
@@ -225,9 +245,9 @@ g.onclick=e=>{const w=e.target.closest(".wl");
 $("more").onclick=()=>{cur="";$("st").value="n";draw();scrollTo(0,0)};
 $("fi").innerHTML=IC.filter;$("fb").onclick=()=>{$("fp").hidden=!$("fp").hidden};
 document.addEventListener("click",e=>{if(!$("qr").contains(e.target))$("fp").hidden=true});
-$("fp").onclick=e=>{const b=e.target.closest(".ch,#fx");if(!b)return;
- if(b.id=="fx"){fc.clear();fr.clear()}else{const t=b.dataset.c?fc:fr,k=b.dataset.c||b.dataset.r;t.has(k)?t.delete(k):t.add(k)}
- $("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",fc.has(x.dataset.c)||fr.has(x.dataset.r)));draw()};
+$("fp").onclick=e=>{const b=e.target.closest(".ch,#fx");if(!b)return;const S={c:fc,r:fr,f:ff,y:fy};
+ if(b.id=="fx")Object.values(S).forEach(t=>t.clear());else{const a=Object.keys(S).find(k=>b.dataset[k]!==undefined),k=b.dataset[a];S[a].has(k)?S[a].delete(k):S[a].add(k)}
+ $("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",Object.entries(S).some(([a,t])=>x.dataset[a]!==undefined&&t.has(x.dataset[a]))));draw()};
 g.onchange=e=>{if(!owner)return;const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);queue();draw()};
 $("st").onchange=draw;$("q").oninput=draw;
 const num=(a,b)=>a.c.localeCompare(b.c,undefined,{numeric:true}),
@@ -280,4 +300,10 @@ if __name__ == "__main__":
     open("docs/index.html", "w", encoding="utf-8").write(page)
     if not os.path.exists("docs/owned.json"):
         open("docs/owned.json", "w").write("[]")
+    ov = surge_override()
+    tagged = [c for c in cards if is_surge(c, ov)]
+    suspects = [c for c in cards if c["set"] in SUSPECT_SETS and (c.get("finishes") or []) == ["foil"] and not is_surge(c, ov)]
+    open("docs/surgefoil.txt", "w", encoding="utf-8").write(moxfield(tagged))
+    open("docs/surgefoil-check.txt", "w", encoding="utf-8").write(moxfield(suspects))
+    print("surge foil tagged:", {k: sum(c["set"] == k for c in tagged) for k in sorted({c["set"] for c in tagged})}, "| foil-only untagged to check:", len(suspects))
     open("docs/cardlist.txt", "w", encoding="utf-8").write(moxfield(cards))
