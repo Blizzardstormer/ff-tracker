@@ -1,0 +1,129 @@
+1 Herald's Horn (FIC) 228
+1 Tataru Taru (FIC) 466
+1 Lulu, Stern Guardian (FIC) 467
+1 Rikku, Resourceful Guardian (FIC) 468
+1 Snapcaster Mage (FIC) 469
+1 Yuffie, Materia Hunter (FIC) 470
+1 Aerith, Last Ancient (FIC) 471
+1 Barret, Avalanche Leader (FIC) 472
+1 Emet-Selch of the Third Seat (FIC) 473
+1 Estinien Varlineau (FIC) 474
+1 Locke, Treasure Hunter (FIC) 475
+1 Mog, Moogle Warrior (FIC) 476
+1 Wakka, Devoted Guardian (FIC) 477
+1 Plains (FIC) 478
+1 Island (FIC) 479
+1 Swamp (FIC) 480
+1 Mountain (FIC) 481
+1 Forest (FIC) 482
+1 Birds of Paradise (FIC) 483
+1 Traveling Chocobo (FIN) 551
+1 Traveling Chocobo (FIN) 551a
+1 Traveling Chocobo (FIN) 551b
+1 Traveling Chocobo (FIN) 551c
+1 Traveling Chocobo (FIN) 551d
+1 Traveling Chocobo (FIN) 551f
+1 Cloud, Planet's Champion (FIN) 552
+1 Sephiroth, Planet's Heir (FIN) 553
+1 Cloud, Midgar Mercenary (FIN) 564
+1 Stiltzkin, Moogle Merchant (FIN) 565
+1 A Realm Reborn (FIN) 566
+1 Tifa Lockhart (FIN) 567
+1 Traveling Chocobo (FIN) 568
+1 Choco, Seeker of Paradise (FIN) 569
+1 Vivi Ornitier (FIN) 570
+1 Yuna, Hope of Spira (FIN) 571
+1 Summon: Bahamut (PFIN) 1s
+1 Ultima, Origin of Oblivion (PFIN) 2s
+1 Aerith Gainsborough (PFIN) 4s
+1 Cloud, Midgar Mercenary (PFIN) 10s
+1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
+1 From Father to Son (PFIN) 20s
+1 Machinist's Arsenal (PFIN) 23s
+1 Minwu, White Mage (PFIN) 26s
+1 Moogles' Valor (PFIN) 27s
+1 Stiltzkin, Moogle Merchant (PFIN) 34s
+1 Summon: Knights of Round (PFIN) 36s
+1 Ultima (PFIN) 38s
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (PFIN) 39s
+1 The Wind Crystal (PFIN) 43s
+1 Astrologian's Planisphere (PFIN) 46s
+1 Edgar, King of Figaro (PFIN) 51s
+1 Gogo, Master of Mimicry (PFIN) 54s
+1 Jill, Shiva's Dominant // Shiva, Warden of Ice (PFIN) 58s
+1 Louisoix's Sacrifice (PFIN) 59s
+1 The Lunar Whale (PFIN) 60s
+1 Matoya, Archon Elder (PFIN) 62s
+1 Memories Returning (PFIN) 63s
+1 Summon: Leviathan (PFIN) 77s
+1 The Water Crystal (PFIN) 85s
+1 Y'shtola Rhul (PFIN) 86s
+1 Ardyn, the Usurper (PFIN) 89s
+1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
+1 Dark Confidant (PFIN) 94s
+1 The Darkness Crystal (PFIN) 96s
+1 Jecht, Reluctant Guardian // Braska's Final Aeon (PFIN) 104s
+1 Kain, Traitorous Dragoon (PFIN) 105s
+1 Ninja's Blades (PFIN) 108s
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (PFIN) 115s
+1 Summon: Primal Odin (PFIN) 121s
+1 Vincent Valentine // Galian Beast (PFIN) 125s
+1 Zenos yae Galvus // Shinryu, Transcendent Rival (PFIN) 127s
+1 Zodiark, Umbral God (PFIN) 128s
+1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (PFIN) 133s
+1 The Fire Crystal (PFIN) 135s
+1 Firion, Wild Rose Warrior (PFIN) 137s
+1 Gilgamesh, Master-at-Arms (PFIN) 139s
+1 Nibelheim Aflame (PFIN) 146s
+1 Raubahn, Bull of Ala Mhigo (PFIN) 151s
+1 Seifer Almasy (PFIN) 156s
+1 Summon: Brynhildr (PFIN) 160s
+1 Summon: G.F. Cerberus (PFIN) 162s
+1 Triple Triad (PFIN) 166s
+1 Vaan, Street Thief (PFIN) 168s
+1 Zell Dincht (PFIN) 170s
+1 Ancient Adamantoise (PFIN) 172s
+1 Bartz and Boko (PFIN) 175s
+1 The Earth Crystal (PFIN) 184s
+1 Esper Origins // Summon: Esper Maduin (PFIN) 185s
+1 Jumbo Cactuar (PFIN) 191s
+1 A Realm Reborn (PFIN) 196s
+1 Sazh Katzroy (PFIN) 199s
+1 Summon: Titan (PFIN) 204s
+1 Summoner's Grimoire (PFIN) 205s
+1 Tifa Lockhart (PFIN) 206s
+1 Traveling Chocobo (PFIN) 210s
+1 Absolute Virtue (PFIN) 212s
+1 Balthier and Fran (PFIN) 213s
+1 Choco, Seeker of Paradise (PFIN) 215s
+1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (PFIN) 218s
+1 Golbez, Crystal Collector (PFIN) 225s
+1 Hope Estheim (PFIN) 226s
+1 Jenova, Ancient Calamity (PFIN) 228s
+1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (PFIN) 229s
+1 Kefka, Court Mage // Kefka, Ruler of Ruin (PFIN) 231s
+1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (PFIN) 232s
+1 Lightning, Army of One (PFIN) 233s
+1 Noctis, Prince of Lucis (PFIN) 235s
+1 Serah Farron // Crystallized Serah (PFIN) 240s
+1 Sin, Spira's Punishment (PFIN) 242s
+1 Squall, SeeD Mercenary (PFIN) 243s
+1 Tellah, Great Sage (PFIN) 244s
+1 Terra, Magical Adept // Esper Terra (PFIN) 245s
+1 Vivi Ornitier (PFIN) 248s
+1 The Wandering Minstrel (PFIN) 249s
+1 Yuna, Hope of Spira (PFIN) 250s
+1 Aettir and Priwen (PFIN) 253s
+1 Buster Sword (PFIN) 255s
+1 Excalibur II (PFIN) 257s
+1 Genji Glove (PFIN) 258s
+1 The Masamune (PFIN) 264s
+1 The Regalia (PFIN) 267s
+1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (PFIN) 272s
+1 Clive's Hideaway (PFIN) 275s
+1 Ishgard, the Holy See // Faith & Grief (PFIN) 283s
+1 Jidoor, Aristocratic Capital // Overture (PFIN) 284s
+1 Lindblum, Industrial Regency // Mage Siege (PFIN) 285s
+1 Midgar, City of Mako // Reactor Raid (PFIN) 286s
+1 Starting Town (PFIN) 289s
+1 Zanarkand, Ancient Metropolis // Lasting Fayth (PFIN) 293s
