@@ -30,7 +30,7 @@ def fetch_cards():
 
 def img(c):
     u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
-    return u.get("normal", "")  # a few extras have no image yet; don't crash the whole build
+    return u.get("grid") or u.get("jpeg") or u.get("normal", "")  # WebP first; a few extras have no image yet, so never crash the build
 
 TOKEN_SETS = {"tfin", "tfic", "wfin"}
 TOKEN_LAYOUTS = {"token", "double_faced_token", "emblem"}
@@ -76,10 +76,10 @@ def tiles(cards):
 def moxfield(cards):
     return "".join(f'1 {c["name"]} ({c["set"].upper()}) {c["collector_number"]}\n' for c in cards)
 
-PAGE = """<!doctype html><meta charset=utf-8><meta name=robots content="noindex,nofollow"><meta name=viewport content="width=device-width,initial-scale=1">
+PAGE = """<!doctype html><html lang=en><meta charset=utf-8><meta name=description content="Final Fantasy Magic: The Gathering collection tracker"><meta name=robots content="noindex,nofollow"><meta name=viewport content="width=device-width,initial-scale=1">
 <title>FF tracker</title><style>
-:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#6b7280;--bd:#e3e5ea;--ac:#4f46e5;--ok:#16a34a;--ic:none;--w:150;--gold:#d9a400;color-scheme:light}
-:root[data-t=dark]{--bg:#0f1115;--sf:#181b21;--fg:#e7e9ee;--mu:#9aa1ad;--bd:#2a2f38;--ac:#6366f1;--ok:#4ade80;--ic:invert(1);--gold:#facc15;color-scheme:dark}
+:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#6b7280;--bd:#e3e5ea;--ac:#4f46e5;--at:#4f46e5;--ok:#16a34a;--ic:none;--w:150;--gold:#d9a400;color-scheme:light}
+:root[data-t=dark]{--bg:#0f1115;--sf:#181b21;--fg:#e7e9ee;--mu:#9aa1ad;--bd:#2a2f38;--ac:#5457e6;--at:#818cf8;--ok:#4ade80;--ic:invert(1);--gold:#facc15;color-scheme:dark}
 *{box-sizing:border-box}
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
@@ -132,7 +132,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .v-etched{background:linear-gradient(120deg,#e5e7eb,#9ca3af);color:#1c1e21;border-color:transparent}
 .v-foil,.v-surge,.v-etched{background-origin:border-box}
 .v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5;text-shadow:none;box-shadow:none}.v.on::before{content:"✓ "}
-.c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--ac)}.c details a{display:block;padding:2px 0;color:var(--ac)}
+.c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--at)}.c details a{display:block;padding:2px 0;color:var(--at)}
 .g.list{display:flex;flex-direction:column;gap:6px}
 .list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
 .list .c img{width:36px}.list .c>a{flex:none}.list .c>.nm{flex:1}.list .c .n{min-height:0;-webkit-line-clamp:1}
@@ -158,9 +158,9 @@ input[type=range]{width:160px}}
 <main><div class=hd><h1>Final Fantasy Collection</h1><span id=ss></span></div>
 <div class=bars><div class=bb title="Every card number, either finish"><div class=bt><span>Master set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
 <div class=bb title="Every foil and non-foil version"><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
-<div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
+<div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name" aria-label="Search by card name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
 <div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
-<select id=cm><option value=x>Exactly these colours</option><option value=i selected>Including these colours</option><option value=a>At most these colours</option></select>
+<select id=cm aria-label="Colour match mode"><option value=x>Exactly these colours</option><option value=i selected>Including these colours</option><option value=a>At most these colours</option></select>
 <div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=s>Special</button><button class=ch data-r=b>Bonus</button></div>
 <div class=fl>Finish</div><div class=fr><button class=ch data-f=n>Non-Foil</button><button class=ch data-f=f>Foil</button><button class=ch data-f=s>Surge Foil</button></div>
 <div class=fl>Card type</div><div class=fr><button class=ch data-t=c>Creature</button><button class=ch data-t=i>Instant</button><button class=ch data-t=s>Sorcery</button><button class=ch data-t=e>Enchantment</button><button class=ch data-t=a>Artifact</button><button class=ch data-t=l>Land</button><button class=ch data-t=p>Planeswalker</button><button class=ch data-t=b>Battle</button></div>
@@ -168,9 +168,9 @@ input[type=range]{width:160px}}
 <div class=fl>Special cards</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
 <button id=fx>Clear</button></div></div></div>
 <div id=ctl><b id=cnt></b>
-<select id=st><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
-<select id=so><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
-<button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size"></div></div>
+<select id=st aria-label="Filter by progress"><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
+<select id=so aria-label="Sort cards"><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
+<button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size" aria-label="Card size"></div></div>
 <div class=g id=g></div>
 <p id=mp hidden><button id=more>Show everything I'm still missing</button></p>
 <details class=io id=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
@@ -240,7 +240,7 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank aria-label="${esc(d.n)} on Scryfall"><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
 let pm=-1,pg=-1;const flash=id=>{const e=$(id);e.classList.remove("flash");void e.offsetWidth;e.classList.add("flash")};
 function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,ac=0,v=0;const ms={},gf={};const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
