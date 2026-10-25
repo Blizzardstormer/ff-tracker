@@ -9,7 +9,15 @@ main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
 .bars{display:flex;gap:16px}.bb{flex:1;min-width:0}
 .bt{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mu);margin-bottom:4px;white-space:nowrap}.bt b{font-weight:400;color:var(--fg)}
-.pb{height:6px;border-radius:3px;background:var(--bd);overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}.pb.gm i{background:var(--gold)}
+.pb{height:6px;border-radius:3px;background:var(--bd)}
+.pb i{display:block;height:100%;width:0;border-radius:3px;background:var(--ok);transition:width .3s;--glow:rgba(34,197,94,.7);animation:breathe 3.2s ease-in-out infinite}
+.pb.gm i{background:var(--gold);--glow:rgba(250,204,21,.75)}
+@keyframes breathe{0%,100%{filter:brightness(1);box-shadow:0 0 0 0 transparent}50%{filter:brightness(1.15);box-shadow:0 0 8px 0 var(--glow)}}
+@keyframes flash{0%{filter:brightness(1.9);box-shadow:0 0 14px 2px var(--glow)}100%{filter:brightness(1);box-shadow:0 0 0 0 transparent}}
+.pb i.flash{animation:flash .9s ease-out 1,breathe 3.2s ease-in-out .9s infinite}
+.pb.done i{animation:breathe 1.5s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.pb i{animation:none!important}}
+.t{position:relative;overflow:hidden}.tp{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ok);transition:width .3s}.t.full .tp{background:var(--gold);width:100%!important}
 #qr{display:flex;gap:6px;position:relative}#q{flex:1;min-width:0}
 #fb{display:inline-flex;align-items:center;gap:6px;padding:7px 9px}#fi{display:inline-flex}
 #fc{background:var(--ac);color:#fff;border-radius:999px;font-size:11px;min-width:18px;padding:0 5px;text-align:center}
@@ -138,9 +146,10 @@ $("lk").onclick=async()=>{
  if(!r.ok)return alert("That token doesn't work for this repo.");
  try{localStorage.setItem("ff-token",t)}catch(e){return alert("This browser can't save the login.")}
  location.reload()};
+const TS={};D.forEach(d=>TS[d.s]=(TS[d.s]||0)+1);
 const ORDER=["FIN","FCA","PFIN","TFIN","RFIN","FIC","TFIC","AFIC","AFIN","PSS5","WFIN","PMEI","SCH","PW25","SLD"],have=new Set(D.map(d=>d.s)),
 sets=[...ORDER.filter(s=>have.has(s)),...[...have].filter(s=>!ORDER.includes(s))],rank=Object.fromEntries(sets.map((s,i)=>[s,i]));let cur="";
-$("tabs").innerHTML=["","*",...sets].map(s=>`<button class=t data-s="${s}" title="${s=="*"?"Cards I'm looking for":esc((SI[s]||{n:s}).n)}">${s=="*"?IC.star+" Wishlist":`${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${s||"All"}`}</button>`).join("");
+$("tabs").innerHTML=["","*",...sets].map(s=>`<button class=t data-s="${s}" title="${s=="*"?"Cards I'm looking for":esc((SI[s]||{n:s}).n)}">${s=="*"?IC.star+" Wishlist":`${(SI[s]||{}).i?`<img class=ic alt="" src="${SI[s].i}"> `:""}${s||"All"}`}${s=="*"?"":"<i class=tp></i>"}</button>`).join("");
 $("tabs").onclick=e=>{const b=e.target.closest(".t");if(b){cur=b.dataset.s;draw()}};
 const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield={q}&search=GO"],
 ["Hideout","https://hideoutcg.com/search?page=1&q=%2A{q}%2A"],["Cards Citadel","https://cardscitadel.com/search?q=%2A{q}%2A"],
@@ -155,10 +164,11 @@ const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check pric
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
 g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
-function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,v=0;const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
+let pm=-1,pg=-1;const flash=id=>{const e=$(id);e.classList.remove("flash");void e.offsetWidth;e.classList.add("flash")};
+function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,ac=0,v=0;const ms={},gf={};const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let c0=0;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
-const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;
+const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;ac+=all;ms[d.s]=(ms[d.s]||0)+(c0>0);gf[d.s]=(gf[d.s]||0)+all;
 e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
 const tys=[...ft].filter(x=>!"gk".includes(x)),sup=[...ft].filter(x=>"gk".includes(x)),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&sup.every(x=>d.tp.includes(x)),
 mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
@@ -166,10 +176,12 @@ stOk=!st||(st=="n"&&mine.some(f=>!own.has(d.k+"-"+f)))||(st=="p"&&part)||(st=="b
 fOk=(!fc.size||(fc.has("C")&&!d.ci)||(P.length>0&&(cm=="x"?d.ci.length==P.length&&P.every(x=>d.ci.includes(x)):cm=="i"?P.every(x=>d.ci.includes(x)):[...d.ci].every(x=>P.includes(x)))))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty))&&tyOk,
 show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
 e.classList.toggle("hide",!show);v+=show});
-[...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
+[...$("tabs").children].forEach(b=>{const s=b.dataset.s;b.classList.toggle("on",s==cur);if(s=="*")return;const tot=s?TS[s]:D.length,p=b.querySelector(".tp");if(p)p.style.width=100*(s?ms[s]||0:m)/tot+"%";b.classList.toggle("full",(s?gf[s]||0:ac)==tot)});
 const wt=$("tabs").children[1];if(wt)wt.hidden=!owner&&!want.size;$("mp").hidden=!(cur=="*"&&!owner);
 const T=D.length,N=D.reduce((a,d)=>a+d.fin.length,0),bar=(b,t,x,n)=>{const p=(100*x/n).toFixed(1);$(b).style.width=p+"%";$(t).innerHTML=`<b>${p}%</b><span class=cn> · ${x.toLocaleString()} / ${n.toLocaleString()}</span>`};
 bar("mb","mt",m,T);bar("gb","gt",gm,N);
+if(pm>=0){if(m!=pm)flash("mb");if(gm!=pg)flash("gb")}pm=m;pg=gm;
+$("mb").parentNode.classList.toggle("done",m==T);$("gb").parentNode.classList.toggle("done",gm==N);
 const n=fc.size+fr.size+ff.size+fy.size+ft.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
 $("cnt").textContent=`Showing ${v} cards`}
 g.onclick=e=>{const w=e.target.closest(".wl");
