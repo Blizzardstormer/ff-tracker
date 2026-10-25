@@ -1,5 +1,5 @@
 """Builds docs/index.html: every tracked Final Fantasy card with art and per-finish owned checkboxes (saved in the browser)."""
-import html, json, os, urllib.parse, urllib.request
+import html, json, os, re, urllib.parse, urllib.request
 
 QUERY = ("e:fin or e:fca or e:pfin or e:tfin or e:rfin or e:fic or e:tfic or e:afic or e:afin or e:pss5 or e:wfin"
          " or (e:pmei (" + " or ".join(f'cn:"{c}"' for c in ['2027-1', '2026-3', '2026-17', '2025-11', '2025-12', '2025-13', '2025-14', '2025-21', '2025-26']) + "))"
@@ -37,13 +37,19 @@ TOKEN_LAYOUTS = {"token", "double_faced_token", "emblem"}
 SUSPECT_SETS = {"fin", "fic", "fca", "pfin"}  # surge foils live here; foil-only cards Scryfall didn't tag get listed for checking
 
 def kind(c):  # Type filter: art cards, scene box, tokens (these have no rarity chip)
+    if c["set"] == "afic":  # checked first: scene box cards also use the art_series layout
+        return "sb"
     if c["set"] == "afin" or c.get("layout") == "art_series":
         return "ar"
-    if c["set"] == "afic":
-        return "sb"
     if c["set"] in TOKEN_SETS or c.get("layout") in TOKEN_LAYOUTS:
         return "tk"
     return ""
+
+CARD_TYPES = {"creature": "c", "artifact": "a", "enchantment": "e", "instant": "i", "sorcery": "s", "land": "l", "planeswalker": "p", "battle": "b", "legendary": "g"}
+
+def types(c):
+    tl = (c.get("type_line") or " // ".join(f.get("type_line", "") for f in c.get("card_faces") or [])).lower()
+    return "".join(v for k, v in CARD_TYPES.items() if re.search(r"\b" + k + r"\b", tl))
 
 def rarity(c):
     return "" if kind(c) else {"common": "c", "uncommon": "u", "rare": "r", "mythic": "m", "special": "s", "bonus": "b"}.get(c.get("rarity"), "")
@@ -64,7 +70,7 @@ def tiles(cards):
         out.append({"k": k if seen[k] == 1 else f"{k}-v{seen[k]}", "n": c["name"], "s": c["set"].upper(),
                     "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"],
                     "ci": "".join(c.get("color_identity") or []),
-                    "r": rarity(c), "ty": kind(c), "sg": int(is_surge(c, ov))})
+                    "r": rarity(c), "ty": kind(c), "tp": types(c), "sg": int(is_surge(c, ov))})
     return out
 
 def moxfield(cards):
@@ -85,7 +91,7 @@ main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
 #qr{display:flex;gap:6px;position:relative}#q{flex:1;min-width:0}
 #fb{display:inline-flex;align-items:center;gap:6px;padding:7px 9px}#fi{display:inline-flex}
 #fc{background:var(--ac);color:#fff;border-radius:999px;font-size:11px;min-width:18px;padding:0 5px;text-align:center}
-#fp{position:absolute;top:calc(100% + 6px);left:0;z-index:5;width:300px;max-width:92vw;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#fp{max-height:70vh;overflow:auto;position:absolute;top:calc(100% + 6px);left:0;z-index:5;width:300px;max-width:92vw;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .fl{font-size:12px;color:var(--mu);margin:8px 0 6px}.fr{display:flex;flex-wrap:wrap;gap:6px}
 .ch{padding:6px 10px;border-radius:999px;display:inline-flex;align-items:center}.ch img{width:18px;height:18px}
 .ch.on{background:var(--ac);border-color:var(--ac);color:#fff}#fx{margin-top:12px}
@@ -148,7 +154,9 @@ input[type=range]{width:160px}}
 <div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
 <div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=s>Special</button><button class=ch data-r=b>Bonus</button></div>
 <div class=fl>Finish</div><div class=fr><button class=ch data-f=n>Non-Foil</button><button class=ch data-f=f>Foil</button><button class=ch data-f=s>Surge Foil</button></div>
-<div class=fl>Type</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
+<div class=fl>Card type</div><div class=fr><button class=ch data-t=c>Creature</button><button class=ch data-t=i>Instant</button><button class=ch data-t=s>Sorcery</button><button class=ch data-t=e>Enchantment</button><button class=ch data-t=a>Artifact</button><button class=ch data-t=l>Land</button><button class=ch data-t=p>Planeswalker</button><button class=ch data-t=b>Battle</button></div>
+<div class=fl>Supertype</div><div class=fr><button class=ch data-t=g>Legendary</button></div>
+<div class=fl>Special cards</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
 <button id=fx>Clear</button></div></div></div>
 <div id=ctl><b id=cnt></b>
 <select id=st><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
@@ -221,7 +229,7 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 ["MTGAsia (copies name)","https://mtg-asia.com/"],["TCG Marketplace (copies name)","https://thetcgmarketplace.com/"]];
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
-const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set;
+const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
 g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
 function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,v=0;const s=cur,st=$("st").value,q=$("q").value.toLowerCase();
@@ -229,16 +237,17 @@ els.forEach((e,i)=>{const d=D[i];let c0=0;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
 const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;
 e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
-const mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
+const tys=[...ft].filter(x=>x!="g"),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&(!ft.has("g")||d.tp.includes("g")),
+mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
 stOk=!st||(st=="n"&&mine.some(f=>!own.has(d.k+"-"+f)))||(st=="p"&&part)||(st=="b"&&all),
-fOk=(!fc.size||(fc.has("C")&&!d.ci)||[...fc].some(x=>d.ci.includes(x)))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty)),
+fOk=(!fc.size||(fc.has("C")&&!d.ci)||[...fc].some(x=>d.ci.includes(x)))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty))&&tyOk,
 show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
 e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>b.classList.toggle("on",b.dataset.s==cur));
 const wt=$("tabs").children[1];if(wt)wt.hidden=!owner&&!want.size;$("mp").hidden=!(cur=="*"&&!owner);
 const T=D.length,N=D.reduce((a,d)=>a+d.fin.length,0),bar=(b,t,x,n)=>{const p=(100*x/n).toFixed(1);$(b).style.width=p+"%";$(t).innerHTML=`<b>${p}%</b><span class=cn> · ${x.toLocaleString()} / ${n.toLocaleString()}</span>`};
 bar("mb","mt",m,T);bar("gb","gt",gm,N);
-const n=fc.size+fr.size+ff.size+fy.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
+const n=fc.size+fr.size+ff.size+fy.size+ft.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
 $("cnt").textContent=`Showing ${v} cards`}
 g.onclick=e=>{const w=e.target.closest(".wl");
  if(w){if(owner){const k=D[els.indexOf(w.closest(".c"))].k;want.has(k)?want.delete(k):want.add(k);queue();draw()}return}
@@ -246,7 +255,7 @@ g.onclick=e=>{const w=e.target.closest(".wl");
 $("more").onclick=()=>{cur="";$("st").value="n";draw();scrollTo(0,0)};
 $("fi").innerHTML=IC.filter;$("fb").onclick=()=>{$("fp").hidden=!$("fp").hidden};
 document.addEventListener("click",e=>{if(!$("qr").contains(e.target))$("fp").hidden=true});
-$("fp").onclick=e=>{const b=e.target.closest(".ch,#fx");if(!b)return;const S={c:fc,r:fr,f:ff,y:fy};
+$("fp").onclick=e=>{const b=e.target.closest(".ch,#fx");if(!b)return;const S={c:fc,r:fr,f:ff,y:fy,t:ft};
  if(b.id=="fx")Object.values(S).forEach(t=>t.clear());else{const a=Object.keys(S).find(k=>b.dataset[k]!==undefined),k=b.dataset[a];S[a].has(k)?S[a].delete(k):S[a].add(k)}
  $("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",Object.entries(S).some(([a,t])=>x.dataset[a]!==undefined&&t.has(x.dataset[a]))));draw()};
 g.onchange=e=>{if(!owner)return;const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);queue();draw()};
