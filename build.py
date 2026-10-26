@@ -1,5 +1,5 @@
 """Builds docs/index.html: every tracked Final Fantasy card with art and per-finish owned checkboxes (saved in the browser)."""
-import html, json, os, re, urllib.parse, urllib.request
+import datetime, html, json, os, re, urllib.parse, urllib.request
 
 QUERY = ("e:fin or e:fca or e:pfin or e:tfin or e:rfin or e:fic or e:tfic or e:afic or e:afin or e:pss5 or e:wfin"
          " or (e:pmei (" + " or ".join(f'cn:"{c}"' for c in ['2027-1', '2026-3', '2026-17', '2025-11', '2025-12', '2025-13', '2025-14', '2025-21', '2025-26']) + "))"
@@ -78,12 +78,13 @@ def moxfield(cards):
 
 PAGE = """<!doctype html><html lang=en><meta charset=utf-8><meta name=description content="Final Fantasy Magic: The Gathering collection tracker"><meta name=robots content="noindex,nofollow"><meta name=viewport content="width=device-width,initial-scale=1">
 <title>FF tracker</title><style>
-:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#6b7280;--bd:#e3e5ea;--ac:#4f46e5;--at:#4f46e5;--ok:#16a34a;--ic:none;--w:150;--gold:#d9a400;color-scheme:light}
+:root{--bg:#f5f6f8;--sf:#fff;--fg:#1c1e21;--mu:#626976;--bd:#e3e5ea;--ac:#4f46e5;--at:#4f46e5;--ok:#16a34a;--ic:none;--w:150;--gold:#d9a400;color-scheme:light}
 :root[data-t=dark]{--bg:#0f1115;--sf:#181b21;--fg:#e7e9ee;--mu:#9aa1ad;--bd:#2a2f38;--ac:#5457e6;--at:#818cf8;--ok:#4ade80;--ic:invert(1);--gold:#facc15;color-scheme:dark}
 *{box-sizing:border-box}
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
-#ss{font-size:12px;color:var(--mu)}.ro .v{cursor:default}
+#ss,#ut{font-size:12px;color:var(--mu)}.hs{display:flex;gap:10px;align-items:baseline}
+#wb{display:flex;gap:10px;align-items:center;margin:12px 0;color:var(--mu)}#wb[hidden]{display:none}#em{text-align:center;color:var(--mu);margin:40px 0}#ft{font-size:11px;color:var(--mu);margin:24px 0 8px;text-align:center}.ro .v{cursor:default}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
 .bars{display:flex;gap:16px}.bb{flex:1;min-width:0}
 .bt{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mu);margin-bottom:4px;white-space:nowrap}.bt b{font-weight:400;color:var(--fg)}
@@ -155,7 +156,7 @@ input[type=range]{width:160px}}
 .list .wl{position:static;width:24px;height:24px;flex:none}#mp{text-align:center;margin:18px 0}
 .hide{display:none!important}
 </style>
-<main><div class=hd><h1>Final Fantasy Collection</h1><span id=ss></span></div>
+<main><div class=hd><h1>Final Fantasy Collection</h1><span class=hs><span id=ut></span><span id=ss></span></span></div>
 <div class=bars><div class=bb title="Every card number, either finish"><div class=bt><span>Master set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
 <div class=bb title="Every foil and non-foil version"><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
 <div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name" aria-label="Search by card name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
@@ -171,12 +172,15 @@ input[type=range]{width:160px}}
 <select id=st aria-label="Filter by progress"><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
 <select id=so aria-label="Sort cards"><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
 <button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size" aria-label="Card size"></div></div>
+<div id=wb hidden><span id=wc></span><button id=cw>Copy list</button></div>
 <div class=g id=g></div>
+<p id=em hidden><span id=et></span> <button id=cf>Clear filters</button></p>
 <p id=mp hidden><button id=more>Show everything I'm still missing</button></p>
 <details class=io id=io><summary>Import / export (Moxfield text)</summary><textarea id=t rows=8></textarea><br>
 <button id=ex>Export owned</button> <button id=im>Import pasted text</button> <input type=file id=fl accept=".csv,.txt"><p id=rs>Import adds to what you own; it never removes anything. Accepts a ManaBox CSV or Moxfield text.</p>
 <hr><button id=rs0>Reset collection to 0 (debug)</button></details>
-<p><button id=lk></button></p><button id=up class=hide title="Back to top"></button></main>
+<p><button id=lk></button></p>
+<p id=ft>Card data and images from Scryfall. Magic: The Gathering and Final Fantasy belong to their owners; this fan tracker is unofficial.</p><button id=up class=hide title="Back to top"></button></main>
 <script>
 const D=__DATA__,SI=__SETS__;
 let own=new Set,want=new Set;
@@ -198,7 +202,10 @@ const REPO="__REPO__",API="https://api.github.com/repos/"+REPO+"/contents/docs/o
 let tok="";try{tok=localStorage.getItem("ff-token")||""}catch(e){}
 let owner=!!tok&&!!REPO,sha="",timer=0,busy=0,again=0;
 const hdr=()=>({Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"}),say=t=>$("ss").textContent=t;
-const take=j=>{if(Array.isArray(j))own=new Set(j);else{own=new Set(j.o||[]);want=new Set(j.w||[])}};
+const BUILT="__BUILT__";let stamp=0;
+const take=j=>{if(Array.isArray(j))own=new Set(j);else{own=new Set(j.o||[]);want=new Set(j.w||[]);stamp=j.t||0}};
+const ago=t=>{const s=(Date.now()-t)/1000;return s<60?"just now":s<3600?Math.floor(s/60)+" min ago":s<86400?Math.floor(s/3600)+" h ago":s<2592000?Math.floor(s/86400)+" days ago":new Date(t).toLocaleDateString()};
+const showUpdated=()=>{const b=Date.parse(BUILT);$("ut").textContent=stamp?"Updated "+ago(stamp):"";$("ut").title=(stamp?"Progress saved: "+new Date(stamp).toLocaleString():"")+(stamp&&b?" · ":"")+(b?"Card list built: "+new Date(b).toLocaleString():"")};
 async function load(){
  try{
   if(owner){const r=await fetch(API,{headers:hdr(),cache:"no-store"});
@@ -210,8 +217,8 @@ async function load(){
  if(!owner&&want.size)cur="*";draw()}
 async function flush(){say("Saving…");
  for(let i=0;i<2;i++){try{
-  const r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"progress",content:btoa(JSON.stringify({o:[...own].sort(),w:[...want].sort()})),sha:sha||undefined})});
-  if(r.ok){sha=(await r.json()).content.sha;return say("Saved")}
+  const t0=Date.now(),r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"progress",content:btoa(JSON.stringify({o:[...own].sort(),w:[...want].sort(),t:t0})),sha:sha||undefined})});
+  if(r.ok){sha=(await r.json()).content.sha;stamp=t0;showUpdated();return say("Saved")}
   if(r.status!=409&&r.status!=422)return say("Save failed ("+r.status+")");
   const q=await fetch(API,{headers:hdr(),cache:"no-store"});sha=q.ok?(await q.json()).sha:""
  }catch(e){return say("Save failed – offline?")}}
@@ -242,12 +249,12 @@ const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check pric
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
 g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank aria-label="${esc(d.n)} on Scryfall"><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
-let pm=-1,pg=-1;const flash=id=>{const e=$(id);e.classList.remove("flash");void e.offsetWidth;e.classList.add("flash")};
-function draw(){$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,ac=0,v=0;const ms={},gf={};const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
+let pm=-1,pg=-1,wlNeed=[];const flash=id=>{const e=$(id);e.classList.remove("flash");void e.offsetWidth;e.classList.add("flash")};
+function draw(){showUpdated();$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,ac=0,v=0;const ms={},gf={},wn=[];const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let c0=0;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
 const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;ac+=all;ms[d.s]=(ms[d.s]||0)+(c0>0);gf[d.s]=(gf[d.s]||0)+all;
-e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
+if(want.has(d.k)&&!all)wn.push(d);e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
 const tys=[...ft].filter(x=>!"gk".includes(x)),sup=[...ft].filter(x=>"gk".includes(x)),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&sup.every(x=>d.tp.includes(x)),
 mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
 stOk=!st||(st=="n"&&mine.some(f=>!own.has(d.k+"-"+f)))||(st=="p"&&part)||(st=="b"&&all),
@@ -260,11 +267,16 @@ const T=D.length,N=D.reduce((a,d)=>a+d.fin.length,0),bar=(b,t,x,n)=>{const p=(10
 bar("mb","mt",m,T);bar("gb","gt",gm,N);
 if(pm>=0){if(m!=pm)flash("mb");if(gm!=pg)flash("gb")}pm=m;pg=gm;
 $("mb").parentNode.classList.toggle("done",m==T);$("gb").parentNode.classList.toggle("done",gm==N);
+wlNeed=wn;$("wb").hidden=!(cur=="*"&&wn.length>0);$("wc").textContent=wn.length+(wn.length==1?" card":" cards")+" still wanted";
+$("em").hidden=v>0;$("et").textContent=cur=="*"?"Nothing on the wishlist right now.":"No cards match these filters.";$("cf").hidden=cur=="*";
 const n=fc.size+fr.size+ff.size+fy.size+ft.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
 $("cnt").textContent=`Showing ${v} cards`}
 g.onclick=e=>{const w=e.target.closest(".wl");
  if(w){if(owner){const k=D[els.indexOf(w.closest(".c"))].k;want.has(k)?want.delete(k):want.add(k);queue();draw()}return}
  const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
+$("cw").onclick=()=>{const t=wlNeed.map(d=>`1 ${d.n} (${d.s}) ${d.c}`).join("\\n"),done=()=>{$("cw").textContent="Copied ✓";setTimeout(()=>$("cw").textContent="Copy list",1500)};
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(done,()=>prompt("Copy this list:",t))};
+$("cf").onclick=()=>{$("q").value="";$("st").value="";$("cm").value="i";[fc,fr,ff,fy,ft].forEach(t=>t.clear());$("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",false));draw()};
 $("more").onclick=()=>{cur="";$("st").value="n";draw();scrollTo(0,0)};
 $("fi").innerHTML=IC.filter;
 const HAS={c:k=>D.some(d=>k=="C"?!d.ci:d.ci.includes(k)),r:k=>D.some(d=>d.r==k),f:k=>D.some(d=>k=="n"?d.fin.includes("nonfoil"):k=="f"?d.fin.includes("foil")&&!d.sg:d.sg),y:k=>D.some(d=>d.ty==k),t:k=>D.some(d=>d.tp.includes(k))};
@@ -322,7 +334,7 @@ if __name__ == "__main__":
     os.makedirs("docs", exist_ok=True)
     t = tiles(cards)
     dump = lambda o: json.dumps(o, ensure_ascii=False).replace("</", "<\\/")
-    page = PAGE.replace("__REPO__", os.environ.get("GITHUB_REPOSITORY", "")).replace("__DATA__", dump(t)).replace("__SETS__", dump(fetch_sets({x["s"] for x in t})))
+    page = PAGE.replace("__BUILT__", datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")).replace("__REPO__", os.environ.get("GITHUB_REPOSITORY", "")).replace("__DATA__", dump(t)).replace("__SETS__", dump(fetch_sets({x["s"] for x in t})))
     open("docs/index.html", "w", encoding="utf-8").write(page)
     if not os.path.exists("docs/owned.json"):
         open("docs/owned.json", "w").write("[]")
