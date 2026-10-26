@@ -1,5 +1,5 @@
 """Builds docs/index.html: every tracked Final Fantasy card with art and per-finish owned checkboxes (saved in the browser)."""
-import datetime, html, json, os, re, urllib.parse, urllib.request
+import datetime, gzip, html, json, os, re, urllib.parse, urllib.request
 
 QUERY = ("e:fin or e:fca or e:pfin or e:tfin or e:rfin or e:fic or e:tfic or e:afic or e:afin or e:pss5 or e:wfin"
          " or (e:pmei (" + " or ".join(f'cn:"{c}"' for c in ['2027-1', '2026-3', '2026-17', '2025-11', '2025-12', '2025-13', '2025-14', '2025-21', '2025-26']) + "))"
@@ -69,9 +69,50 @@ def tiles(cards):
         seen[k] = seen.get(k, 0) + 1  # variations can share a number; keep keys unique
         out.append({"k": k if seen[k] == 1 else f"{k}-v{seen[k]}", "n": c["name"], "s": c["set"].upper(),
                     "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"],
-                    "ci": "".join(c.get("color_identity") or []),
+                    "id": c.get("id"), "ci": "".join(c.get("color_identity") or []),
                     "r": rarity(c), "ty": kind(c), "tp": types(c), "sg": int(is_surge(c, ov))})
     return out
+
+MTGJSON = "https://mtgjson.com/api/v5/"
+PRICE_KEYS = {"nonfoil": "normal", "foil": "foil", "etched": "etched"}  # our finish -> MTGJSON key
+
+def mtgjson(name):
+    req = urllib.request.Request(MTGJSON + name, headers={"User-Agent": "ff-tracker/1.0"})
+    raw = urllib.request.urlopen(req, timeout=180).read()
+    return json.loads(gzip.decompress(raw) if name.endswith(".gz") else raw)
+
+def card_kingdom(t):
+    """tile key -> {finish: today's Card Kingdom retail price}, via MTGJSON; also the newest price date."""
+    wanted = [x for x in t if not x["ty"]]  # tokens, art cards and the scene box aren't sold
+    uuids = {}
+    for code in sorted({x["s"] for x in wanted}):
+        try:
+            d = mtgjson(f"{code}.json")["data"]
+        except Exception as e:
+            print("MTGJSON: no set file for", code, "-", e)
+            continue
+        cards = (d.get("cards") or []) + (d.get("tokens") or [])
+        by_id = {(c.get("identifiers") or {}).get("scryfallId"): c["uuid"] for c in cards}
+        by_no = {str(c.get("number", "")).lower(): c["uuid"] for c in cards}
+        for x in wanted:
+            if x["s"] == code:
+                u = by_id.get(x["id"]) or by_no.get(x["c"].lower())
+                if u:
+                    uuids[x["k"]] = u
+    prices = mtgjson("AllPricesToday.json.gz")["data"]
+    out, newest = {}, ""
+    for x in wanted:
+        r = (((prices.get(uuids.get(x["k"])) or {}).get("paper") or {}).get("cardkingdom") or {}).get("retail") or {}
+        p = {}
+        for f in x["fin"]:
+            pts = r.get(PRICE_KEYS.get(f, f)) or {}
+            if pts:
+                day = max(pts)
+                p[f] = pts[day]
+                newest = max(newest, day)
+        if p:
+            out[x["k"]] = p
+    return out, newest
 
 def moxfield(cards):
     return "".join(f'1 {c["name"]} ({c["set"].upper()}) {c["collector_number"]}\n' for c in cards)
@@ -84,6 +125,7 @@ PAGE = """<!doctype html><html lang=en><meta charset=utf-8><meta name=descriptio
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
 #ss,#ut{font-size:12px;color:var(--mu)}.hs{display:flex;gap:10px;align-items:baseline}
+.pr{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 8px;min-height:1.5em;margin-top:2px;font-size:clamp(9px,7cqw,12px);color:var(--fg);font-variant-numeric:tabular-nums}.pr span{display:inline-flex;align-items:center;gap:3px}.pr svg{width:12px;height:12px}.pr .ck{color:var(--mu)}.pr .ck svg{width:14px;height:14px}.pn svg{color:var(--mu)}.pfo svg{color:#a855f7}.psg svg{color:#00b8d4}.list .pr{flex:none;min-height:0}
 #wb{display:flex;gap:10px;align-items:center;margin:12px 0;color:var(--mu)}#wb[hidden]{display:none}#em{text-align:center;color:var(--mu);margin:40px 0}#ft{font-size:11px;color:var(--mu);margin:24px 0 8px;text-align:center}.ro .v{cursor:default}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
 .bars{display:flex;gap:16px}.bb{flex:1;min-width:0}
@@ -192,6 +234,9 @@ list:svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>'),
 star:svg('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>'),
 up:svg('<path d="M12 19V5M5 12l7-7 7 7"></path>'),
 filter:svg('<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>'),
+nf:svg('<rect x="6" y="3" width="12" height="18" rx="2"></rect>'),
+fo:svg('<rect x="6" y="3" width="12" height="18" rx="2"></rect><path d="M12 8l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"></path>'),
+ck:svg('<path d="M5 21h14M7 21V9m10 12V9M5 9h14M5 9V4h3v3h2V4h4v3h2V4h3v5"></path>'),
 grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>')};
 let th="";try{th=localStorage.getItem("ff-theme")||""}catch(e){}
 th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -247,14 +292,14 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
 const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank aria-label="${esc(d.n)} on Scryfall"><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div><div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank aria-label="${esc(d.n)} on Scryfall"><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div>${owner?"<div class=pr></div>":""}<div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
 const els=[...g.children];
 let pm=-1,pg=-1,wlNeed=[];const flash=id=>{const e=$(id);e.classList.remove("flash");void e.offsetWidth;e.classList.add("flash")};
 function draw(){showUpdated();$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,ac=0,v=0;const ms={},gf={},wn=[];const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
 els.forEach((e,i)=>{const d=D[i];let c0=0;
 e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-"+x.dataset.f);x.checked=h;x.parentNode.classList.toggle("on",h);c0+=h});
 const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;ac+=all;ms[d.s]=(ms[d.s]||0)+(c0>0);gf[d.s]=(gf[d.s]||0)+all;
-if(want.has(d.k)&&!all)wn.push(d);e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);
+if(want.has(d.k)&&!all)wn.push(d);e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);const pr=e.querySelector(".pr");if(pr)pr.classList.toggle("hide",all);
 const tys=[...ft].filter(x=>!"gk".includes(x)),sup=[...ft].filter(x=>"gk".includes(x)),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&sup.every(x=>d.tp.includes(x)),
 mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
 stOk=!st||(st=="n"&&mine.some(f=>!own.has(d.k+"-"+f)))||(st=="p"&&part)||(st=="b"&&all),
@@ -326,6 +371,11 @@ $("fl").onchange=()=>{const f=$("fl").files[0];if(f)f.text().then(doImport);$("f
 $("rs0").onclick=()=>{if(!owner||prompt("This clears ALL your progress. Export first if unsure. Type RESET to continue")!=="RESET")return;own.clear();queue();draw();$("rs").textContent="Collection reset to 0."};
 $("st").value=owner?"":"n";$("up").innerHTML=IC.up;$("up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
 addEventListener("scroll",()=>$("up").classList.toggle("hide",scrollY<600),{passive:true});
+let PR={},prDate="";
+function showPrices(){els.forEach((e,i)=>{const pr=e.querySelector(".pr");if(!pr)return;const d=D[i],p=PR[d.k]||{};
+ const parts=d.fin.filter(f=>p[f]!=null).map(f=>`<span class="${f=="nonfoil"?"pn":d.sg&&f=="foil"?"psg":"pfo"}" title="${f=="nonfoil"?"Non-foil":d.sg&&f=="foil"?"Surge foil":f=="foil"?"Foil":"Etched"} · Card Kingdom">${f=="nonfoil"?IC.nf:IC.fo}$${p[f].toFixed(2)}</span>`);
+ pr.innerHTML=parts.length?`<span class=ck title="Card Kingdom retail${prDate?", "+prDate:""}">${IC.ck}</span>`+parts.join(""):""})}
+if(owner)fetch("prices.json?"+Date.now()).then(r=>r.ok?r.json():null).then(j=>{if(j){PR=j.p||{};prDate=j.u||"";showPrices()}}).catch(()=>{});
 sort();draw();load();
 </script>"""
 
@@ -333,11 +383,23 @@ if __name__ == "__main__":
     cards = fetch_cards()
     os.makedirs("docs", exist_ok=True)
     t = tiles(cards)
+    page_t = [{k: v for k, v in x.items() if k != "id"} for x in t]
     dump = lambda o: json.dumps(o, ensure_ascii=False).replace("</", "<\\/")
-    page = PAGE.replace("__BUILT__", datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")).replace("__REPO__", os.environ.get("GITHUB_REPOSITORY", "")).replace("__DATA__", dump(t)).replace("__SETS__", dump(fetch_sets({x["s"] for x in t})))
+    page = PAGE.replace("__BUILT__", datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")).replace("__REPO__", os.environ.get("GITHUB_REPOSITORY", "")).replace("__DATA__", dump(page_t)).replace("__SETS__", dump(fetch_sets({x["s"] for x in t})))
     open("docs/index.html", "w", encoding="utf-8").write(page)
     if not os.path.exists("docs/owned.json"):
         open("docs/owned.json", "w").write("[]")
+    try:  # prices are a bonus: if MTGJSON is down, keep yesterday's file and carry on
+        prices, day = card_kingdom(t)
+        if prices:
+            open("docs/prices.json", "w", encoding="utf-8").write(json.dumps({"u": day, "p": prices}, separators=(",", ":")))
+            core = [x for x in t if x["s"].lower() in SUSPECT_SETS]
+            open("docs/prices-missing.txt", "w", encoding="utf-8").write("".join(f'1 {x["n"]} ({x["s"]}) {x["c"]}\n' for x in core if x["k"] not in prices))
+            print("Card Kingdom prices:", len(prices), "cards priced | core sets without a price:", sum(x["k"] not in prices for x in core), "| date", day)
+        else:
+            print("Card Kingdom prices: none found, keeping the old file")
+    except Exception as e:
+        print("price update skipped:", e)
     ov = surge_override()
     tagged = [c for c in cards if is_surge(c, ov)]
     suspects = [c for c in cards if c["set"] in SUSPECT_SETS and (c.get("finishes") or []) == ["foil"] and not is_surge(c, ov)]
