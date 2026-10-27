@@ -211,7 +211,7 @@ input[type=range]{width:160px}}
 <div class=fl>Special cards</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
 <button id=fx>Clear</button></div></div></div>
 <div id=ctl><b id=cnt></b>
-<select id=st aria-label="Filter by progress"><option value="">All</option><option value=n>Needed</option><option value=p>Have one finish</option><option value=b>Both finishes</option></select>
+<select id=st aria-label="Filter by progress"><option value="">All</option><option value=n>Needed</option><option value=mn>Missing non-foil</option><option value=mf>Missing foil</option><option value=b>Both finishes</option></select>
 <select id=so aria-label="Sort cards"><option value=n>Number ↑</option><option value=d>Number ↓</option><option value=a>Name A–Z</option></select>
 <button id=vw></button><button id=th></button><input type=range id=sz min=110 max=300 step=5 title="Card size" aria-label="Card size"></div></div>
 <div id=wb hidden><span id=wc></span><button id=cw>Copy list</button></div>
@@ -302,7 +302,7 @@ const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;ac+=all;ms[d.s]=(ms[d.
 if(want.has(d.k)&&!all)wn.push(d);e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);const pr=e.querySelector(".pr");if(pr)pr.classList.toggle("hide",all);
 const tys=[...ft].filter(x=>!"gk".includes(x)),sup=[...ft].filter(x=>"gk".includes(x)),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&sup.every(x=>d.tp.includes(x)),
 mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
-stOk=!st||(st=="n"&&mine.some(f=>!own.has(d.k+"-"+f)))||(st=="p"&&part)||(st=="b"&&all),
+stOk=!st||(st=="n"&&mine.every(f=>!own.has(d.k+"-"+f)))||(st=="mn"&&d.fin.includes("nonfoil")&&!own.has(d.k+"-nonfoil"))||(st=="mf"&&d.fin.some(f=>f!="nonfoil"&&!own.has(d.k+"-"+f)))||(st=="b"&&all),
 fOk=(!fc.size||(fc.has("C")&&!d.ci)||(P.length>0&&(cm=="x"?d.ci.length==P.length&&P.every(x=>d.ci.includes(x)):cm=="i"?P.every(x=>d.ci.includes(x)):[...d.ci].every(x=>P.includes(x)))))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty))&&tyOk,
 show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
 e.classList.toggle("hide",!show);v+=show});
