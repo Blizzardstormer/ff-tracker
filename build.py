@@ -125,7 +125,7 @@ PAGE = """<!doctype html><html lang=en><meta charset=utf-8><meta name=descriptio
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
 #ss,#ut{font-size:12px;color:var(--mu)}.hs{display:flex;gap:10px;align-items:baseline}
-.pr{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 8px;min-height:1.5em;margin-top:2px;font-size:clamp(11px,9cqw,16px);font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}.pr span{display:inline-flex;align-items:center;gap:4px}.pr svg{width:1.1em;height:1.1em}.pr .ck{color:var(--mu)}.pr .ck svg{width:1.3em;height:1.3em}.pn svg{color:var(--mu)}.pfo svg{color:#a855f7}.psg svg{color:#00b8d4}.list .pr{flex:none;min-height:0;font-size:14px}
+.pr{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 8px;min-height:1.5em;margin-top:2px;font-size:clamp(9px,7cqw,12px);color:var(--fg);font-variant-numeric:tabular-nums}.pr span{display:inline-flex;align-items:center;gap:3px}.pr svg{width:12px;height:12px}.pr .ck{color:var(--mu)}.pr .ck svg{width:14px;height:14px}.pn svg{color:var(--mu)}.pfo svg{color:#a855f7}.psg svg{color:#00b8d4}.list .pr{flex:none;min-height:0}
 #wb{display:flex;gap:10px;align-items:center;margin:12px 0;color:var(--mu)}#wb[hidden]{display:none}#em{text-align:center;color:var(--mu);margin:40px 0}#ft{font-size:11px;color:var(--mu);margin:24px 0 8px;text-align:center}.ro .v{cursor:default}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
 .bars{display:flex;gap:16px}.bb{flex:1;min-width:0}
@@ -160,8 +160,8 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .c{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:8px;text-align:center;position:relative;transition:transform .15s,box-shadow .15s}
 .c:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.14)}
 .c img{width:100%;aspect-ratio:488/680;border-radius:8px;display:block}
-.c .n{font-weight:600;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.c small{color:var(--mu);font-size:clamp(11px,8cqw,14px)}.c{display:flex;flex-direction:column}.nm{flex:1}.c a{color:inherit;text-decoration:none}
+.c .n{font-weight:600;margin-top:6px;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.c small{color:var(--mu)}.c a{color:inherit;text-decoration:none}
 .c{--b:clamp(36px,40cqw,90px);container-type:inline-size;content-visibility:auto;contain-intrinsic-block-size:auto 340px}
 .c.own>:not(.ok){opacity:.55;filter:grayscale(1)}
 .c.part{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
@@ -177,7 +177,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5;text-shadow:none;box-shadow:none}.v.on::before{content:"✓ "}
 .c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--at)}.c details a{display:block;padding:2px 0;color:var(--at)}
 .g.list{display:flex;flex-direction:column;gap:6px}
-.list .c{display:flex;flex-direction:row;align-items:center;gap:14px;text-align:left;padding:6px 10px}
+.list .c{display:flex;align-items:center;gap:14px;text-align:left;padding:6px 10px}
 .list .c img{width:36px}.list .c>a{flex:none}.list .c>.nm{flex:1}.list .c .n{min-height:0;-webkit-line-clamp:1}
 .list .vs{margin:0;width:230px;flex:none}.list .c.own>.ok{position:static;transform:none;width:24px;height:24px;flex:none}.list .c:hover{transform:none;box-shadow:none}.list .c.part{box-shadow:none;border-left:4px solid var(--ok)}
 .io{margin-top:24px}.io textarea{width:100%;max-width:520px}
@@ -227,17 +227,16 @@ input[type=range]{width:160px}}
 const D=__DATA__,SI=__SETS__;
 let own=new Set,want=new Set;
 const $=id=>document.getElementById(id),g=$("g"),esc=s=>s.replace(/[&<>"]/g,c=>"&#"+c.charCodeAt(0)+";");
-const fsvg=p=>`<svg viewBox="0 0 24 24" width=18 height=18 fill=currentColor fill-rule=evenodd>${p}</svg>`,
-svg=p=>`<svg viewBox="0 0 24 24" width=18 height=18 fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>${p}</svg>`,
+const svg=p=>`<svg viewBox="0 0 24 24" width=18 height=18 fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>${p}</svg>`,
 IC={sun:svg('<circle cx=12 cy=12 r=4></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>'),
 moon:svg('<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>'),
 list:svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>'),
 star:svg('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>'),
 up:svg('<path d="M12 19V5M5 12l7-7 7 7"></path>'),
 filter:svg('<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>'),
-nf:fsvg('<path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>'),
-fo:fsvg('<path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM12 7.5l1.2 3.3 3.3 1.2-3.3 1.2L12 16.5l-1.2-3.3L7.5 12l3.3-1.2z"></path>'),
-ck:fsvg('<path d="M4 5h4v3h2V5h4v3h2V5h4v16H4zM10 21v-5a2 2 0 0 1 4 0v5z"></path>'),
+nf:svg('<rect x="6" y="3" width="12" height="18" rx="2"></rect>'),
+fo:svg('<rect x="6" y="3" width="12" height="18" rx="2"></rect><path d="M12 8l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"></path>'),
+ck:svg('<path d="M5 21h14M7 21V9m10 12V9M5 9h14M5 9V4h3v3h2V4h4v3h2V4h3v5"></path>'),
 grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>')};
 let th="";try{th=localStorage.getItem("ff-theme")||""}catch(e){}
 th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
