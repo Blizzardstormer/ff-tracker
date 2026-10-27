@@ -334,7 +334,9 @@ $("fp").onclick=e=>{const b=e.target.closest(".ch,#fx");if(!b)return;const S={c:
 g.onchange=e=>{if(!owner)return;const k=D[els.indexOf(e.target.closest(".c"))].k+"-"+e.target.dataset.f;e.target.checked?own.add(k):own.delete(k);queue();draw()};
 $("st").onchange=draw;$("q").oninput=draw;
 const num=(a,b)=>a.c.localeCompare(b.c,undefined,{numeric:true}),
-by={n:(a,b)=>rank[a.s]-rank[b.s]||num(a,b),d:(a,b)=>rank[a.s]-rank[b.s]||num(b,a),a:(a,b)=>a.n.localeCompare(b.n)||rank[a.s]-rank[b.s]||num(a,b)};
+by={n:(a,b)=>rank[a.s]-rank[b.s]||num(a,b),d:(a,b)=>rank[a.s]-rank[b.s]||num(b,a),a:(a,b)=>a.n.localeCompare(b.n)||rank[a.s]-rank[b.s]||num(a,b),
+...Object.fromEntries(["nonfoil","foil"].flatMap(f=>[["p"+f[0]+"u",(a,b)=>px(a,1,f)-px(b,1,f)||num(a,b)],["p"+f[0]+"d",(a,b)=>px(b,-1,f)-px(a,-1,f)||num(a,b)]]))},
+px=(d,z,f)=>{const p=PR[d.k]||{},v=p[f]??(f=="foil"?p.etched:null);return v==null?z*1e9:v}; // unpriced cards sort last; shortcut: etched counts as foil
 const sort=()=>g.append(...D.map((_,i)=>i).sort((i,j)=>by[$("so").value](D[i],D[j])).map(i=>els[i]));
 $("so").onchange=sort;
 const setV=()=>{const l=g.classList.contains("list");$("vw").innerHTML=l?IC.grid:IC.list;$("vw").title=l?"Grid view":"List view";$("sz").hidden=l};
@@ -375,7 +377,7 @@ let PR={},prDate="";
 function showPrices(){els.forEach((e,i)=>{const pr=e.querySelector(".pr");if(!pr)return;const d=D[i],p=PR[d.k]||{};
  const parts=d.fin.filter(f=>p[f]!=null).map(f=>`<span class="${f=="nonfoil"?"pn":d.sg&&f=="foil"?"psg":"pfo"}" title="${f=="nonfoil"?"Non-foil":d.sg&&f=="foil"?"Surge foil":f=="foil"?"Foil":"Etched"} · Card Kingdom">${f=="nonfoil"?IC.nf:IC.fo}$${p[f].toFixed(2)}</span>`);
  pr.innerHTML=parts.length?`<span class=ck title="Card Kingdom retail${prDate?", "+prDate:""}">${IC.ck}</span>`+parts.join(""):""})}
-if(owner)fetch("prices.json?"+Date.now()).then(r=>r.ok?r.json():null).then(j=>{if(j){PR=j.p||{};prDate=j.u||"";showPrices()}}).catch(()=>{});
+if(owner)fetch("prices.json?"+Date.now()).then(r=>r.ok?r.json():null).then(j=>{if(j){PR=j.p||{};prDate=j.u||"";showPrices();$("so").insertAdjacentHTML("beforeend","<option value=pnu>Non-foil price ↑</option><option value=pnd>Non-foil price ↓</option><option value=pfu>Foil price ↑</option><option value=pfd>Foil price ↓</option>")}}).catch(()=>{});
 sort();draw();load();
 </script>"""
 
