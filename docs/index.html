@@ -23,7 +23,7 @@ main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
 #qr{display:flex;gap:6px;position:relative}#q{flex:1;min-width:0}
 #fb{display:inline-flex;align-items:center;gap:6px;padding:7px 9px}#fi{display:inline-flex}
 #fc{background:var(--ac);color:#fff;border-radius:999px;font-size:11px;min-width:18px;padding:0 5px;text-align:center}
-#fp{max-height:70vh;overflow:auto;position:absolute;top:calc(100% + 6px);left:0;z-index:5;width:300px;max-width:92vw;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#fp{max-height:80vh;overflow:auto;position:absolute;top:calc(100% + 6px);left:0;z-index:5;width:480px;max-width:92vw;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .fl{font-size:12px;color:var(--mu);margin:8px 0 6px}.fr{display:flex;flex-wrap:wrap;gap:6px}
 .ch{padding:6px 10px;border-radius:999px;display:inline-flex;align-items:center}.ch img{width:18px;height:18px}
 .ch.on{background:var(--ac);border-color:var(--ac);color:#fff}#fx{margin-top:12px}.ch[hidden]{display:none}#cm{display:block;width:100%;margin-top:8px}
@@ -45,7 +45,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .c small{color:var(--mu)}.c a{color:inherit;text-decoration:none}
 .c{--b:clamp(36px,40cqw,90px);container-type:inline-size;content-visibility:auto;contain-intrinsic-block-size:auto 340px}
 .c.own>:not(.ok){opacity:.55;filter:grayscale(1)}
-.c.part{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+.c.part{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
 .ok{display:none}
 .c.own>.ok{display:block;position:absolute;left:50%;top:calc(8px + 100cqw*.697);transform:translate(-50%,-50%);width:var(--b);height:var(--b);border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(15,17,21,.6) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/55% no-repeat;backdrop-filter:blur(6px);pointer-events:none}
 .vs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
@@ -131,7 +131,7 @@ const REPO="Blizzardstormer/ff-tracker",API="https://api.github.com/repos/"+REPO
 let tok="";try{tok=localStorage.getItem("ff-token")||""}catch(e){}
 let owner=!!tok&&!!REPO,sha="",timer=0,busy=0,again=0,ver=0,saved=0;
 const hdr=()=>({Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"}),say=t=>$("ss").textContent=t;
-const BUILT="2026-10-30T10:46:08+00:00";let stamp=0;
+const BUILT="2026-10-30T11:10:48+00:00";let stamp=0;
 const take=j=>{if(Array.isArray(j))own=new Set(j);else{own=new Set(j.o||[]);want=new Set(j.w||[]);stamp=j.t||0}};
 const ago=t=>{const s=(Date.now()-t)/1000;return s<60?"just now":s<3600?Math.floor(s/60)+" min ago":s<86400?Math.floor(s/3600)+" h ago":s<2592000?Math.floor(s/86400)+" days ago":new Date(t).toLocaleDateString()};
 const showUpdated=()=>{const b=Date.parse(BUILT);$("ut").textContent=stamp?"Updated "+ago(stamp):"";$("ut").title=(stamp?"Progress saved: "+new Date(stamp).toLocaleString():"")+(stamp&&b?" · ":"")+(b?"Card list built: "+new Date(b).toLocaleString():"")};
@@ -233,7 +233,7 @@ $("vw").onclick=()=>{g.classList.toggle("list");setV()};setV();
 const mq=matchMedia("(max-width:700px)"),zk=()=>mq.matches?"ff-cols":"ff-size";
 const setZ=()=>{const v=$("sz").value;g.style.setProperty(mq.matches?"--n":"--w",mq.matches?4-v:v)};
 function initZ(){const m=mq.matches;g.classList.toggle("m",m);$("sz").min=m?1:110;$("sz").max=m?3:300;$("sz").step=m?1:5;
-let v;try{v=localStorage.getItem(zk())}catch(e){}$("sz").value=v||(m?1:150);setZ()}
+let v;try{v=localStorage.getItem(zk())}catch(e){}$("sz").value=v||(m?1:owner?150:Math.max(110,Math.min(300,Math.floor((g.clientWidth-48)/5/5)*5)));setZ()}  // guests: card width that fits 5 columns (48 = 4 gaps)
 mq.addEventListener("change",initZ);initZ();
 let rz=0;$("sz").oninput=()=>{rz=rz||requestAnimationFrame(()=>{rz=0;setZ()})};
 $("sz").onchange=()=>{try{localStorage.setItem(zk(),$("sz").value)}catch(e){}};
