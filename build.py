@@ -211,8 +211,8 @@ input[type=range]{width:160px}}
 .hide{display:none!important}
 </style>
 <main><div class=hd><h1>Final Fantasy Collection</h1><span class=hs><span id=ut></span><span id=ss></span></span></div>
-<div class=bars><div class=bb title="Every card number, either finish"><div class=bt><span>Master set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
-<div class=bb title="Every foil and non-foil version"><div class=bt><span>Grandmaster</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
+<div class=bars><div class=bb title="Every card number, either finish"><div class=bt><span>Master Set</span><span id=mt></span></div><div class=pb><i id=mb></i></div></div>
+<div class=bb title="Every foil and non-foil version"><div class=bt><span>Grandmaster Set</span><span id=gt></span></div><div class="pb gm"><i id=gb></i></div></div></div>
 <div id=bar><div id=sk><div id=tabs></div><div id=qr><input id=q placeholder="Search name" aria-label="Search by card name"><button id=fb title="Filter"><i id=fi></i><span id=fc class=hide></span></button>
 <div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
 <select id=cm aria-label="Colour match mode"><option value=x>Exactly these colours</option><option value=i selected>Including these colours</option><option value=a>At most these colours</option></select>
