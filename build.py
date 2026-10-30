@@ -32,7 +32,11 @@ def img(c):
     u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
     return u.get("grid") or u.get("jpeg") or u.get("normal", "")  # WebP first; a few extras have no image yet, so never crash the build
 
-def back(c):  # only double-faced cards: split/adventure faces have no image of their own
+DFC_LAYOUTS = {"transform", "modal_dfc", "reversible_card", "double_faced_token"}  # art series cards also have a second image, but no real back
+
+def back(c):
+    if c.get("layout") not in DFC_LAYOUTS:
+        return ""
     f = (c.get("card_faces") or [{}, {}])[1:2]
     u = f[0].get("image_uris") if f else None
     return (u.get("grid") or u.get("jpeg") or u.get("normal", "")) if u else ""
@@ -130,7 +134,7 @@ PAGE = """<!doctype html><html lang=en><meta charset=utf-8><meta name=descriptio
 *{box-sizing:border-box}
 body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:var(--bg);color:var(--fg)}
 main{max-width:1400px;margin:0 auto;padding:0 16px 40px}
-#ss,#ut{font-size:12px;color:var(--mu)}.hs{display:flex;gap:10px;align-items:baseline}
+#ss,#ut{font-size:12px;color:var(--mu)}#ss{cursor:pointer}.hs{display:flex;gap:10px;align-items:baseline}
 .pr{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 8px;min-height:1.5em;margin-top:2px;font-size:clamp(9px,7cqw,12px);color:var(--fg);font-variant-numeric:tabular-nums}.pr span{display:inline-flex;align-items:center;gap:3px}.pr svg{width:12px;height:12px}.pr .ck{color:var(--mu)}.pr .ck svg{width:14px;height:14px}.pn svg{color:var(--mu)}.pfo svg{color:#a855f7}.psg svg{color:#00b8d4}.list .pr{flex:none;min-height:0}
 #wb{display:flex;gap:10px;align-items:center;margin:12px 0;color:var(--mu)}#wb[hidden]{display:none}#em{text-align:center;color:var(--mu);margin:40px 0}#ft{font-size:11px;color:var(--mu);margin:24px 0 8px;text-align:center}.ro .v{cursor:default}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 8px}h1{font-size:20px;margin:0}
@@ -179,7 +183,7 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .v-foil{background:linear-gradient(120deg,#ff9aa2,#ffdf93,#b5ead7,#9ad0f5,#cdb4f6);color:#1c1e21;border-color:transparent}
 .v-surge{background:linear-gradient(120deg,#00e5ff,#5b8cff,#c04bff,#ff3df2);color:#fff;border-color:transparent;text-shadow:0 1px 2px rgba(0,0,0,.45);box-shadow:0 0 8px rgba(0,229,255,.55)}
 .v-etched{background:linear-gradient(120deg,#e5e7eb,#9ca3af);color:#1c1e21;border-color:transparent}
-.v-stamp{background:linear-gradient(120deg,#b8860b,#ffd700,#fff4a3,#ffd700,#b8860b);color:#3b2a00;border-color:transparent;text-shadow:0 1px 0 rgba(255,255,255,.4);box-shadow:0 0 8px rgba(255,200,0,.6)}
+.v-stamp{background:linear-gradient(120deg,#f6e7b4,#f0d27a,#fbefc8,#e9c46a);color:#1c1e21;border-color:transparent}
 .v-foil,.v-surge,.v-etched,.v-stamp{background-origin:border-box}
 .v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5;text-shadow:none;box-shadow:none}.v.on::before{content:"✓ "}
 .c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--at)}.c details a{display:block;padding:2px 0;color:var(--at)}
@@ -216,7 +220,7 @@ input[type=range]{width:160px}}
 <div class=fl>Finish</div><div class=fr><button class=ch data-f=n>Non-Foil</button><button class=ch data-f=f>Foil</button><button class=ch data-f=s>Surge Foil</button><button class=ch data-f=g>Gold Stamp</button></div>
 <div class=fl>Card type</div><div class=fr><button class=ch data-t=c>Creature</button><button class=ch data-t=i>Instant</button><button class=ch data-t=s>Sorcery</button><button class=ch data-t=e>Enchantment</button><button class=ch data-t=a>Artifact</button><button class=ch data-t=l>Land</button><button class=ch data-t=p>Planeswalker</button><button class=ch data-t=b>Battle</button></div>
 <div class=fl>Supertype</div><div class=fr><button class=ch data-t=g>Legendary</button><button class=ch data-t=k>Basic</button></div>
-<div class=fl>Special cards</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
+<div class=fl>Special cards</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button><button class=ch data-y=df>Double-faced</button></div>
 <button id=fx>Clear</button></div></div></div>
 <div id=ctl><b id=cnt></b>
 <select id=st aria-label="Filter by progress"><option value="">All</option><option value=n>Needed</option><option value=mn>Missing non-foil</option><option value=mf>Missing foil</option><option value=b>Both finishes</option></select>
@@ -254,7 +258,7 @@ $("th").onclick=()=>{setT(th=="dark"?"light":"dark");try{localStorage.setItem("f
 // Progress lives in docs/owned.json in the repo: everyone can read it, only a browser holding the owner's token can write it.
 const REPO="__REPO__",API="https://api.github.com/repos/"+REPO+"/contents/docs/owned.json";
 let tok="";try{tok=localStorage.getItem("ff-token")||""}catch(e){}
-let owner=!!tok&&!!REPO,sha="",timer=0,busy=0,again=0;
+let owner=!!tok&&!!REPO,sha="",timer=0,busy=0,again=0,ver=0,saved=0;
 const hdr=()=>({Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"}),say=t=>$("ss").textContent=t;
 const BUILT="__BUILT__";let stamp=0;
 const take=j=>{if(Array.isArray(j))own=new Set(j);else{own=new Set(j.o||[]);want=new Set(j.w||[]);stamp=j.t||0}};
@@ -269,15 +273,20 @@ async function load(){
   const r=await fetch("owned.json?"+Date.now());if(r.ok)take(await r.json())
  }catch(e){say("Couldn't load progress")}
  if(!owner&&want.size)cur="*";draw()}
-async function flush(){say("Saving…");
+async function flush(){say("Saving…");const v=ver;
  for(let i=0;i<2;i++){try{
   const t0=Date.now(),r=await fetch(API,{method:"PUT",headers:hdr(),body:JSON.stringify({message:"progress",content:btoa(JSON.stringify({o:[...own].sort(),w:[...want].sort(),t:t0})),sha:sha||undefined})});
-  if(r.ok){sha=(await r.json()).content.sha;stamp=t0;showUpdated();return say("Saved")}
+  if(r.ok){sha=(await r.json()).content.sha;stamp=t0;saved=v;showUpdated();return say("Saved")}
   if(r.status!=409&&r.status!=422)return say("Save failed ("+r.status+")");
   const q=await fetch(API,{headers:hdr(),cache:"no-store"});sha=q.ok?(await q.json()).sha:""
  }catch(e){return say("Save failed – offline?")}}
  say("Save failed – conflict")}
-const queue=()=>{say("Unsaved…");clearTimeout(timer);timer=setTimeout(async()=>{if(busy){again=1;return}busy=1;await flush();busy=0;if(again){again=0;queue()}},1500)};
+const queue=()=>{ver++;say("Unsaved – click to save now");clearTimeout(timer);timer=setTimeout(now,1500)},
+now=async()=>{clearTimeout(timer);if(busy){again=1;return}busy=1;await flush();busy=0;if(again){again=0;queue()}};
+// shortcut: a save started while the tab closes can still be cut off; the prompt below is the safety net
+$("ss").title="Click to save now";$("ss").onclick=()=>{if(owner&&ver>saved)now()};
+addEventListener("visibilitychange",()=>{if(document.hidden&&owner&&ver>saved)now()});
+addEventListener("beforeunload",e=>{if(owner&&ver>saved){e.preventDefault();e.returnValue=""}});
 $("lk").onclick=async()=>{
  if(owner){try{localStorage.removeItem("ff-token")}catch(e){}return location.reload()}
  const t=(prompt("Paste your GitHub token (only on your own devices)")||"").trim();if(!t)return;
@@ -312,7 +321,7 @@ if(want.has(d.k)&&!all)wn.push(d);e.classList.toggle("own",all);e.classList.togg
 const tys=[...ft].filter(x=>!"gk".includes(x)),sup=[...ft].filter(x=>"gk".includes(x)),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&sup.every(x=>d.tp.includes(x)),
 mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):f=="stamp"?ff.has("g"):0):d.fin,
 stOk=!st||(st=="n"&&mine.every(f=>!own.has(d.k+"-"+f)))||(st=="mn"&&d.fin.includes("nonfoil")&&!own.has(d.k+"-nonfoil"))||(st=="mf"&&d.fin.some(f=>f!="nonfoil"&&!own.has(d.k+"-"+f)))||(st=="b"&&all),
-fOk=(!fc.size||(fc.has("C")&&!d.ci)||(P.length>0&&(cm=="x"?d.ci.length==P.length&&P.every(x=>d.ci.includes(x)):cm=="i"?P.every(x=>d.ci.includes(x)):[...d.ci].every(x=>P.includes(x)))))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty))&&tyOk,
+fOk=(!fc.size||(fc.has("C")&&!d.ci)||(P.length>0&&(cm=="x"?d.ci.length==P.length&&P.every(x=>d.ci.includes(x)):cm=="i"?P.every(x=>d.ci.includes(x)):[...d.ci].every(x=>P.includes(x)))))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty)||(d.b&&fy.has("df")))&&tyOk,
 show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
 e.classList.toggle("hide",!show);v+=show});
 [...$("tabs").children].forEach(b=>{const s=b.dataset.s;b.classList.toggle("on",s==cur);if(s=="*")return;const tot=s?TS[s]:D.length,p=b.querySelector(".tp");if(p)p.style.width=100*(s?ms[s]||0:m)/tot+"%";b.classList.toggle("full",(s?gf[s]||0:ac)==tot)});
@@ -333,7 +342,7 @@ $("cw").onclick=()=>{const t=wlNeed.map(d=>`1 ${d.n} (${d.s}) ${d.c}`).join("\\n
 $("cf").onclick=()=>{$("q").value="";$("st").value="";$("cm").value="i";[fc,fr,ff,fy,ft].forEach(t=>t.clear());$("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",false));draw()};
 $("more").onclick=()=>{cur="";$("st").value="n";draw();scrollTo(0,0)};
 $("fi").innerHTML=IC.filter;
-const HAS={c:k=>D.some(d=>k=="C"?!d.ci:d.ci.includes(k)),r:k=>D.some(d=>d.r==k),f:k=>D.some(d=>k=="n"?d.fin.includes("nonfoil"):k=="f"?d.fin.includes("foil")&&!d.sg:k=="g"?d.fin.includes("stamp"):d.sg),y:k=>D.some(d=>d.ty==k),t:k=>D.some(d=>d.tp.includes(k))};
+const HAS={c:k=>D.some(d=>k=="C"?!d.ci:d.ci.includes(k)),r:k=>D.some(d=>d.r==k),f:k=>D.some(d=>k=="n"?d.fin.includes("nonfoil"):k=="f"?d.fin.includes("foil")&&!d.sg:k=="g"?d.fin.includes("stamp"):d.sg),y:k=>D.some(d=>k=="df"?d.b:d.ty==k),t:k=>D.some(d=>d.tp.includes(k))};
 $("fp").querySelectorAll(".ch").forEach(x=>{const a=Object.keys(HAS).find(k=>x.dataset[k]!==undefined);x.hidden=!HAS[a](x.dataset[a])});
 $("cm").onchange=draw;$("fb").onclick=()=>{$("fp").hidden=!$("fp").hidden};
 document.addEventListener("click",e=>{if(!$("qr").contains(e.target))$("fp").hidden=true});
