@@ -32,6 +32,11 @@ def img(c):
     u = c.get("image_uris") or (c.get("card_faces") or [{}])[0].get("image_uris") or {}
     return u.get("grid") or u.get("jpeg") or u.get("normal", "")  # WebP first; a few extras have no image yet, so never crash the build
 
+def back(c):  # only double-faced cards: split/adventure faces have no image of their own
+    f = (c.get("card_faces") or [{}, {}])[1:2]
+    u = f[0].get("image_uris") if f else None
+    return (u.get("grid") or u.get("jpeg") or u.get("normal", "")) if u else ""
+
 TOKEN_SETS = {"tfin", "tfic", "wfin"}
 TOKEN_LAYOUTS = {"token", "double_faced_token", "emblem"}
 SUSPECT_SETS = {"fin", "fic", "fca", "pfin"}  # surge foils live here; foil-only cards Scryfall didn't tag get listed for checking
@@ -68,9 +73,10 @@ def tiles(cards):
         k = f'{c["set"]}-{c["collector_number"]}'
         seen[k] = seen.get(k, 0) + 1  # variations can share a number; keep keys unique
         out.append({"k": k if seen[k] == 1 else f"{k}-v{seen[k]}", "n": c["name"], "s": c["set"].upper(),
-                    "c": c["collector_number"], "fin": c.get("finishes") or ["nonfoil"], "i": img(c), "u": c["scryfall_uri"],
+                    "c": c["collector_number"], "fin": ["nonfoil", "stamp"] if c["set"] == "afin" else c.get("finishes") or ["nonfoil"],  # afin: Scryfall lists one print per art card, but each exists plain + gold-stamped
+                    "i": img(c), "u": c["scryfall_uri"],
                     "id": c.get("id"), "ci": "".join(c.get("color_identity") or []),
-                    "r": rarity(c), "ty": kind(c), "tp": types(c), "sg": int(is_surge(c, ov))})
+                    "r": rarity(c), "ty": kind(c), "tp": types(c), "sg": int(is_surge(c, ov)), **({"b": back(c)} if back(c) else {})})
     return out
 
 MTGJSON = "https://mtgjson.com/api/v5/"
@@ -173,7 +179,8 @@ input[type=range]{width:120px;padding:0;accent-color:var(--ac)}#vw,#th{display:i
 .v-foil{background:linear-gradient(120deg,#ff9aa2,#ffdf93,#b5ead7,#9ad0f5,#cdb4f6);color:#1c1e21;border-color:transparent}
 .v-surge{background:linear-gradient(120deg,#00e5ff,#5b8cff,#c04bff,#ff3df2);color:#fff;border-color:transparent;text-shadow:0 1px 2px rgba(0,0,0,.45);box-shadow:0 0 8px rgba(0,229,255,.55)}
 .v-etched{background:linear-gradient(120deg,#e5e7eb,#9ca3af);color:#1c1e21;border-color:transparent}
-.v-foil,.v-surge,.v-etched{background-origin:border-box}
+.v-stamp{background:linear-gradient(120deg,#b8860b,#ffd700,#fff4a3,#ffd700,#b8860b);color:#3b2a00;border-color:transparent;text-shadow:0 1px 0 rgba(255,255,255,.4);box-shadow:0 0 8px rgba(255,200,0,.6)}
+.v-foil,.v-surge,.v-etched,.v-stamp{background-origin:border-box}
 .v.on{background:var(--ok);border-color:var(--ok);color:#fff;opacity:.5;text-shadow:none;box-shadow:none}.v.on::before{content:"✓ "}
 .c details{font-size:12px;margin-top:4px;text-align:left}.c summary{cursor:pointer;color:var(--at)}.c details a{display:block;padding:2px 0;color:var(--at)}
 .g.list{display:flex;flex-direction:column;gap:6px}
@@ -195,6 +202,7 @@ input[type=range]{width:160px}}
 #up{position:fixed;right:16px;bottom:16px;z-index:3;width:44px;height:44px;padding:0;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .wl{position:absolute;top:12px;right:12px;z-index:1;display:grid;place-items:center;width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(15,17,21,.55);color:#fff;backdrop-filter:blur(4px);cursor:pointer}
 .c.w .wl{color:#facc15}.c.w .wl svg{fill:currentColor}.ro .c:not(.w) .wl{display:none}.ro .wl{pointer-events:none}
+.flip{position:absolute;top:48px;right:12px;z-index:1;display:grid;place-items:center;width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(15,17,21,.7);color:#fff;cursor:pointer}.list .flip{position:static;width:24px;height:24px;flex:none}
 .list .wl{position:static;width:24px;height:24px;flex:none}#mp{text-align:center;margin:18px 0}
 .hide{display:none!important}
 </style>
@@ -205,7 +213,7 @@ input[type=range]{width:160px}}
 <div id=fp hidden><div class=fl>Colour identity</div><div class=fr><button class=ch data-c=W title=White><img alt=W src="https://svgs.scryfall.io/card-symbols/W.svg"></button><button class=ch data-c=U title=Blue><img alt=U src="https://svgs.scryfall.io/card-symbols/U.svg"></button><button class=ch data-c=B title=Black><img alt=B src="https://svgs.scryfall.io/card-symbols/B.svg"></button><button class=ch data-c=R title=Red><img alt=R src="https://svgs.scryfall.io/card-symbols/R.svg"></button><button class=ch data-c=G title=Green><img alt=G src="https://svgs.scryfall.io/card-symbols/G.svg"></button><button class=ch data-c=C title=Colourless><img alt=C src="https://svgs.scryfall.io/card-symbols/C.svg"></button></div>
 <select id=cm aria-label="Colour match mode"><option value=x>Exactly these colours</option><option value=i selected>Including these colours</option><option value=a>At most these colours</option></select>
 <div class=fl>Rarity</div><div class=fr><button class=ch data-r=c>Common</button><button class=ch data-r=u>Uncommon</button><button class=ch data-r=r>Rare</button><button class=ch data-r=m>Mythic</button><button class=ch data-r=s>Special</button><button class=ch data-r=b>Bonus</button></div>
-<div class=fl>Finish</div><div class=fr><button class=ch data-f=n>Non-Foil</button><button class=ch data-f=f>Foil</button><button class=ch data-f=s>Surge Foil</button></div>
+<div class=fl>Finish</div><div class=fr><button class=ch data-f=n>Non-Foil</button><button class=ch data-f=f>Foil</button><button class=ch data-f=s>Surge Foil</button><button class=ch data-f=g>Gold Stamp</button></div>
 <div class=fl>Card type</div><div class=fr><button class=ch data-t=c>Creature</button><button class=ch data-t=i>Instant</button><button class=ch data-t=s>Sorcery</button><button class=ch data-t=e>Enchantment</button><button class=ch data-t=a>Artifact</button><button class=ch data-t=l>Land</button><button class=ch data-t=p>Planeswalker</button><button class=ch data-t=b>Battle</button></div>
 <div class=fl>Supertype</div><div class=fr><button class=ch data-t=g>Legendary</button><button class=ch data-t=k>Basic</button></div>
 <div class=fl>Special cards</div><div class=fr><button class=ch data-y=tk>Tokens</button><button class=ch data-y=ar>Art cards</button><button class=ch data-y=sb>Scene Box</button></div>
@@ -237,7 +245,8 @@ filter:svg('<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></poly
 nf:svg('<rect x="6" y="3" width="12" height="18" rx="2"></rect>'),
 fo:svg('<rect x="6" y="3" width="12" height="18" rx="2"></rect><path d="M12 8l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"></path>'),
 ck:svg('<path d="M5 21h14M7 21V9m10 12V9M5 9h14M5 9V4h3v3h2V4h4v3h2V4h3v5"></path>'),
-grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>')};
+grid:svg('<rect x=3 y=3 width=7 height=7></rect><rect x=14 y=3 width=7 height=7></rect><rect x=14 y=14 width=7 height=7></rect><rect x=3 y=14 width=7 height=7></rect>'),
+flip:svg('<path d="M21 12a9 9 0 1 1-3-6.7L21 8"></path><path d="M21 3v5h-5"></path>')};
 let th="";try{th=localStorage.getItem("ff-theme")||""}catch(e){}
 th=th||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
 const setT=t=>{th=t;document.documentElement.dataset.t=t;$("th").innerHTML=t=="dark"?IC.sun:IC.moon;$("th").title=t=="dark"?"Switch to light mode":"Switch to dark mode"};
@@ -291,8 +300,8 @@ const ST=[["Agora","https://agorahobby.com/store/search?category=mtg&searchfield
 ["MTGAsia (copies name)","https://mtg-asia.com/"],["TCG Marketplace (copies name)","https://thetcgmarketplace.com/"]];
 // shortcut: searches the first face's full name; stores whose search URL can't take a term just open and copy the name
 const menu=d=>{const t=d.n.split(" // ")[0];return `<details><summary>Check price</summary>${ST.map(([s,u])=>`<a target=_blank href="${esc(u.replace("{q}",encodeURIComponent(t)))}"${u.includes("{q}")?"":` data-c="${esc(t)}"`}>${s}</a>`).join("")}</details>`};
-const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
-g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank aria-label="${esc(d.n)} on Scryfall"><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div>${owner?"<div class=pr></div>":""}<div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button></div>`).join("");
+const FN={nonfoil:"Non-Foil",foil:"Foil",etched:"Etched",stamp:"Gold Stamp"},fc=new Set,fr=new Set,ff=new Set,fy=new Set,ft=new Set;
+g.innerHTML=D.map(d=>`<div class=c><a href="${d.u}" target=_blank aria-label="${esc(d.n)} on Scryfall"><img loading=lazy decoding=async alt="" src="${d.i}"></a><div class=nm><div class=n>${esc(d.n)}</div><small>${d.s} ${d.c}</small></div>${owner?"<div class=pr></div>":""}<div class=vs>${d.fin.map(f=>`<label class="v v-${f}${d.sg&&f=="foil"?" v-surge":""}"><input type=checkbox data-f=${f}><span>${d.sg&&f=="foil"?"Surge Foil":FN[f]||f}</span></label>`).join("")}</div>${menu(d)}<i class=ok></i><button class=wl title="Wishlist">${IC.star}</button>${d.b?`<button class=flip title="Show other side">${IC.flip}</button>`:""}</div>`).join("");
 const els=[...g.children];
 let pm=-1,pg=-1,wlNeed=[];const flash=id=>{const e=$(id);e.classList.remove("flash");void e.offsetWidth;e.classList.add("flash")};
 function draw(){showUpdated();$("io").hidden=!owner;$("im").hidden=$("fl").hidden=!owner;$("lk").textContent=owner?"Log out of owner mode":"Owner login";g.classList.toggle("ro",!owner);let m=0,gm=0,ac=0,v=0;const ms={},gf={},wn=[];const P=[...fc].filter(x=>x!="C"),cm=$("cm").value,s=cur,st=$("st").value,q=$("q").value.toLowerCase();
@@ -301,7 +310,7 @@ e.querySelectorAll("input").forEach(x=>{x.disabled=!owner;const h=own.has(d.k+"-
 const all=c0==d.fin.length,part=c0>0&&!all;m+=c0>0;gm+=c0;ac+=all;ms[d.s]=(ms[d.s]||0)+(c0>0);gf[d.s]=(gf[d.s]||0)+all;
 if(want.has(d.k)&&!all)wn.push(d);e.classList.toggle("own",all);e.classList.toggle("part",part);e.classList.toggle("w",want.has(d.k));e.querySelector("details").classList.toggle("hide",all);const pr=e.querySelector(".pr");if(pr)pr.classList.toggle("hide",all);
 const tys=[...ft].filter(x=>!"gk".includes(x)),sup=[...ft].filter(x=>"gk".includes(x)),tyOk=(!tys.length||tys.some(x=>d.tp.includes(x)))&&sup.every(x=>d.tp.includes(x)),
-mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):0):d.fin,
+mine=ff.size?d.fin.filter(f=>f=="nonfoil"?ff.has("n"):f=="foil"?ff.has(d.sg?"s":"f"):f=="stamp"?ff.has("g"):0):d.fin,
 stOk=!st||(st=="n"&&mine.every(f=>!own.has(d.k+"-"+f)))||(st=="mn"&&d.fin.includes("nonfoil")&&!own.has(d.k+"-nonfoil"))||(st=="mf"&&d.fin.some(f=>f!="nonfoil"&&!own.has(d.k+"-"+f)))||(st=="b"&&all),
 fOk=(!fc.size||(fc.has("C")&&!d.ci)||(P.length>0&&(cm=="x"?d.ci.length==P.length&&P.every(x=>d.ci.includes(x)):cm=="i"?P.every(x=>d.ci.includes(x)):[...d.ci].every(x=>P.includes(x)))))&&(!fr.size||fr.has(d.r))&&(!ff.size||mine.length>0)&&(!fy.size||fy.has(d.ty))&&tyOk,
 show=(!s||(s=="*"?want.has(d.k)&&(owner||!all):d.s==s))&&stOk&&fOk&&d.n.toLowerCase().includes(q);
@@ -316,7 +325,7 @@ wlNeed=wn;$("wb").hidden=!(cur=="*"&&wn.length>0);$("wc").textContent=wn.length+
 $("em").hidden=v>0;$("et").textContent=cur=="*"?"Nothing on the wishlist right now.":"No cards match these filters.";$("cf").hidden=cur=="*";
 const n=fc.size+fr.size+ff.size+fy.size+ft.size;$("fc").textContent=n;$("fc").classList.toggle("hide",!n);
 $("cnt").textContent=`Showing ${v} cards`}
-g.onclick=e=>{const w=e.target.closest(".wl");
+g.onclick=e=>{const fl=e.target.closest(".flip");if(fl){const c=fl.closest(".c"),i=c.querySelector("img");i.src=(i.dataset.bk=i.dataset.bk?"":"1")?D[els.indexOf(c)].b:D[els.indexOf(c)].i;return}const w=e.target.closest(".wl");
  if(w){if(owner){const k=D[els.indexOf(w.closest(".c"))].k;want.has(k)?want.delete(k):want.add(k);queue();draw()}return}
  const c=e.target.dataset.c;if(c)try{navigator.clipboard.writeText(c)}catch(x){}};
 $("cw").onclick=()=>{const t=wlNeed.map(d=>`1 ${d.n} (${d.s}) ${d.c}`).join("\\n"),done=()=>{$("cw").textContent="Copied ✓";setTimeout(()=>$("cw").textContent="Copy list",1500)};
@@ -324,7 +333,7 @@ $("cw").onclick=()=>{const t=wlNeed.map(d=>`1 ${d.n} (${d.s}) ${d.c}`).join("\\n
 $("cf").onclick=()=>{$("q").value="";$("st").value="";$("cm").value="i";[fc,fr,ff,fy,ft].forEach(t=>t.clear());$("fp").querySelectorAll(".ch").forEach(x=>x.classList.toggle("on",false));draw()};
 $("more").onclick=()=>{cur="";$("st").value="n";draw();scrollTo(0,0)};
 $("fi").innerHTML=IC.filter;
-const HAS={c:k=>D.some(d=>k=="C"?!d.ci:d.ci.includes(k)),r:k=>D.some(d=>d.r==k),f:k=>D.some(d=>k=="n"?d.fin.includes("nonfoil"):k=="f"?d.fin.includes("foil")&&!d.sg:d.sg),y:k=>D.some(d=>d.ty==k),t:k=>D.some(d=>d.tp.includes(k))};
+const HAS={c:k=>D.some(d=>k=="C"?!d.ci:d.ci.includes(k)),r:k=>D.some(d=>d.r==k),f:k=>D.some(d=>k=="n"?d.fin.includes("nonfoil"):k=="f"?d.fin.includes("foil")&&!d.sg:k=="g"?d.fin.includes("stamp"):d.sg),y:k=>D.some(d=>d.ty==k),t:k=>D.some(d=>d.tp.includes(k))};
 $("fp").querySelectorAll(".ch").forEach(x=>{const a=Object.keys(HAS).find(k=>x.dataset[k]!==undefined);x.hidden=!HAS[a](x.dataset[a])});
 $("cm").onchange=draw;$("fb").onclick=()=>{$("fp").hidden=!$("fp").hidden};
 document.addEventListener("click",e=>{if(!$("qr").contains(e.target))$("fp").hidden=true});
