@@ -89,6 +89,7 @@
 1 Terra, Magical Adept // Esper Terra (FIN) 511
 1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 513
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 521
+1 Gogo, Master of Mimicry (FIN) 522
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 523
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (FIN) 525
 1 Ragnarok, Divine Deliverance (FIN) 526b
@@ -96,7 +97,6 @@
 1 Vincent Valentine // Galian Beast (FIN) 528
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 529
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 530
-1 Tifa Lockhart (FIN) 536
 1 Balthier and Fran (FIN) 538
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 539
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 542
@@ -108,7 +108,6 @@
 1 Traveling Chocobo (FIN) 551f
 1 Cloud, Midgar Mercenary (PFIN) 10s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
-1 From Father to Son (PFIN) 20s
 1 Machinist's Arsenal (PFIN) 23s
 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (PFIN) 39s
 1 The Wind Crystal (PFIN) 43s
@@ -123,7 +122,6 @@
 1 Vincent Valentine // Galian Beast (PFIN) 125s
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (PFIN) 127s
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (PFIN) 133s
-1 Summon: G.F. Cerberus (PFIN) 162s
 1 The Earth Crystal (PFIN) 184s
 1 Esper Origins // Summon: Esper Maduin (PFIN) 185s
 1 Jumbo Cactuar (PFIN) 191s
