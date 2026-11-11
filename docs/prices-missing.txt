@@ -104,8 +104,10 @@
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544†
 1 Traveling Chocobo (FIN) 551
+1 Traveling Chocobo (FIN) 551a
 1 Traveling Chocobo (FIN) 551b
 1 Traveling Chocobo (FIN) 551f
+1 Summon: Bahamut (PFIN) 1s
 1 Cloud, Midgar Mercenary (PFIN) 10s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
 1 Machinist's Arsenal (PFIN) 23s
@@ -116,6 +118,7 @@
 1 Memories Returning (PFIN) 63s
 1 Summon: Leviathan (PFIN) 77s
 1 Y'shtola Rhul (PFIN) 86s
+1 Ardyn, the Usurper (PFIN) 89s
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
 1 Jecht, Reluctant Guardian // Braska's Final Aeon (PFIN) 104s
 1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (PFIN) 115s
@@ -127,6 +130,7 @@
 1 Jumbo Cactuar (PFIN) 191s
 1 Absolute Virtue (PFIN) 212s
 1 Balthier and Fran (PFIN) 213s
+1 Choco, Seeker of Paradise (PFIN) 215s
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (PFIN) 218s
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (PFIN) 229s
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (PFIN) 231s
