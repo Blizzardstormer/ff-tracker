@@ -1,5 +1,6 @@
 1 Strixhaven Stadium (FCA) 63†
 1 Hildibrand Manderville // Gentleman's Rise (FIC) 83
+1 The Falcon, Airship Restored (FIC) 116
 1 Hildibrand Manderville // Gentleman's Rise (FIC) 173
 1 Cloud, Ex-SOLDIER (FIC) 221
 1 Y'shtola, Night's Blessed (FIC) 226
@@ -138,6 +139,7 @@
 1 Serah Farron // Crystallized Serah (PFIN) 240s
 1 Terra, Magical Adept // Esper Terra (PFIN) 245s
 1 Vivi Ornitier (PFIN) 248s
+1 The Wandering Minstrel (PFIN) 249s
 1 Aettir and Priwen (PFIN) 253s
 1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (PFIN) 272s
 1 Ishgard, the Holy See // Faith & Grief (PFIN) 283s
