@@ -111,13 +111,11 @@
 1 Summon: Bahamut (PFIN) 1s
 1 Cloud, Midgar Mercenary (PFIN) 10s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
-1 Machinist's Arsenal (PFIN) 23s
 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (PFIN) 39s
 1 The Wind Crystal (PFIN) 43s
 1 Gogo, Master of Mimicry (PFIN) 54s
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (PFIN) 58s
 1 Memories Returning (PFIN) 63s
-1 Summon: Leviathan (PFIN) 77s
 1 Y'shtola Rhul (PFIN) 86s
 1 Ardyn, the Usurper (PFIN) 89s
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
