@@ -98,7 +98,6 @@
 1 Vincent Valentine // Galian Beast (FIN) 528
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 529
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 530
-1 Balthier and Fran (FIN) 538
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 539
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 542
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 543
@@ -111,6 +110,7 @@
 1 Summon: Bahamut (PFIN) 1s
 1 Cloud, Midgar Mercenary (PFIN) 10s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
+1 Moogles' Valor (PFIN) 27s
 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (PFIN) 39s
 1 The Wind Crystal (PFIN) 43s
 1 Gogo, Master of Mimicry (PFIN) 54s
@@ -127,7 +127,6 @@
 1 The Earth Crystal (PFIN) 184s
 1 Esper Origins // Summon: Esper Maduin (PFIN) 185s
 1 Jumbo Cactuar (PFIN) 191s
-1 Absolute Virtue (PFIN) 212s
 1 Balthier and Fran (PFIN) 213s
 1 Choco, Seeker of Paradise (PFIN) 215s
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (PFIN) 218s
