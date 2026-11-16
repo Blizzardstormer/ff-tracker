@@ -6,7 +6,6 @@
 1 Y'shtola, Night's Blessed (FIC) 226
 1 Hypnotic Sprite // Mesmeric Glare (FIC) 264
 1 Murderous Rider // Swift End (FIC) 279
-1 Forest (FIC) 482
 1 Crystal Fragments // Summon: Alexander (FIN) 13
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 16
 1 Sidequest: Catch a Fish // Cooking Campsite (FIN) 31
@@ -79,6 +78,7 @@
 1 Vincent Valentine // Galian Beast (FIN) 454
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 455
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 458
+1 Absolute Virtue (FIN) 476
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 483
 1 The Emperor of Palamecia // The Lord Master of Hell (FIN) 484
 1 Exdeath, Void Warlock // Neo Exdeath, Dimension's End (FIN) 485
@@ -90,6 +90,7 @@
 1 Serah Farron // Crystallized Serah (FIN) 506
 1 Terra, Magical Adept // Esper Terra (FIN) 511
 1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 513
+1 Cloud, Midgar Mercenary (FIN) 520
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 521
 1 Gogo, Master of Mimicry (FIN) 522
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 523
@@ -104,19 +105,21 @@
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 543
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544†
+1 The Wandering Minstrel (FIN) 548
 1 Traveling Chocobo (FIN) 551
 1 Traveling Chocobo (FIN) 551a
 1 Traveling Chocobo (FIN) 551b
 1 Traveling Chocobo (FIN) 551f
 1 Summon: Bahamut (PFIN) 1s
-1 Cloud, Midgar Mercenary (PFIN) 10s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
+1 Machinist's Arsenal (PFIN) 23s
 1 Moogles' Valor (PFIN) 27s
 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (PFIN) 39s
 1 The Wind Crystal (PFIN) 43s
 1 Gogo, Master of Mimicry (PFIN) 54s
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (PFIN) 58s
 1 Memories Returning (PFIN) 63s
+1 Summon: Leviathan (PFIN) 77s
 1 Y'shtola Rhul (PFIN) 86s
 1 Ardyn, the Usurper (PFIN) 89s
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
