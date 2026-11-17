@@ -6,6 +6,7 @@
 1 Y'shtola, Night's Blessed (FIC) 226
 1 Hypnotic Sprite // Mesmeric Glare (FIC) 264
 1 Murderous Rider // Swift End (FIC) 279
+1 Barret, Avalanche Leader (FIC) 472
 1 Crystal Fragments // Summon: Alexander (FIN) 13
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 16
 1 Sidequest: Catch a Fish // Cooking Campsite (FIN) 31
@@ -100,6 +101,7 @@
 1 Vincent Valentine // Galian Beast (FIN) 528
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 529
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 530
+1 Balthier and Fran (FIN) 538
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 539
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 542
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 543
@@ -110,6 +112,8 @@
 1 Traveling Chocobo (FIN) 551a
 1 Traveling Chocobo (FIN) 551b
 1 Traveling Chocobo (FIN) 551f
+1 Cloud, Midgar Mercenary (FIN) 564
+1 Tifa Lockhart (FIN) 567
 1 Summon: Bahamut (PFIN) 1s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
 1 Machinist's Arsenal (PFIN) 23s
