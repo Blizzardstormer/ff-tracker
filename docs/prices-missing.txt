@@ -24,7 +24,6 @@
 1 Sidequest: Play Blitzball // World Champion, Celestial Weapon (FIN) 158
 1 Esper Origins // Summon: Esper Maduin (FIN) 185
 1 Sidequest: Raise a Chocobo // Black Chocobo (FIN) 201
-1 Absolute Virtue (FIN) 212
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 218
 1 The Emperor of Palamecia // The Lord Master of Hell (FIN) 219
 1 Exdeath, Void Warlock // Neo Exdeath, Dimension's End (FIN) 220
@@ -92,7 +91,6 @@
 1 Serah Farron // Crystallized Serah (FIN) 506
 1 Terra, Magical Adept // Esper Terra (FIN) 511
 1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 513
-1 Cloud, Midgar Mercenary (FIN) 520
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 521
 1 Gogo, Master of Mimicry (FIN) 522
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 523
@@ -112,6 +110,7 @@
 1 Traveling Chocobo (FIN) 551
 1 Traveling Chocobo (FIN) 551a
 1 Traveling Chocobo (FIN) 551b
+1 Traveling Chocobo (FIN) 551d
 1 Traveling Chocobo (FIN) 551f
 1 Cloud, Midgar Mercenary (FIN) 564
 1 Tifa Lockhart (FIN) 567
@@ -126,6 +125,7 @@
 1 Gogo, Master of Mimicry (PFIN) 54s
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (PFIN) 58s
 1 Memories Returning (PFIN) 63s
+1 The Water Crystal (PFIN) 85s
 1 Y'shtola Rhul (PFIN) 86s
 1 Ardyn, the Usurper (PFIN) 89s
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
@@ -146,9 +146,9 @@
 1 Serah Farron // Crystallized Serah (PFIN) 240s
 1 Terra, Magical Adept // Esper Terra (PFIN) 245s
 1 Vivi Ornitier (PFIN) 248s
-1 The Wandering Minstrel (PFIN) 249s
 1 Aettir and Priwen (PFIN) 253s
 1 The Masamune (PFIN) 264s
+1 The Regalia (PFIN) 267s
 1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (PFIN) 272s
 1 Ishgard, the Holy See // Faith & Grief (PFIN) 283s
 1 Jidoor, Aristocratic Capital // Overture (PFIN) 284s
