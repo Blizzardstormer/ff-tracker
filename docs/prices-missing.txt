@@ -5,8 +5,6 @@
 1 Y'shtola, Night's Blessed (FIC) 226
 1 Hypnotic Sprite // Mesmeric Glare (FIC) 264
 1 Murderous Rider // Swift End (FIC) 279
-1 Barret, Avalanche Leader (FIC) 472
-1 Estinien Varlineau (FIC) 474
 1 Crystal Fragments // Summon: Alexander (FIN) 13
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 16
 1 Sidequest: Catch a Fish // Cooking Campsite (FIN) 31
@@ -79,7 +77,6 @@
 1 Vincent Valentine // Galian Beast (FIN) 454
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 455
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 458
-1 Absolute Virtue (FIN) 476
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 483
 1 The Emperor of Palamecia // The Lord Master of Hell (FIN) 484
 1 Exdeath, Void Warlock // Neo Exdeath, Dimension's End (FIN) 485
@@ -92,7 +89,6 @@
 1 Terra, Magical Adept // Esper Terra (FIN) 511
 1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 513
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 521
-1 Gogo, Master of Mimicry (FIN) 522
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (FIN) 523
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (FIN) 525
 1 Ragnarok, Divine Deliverance (FIN) 526b
@@ -100,13 +96,11 @@
 1 Vincent Valentine // Galian Beast (FIN) 528
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (FIN) 529
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (FIN) 530
-1 Balthier and Fran (FIN) 538
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (FIN) 539
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (FIN) 542
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 543
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 544†
-1 The Wandering Minstrel (FIN) 548
 1 Traveling Chocobo (FIN) 551
 1 Traveling Chocobo (FIN) 551a
 1 Traveling Chocobo (FIN) 551b
@@ -154,4 +148,5 @@
 1 Jidoor, Aristocratic Capital // Overture (PFIN) 284s
 1 Lindblum, Industrial Regency // Mage Siege (PFIN) 285s
 1 Midgar, City of Mako // Reactor Raid (PFIN) 286s
+1 Starting Town (PFIN) 289s
 1 Zanarkand, Ancient Metropolis // Lasting Fayth (PFIN) 293s
