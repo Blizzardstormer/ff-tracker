@@ -108,6 +108,7 @@
 1 Traveling Chocobo (FIN) 551f
 1 Cloud, Midgar Mercenary (FIN) 564
 1 Tifa Lockhart (FIN) 567
+1 Swamp (FIN) 574
 1 Summon: Bahamut (PFIN) 1s
 1 Ultima, Origin of Oblivion (PFIN) 2s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
@@ -119,6 +120,7 @@
 1 Gogo, Master of Mimicry (PFIN) 54s
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (PFIN) 58s
 1 Memories Returning (PFIN) 63s
+1 Summon: Leviathan (PFIN) 77s
 1 The Water Crystal (PFIN) 85s
 1 Y'shtola Rhul (PFIN) 86s
 1 Ardyn, the Usurper (PFIN) 89s
@@ -141,7 +143,6 @@
 1 Terra, Magical Adept // Esper Terra (PFIN) 245s
 1 Vivi Ornitier (PFIN) 248s
 1 Aettir and Priwen (PFIN) 253s
-1 The Masamune (PFIN) 264s
 1 The Regalia (PFIN) 267s
 1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (PFIN) 272s
 1 Ishgard, the Holy See // Faith & Grief (PFIN) 283s
