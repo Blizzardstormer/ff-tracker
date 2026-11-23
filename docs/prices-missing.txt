@@ -109,7 +109,6 @@
 1 Cloud, Midgar Mercenary (FIN) 564
 1 Tifa Lockhart (FIN) 567
 1 Swamp (FIN) 574
-1 Summon: Bahamut (PFIN) 1s
 1 Ultima, Origin of Oblivion (PFIN) 2s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
 1 From Father to Son (PFIN) 20s
