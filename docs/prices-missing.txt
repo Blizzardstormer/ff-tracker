@@ -55,6 +55,7 @@
 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (FIN) 329
 1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (FIN) 354
 1 Crystal Fragments // Summon: Alexander (FIN) 357
+1 Summon: Leviathan (FIN) 361
 1 Jecht, Reluctant Guardian // Braska's Final Aeon (FIN) 363
 1 Esper Origins // Summon: Esper Maduin (FIN) 370
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 376
@@ -111,7 +112,6 @@
 1 Traveling Chocobo (FIN) 551b
 1 Traveling Chocobo (FIN) 551d
 1 Traveling Chocobo (FIN) 551f
-1 Cloud, Midgar Mercenary (FIN) 564
 1 Tifa Lockhart (FIN) 567
 1 Swamp (FIN) 574
 1 Summon: Bahamut (PFIN) 1s
@@ -124,6 +124,7 @@
 1 Gogo, Master of Mimicry (PFIN) 54s
 1 Jill, Shiva's Dominant // Shiva, Warden of Ice (PFIN) 58s
 1 Memories Returning (PFIN) 63s
+1 Summon: Leviathan (PFIN) 77s
 1 The Water Crystal (PFIN) 85s
 1 Y'shtola Rhul (PFIN) 86s
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
