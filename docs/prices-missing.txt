@@ -8,6 +8,7 @@
 1 Yuna, Grand Summoner (FIC) 227
 1 Hypnotic Sprite // Mesmeric Glare (FIC) 264
 1 Murderous Rider // Swift End (FIC) 279
+1 Rinoa, Angel Wing (FIC) 450
 1 Aerith, Last Ancient (FIC) 471
 1 Crystal Fragments // Summon: Alexander (FIN) 13
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 16
@@ -55,7 +56,6 @@
 1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal (FIN) 329
 1 Balamb Garden, SeeD Academy // Balamb Garden, Airborne (FIN) 354
 1 Crystal Fragments // Summon: Alexander (FIN) 357
-1 Summon: Leviathan (FIN) 361
 1 Jecht, Reluctant Guardian // Braska's Final Aeon (FIN) 363
 1 Esper Origins // Summon: Esper Maduin (FIN) 370
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (FIN) 376
@@ -112,8 +112,8 @@
 1 Traveling Chocobo (FIN) 551b
 1 Traveling Chocobo (FIN) 551d
 1 Traveling Chocobo (FIN) 551f
-1 Tifa Lockhart (FIN) 567
 1 Swamp (FIN) 574
+1 Astrologian's Planisphere (FIN) 581
 1 Summon: Bahamut (PFIN) 1s
 1 Ultima, Origin of Oblivion (PFIN) 2s
 1 Dion, Bahamut's Dominant // Bahamut, Warden of Light (PFIN) 16s
