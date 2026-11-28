@@ -90,7 +90,6 @@
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (FIN) 496
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 497
 1 Kuja, Genome Sorcerer // Trance Kuja, Fate Defied (FIN) 497†
-1 Rydia, Summoner of Mist (FIN) 504
 1 Serah Farron // Crystallized Serah (FIN) 506
 1 Terra, Magical Adept // Esper Terra (FIN) 511
 1 Ultimecia, Time Sorceress // Ultimecia, Omnipotent (FIN) 513
@@ -110,8 +109,8 @@
 1 Traveling Chocobo (FIN) 551
 1 Traveling Chocobo (FIN) 551a
 1 Traveling Chocobo (FIN) 551b
-1 Traveling Chocobo (FIN) 551d
 1 Traveling Chocobo (FIN) 551f
+1 Cloud, Midgar Mercenary (FIN) 564
 1 Swamp (FIN) 574
 1 Astrologian's Planisphere (FIN) 581
 1 Summon: Bahamut (PFIN) 1s
@@ -130,15 +129,12 @@
 1 Cecil, Dark Knight // Cecil, Redeemed Paladin (PFIN) 91s
 1 Jecht, Reluctant Guardian // Braska's Final Aeon (PFIN) 104s
 1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (PFIN) 115s
-1 Summon: Primal Odin (PFIN) 121s
 1 Vincent Valentine // Galian Beast (PFIN) 125s
 1 Zenos yae Galvus // Shinryu, Transcendent Rival (PFIN) 127s
 1 Clive, Ifrit's Dominant // Ifrit, Warden of Inferno (PFIN) 133s
 1 The Earth Crystal (PFIN) 184s
 1 Esper Origins // Summon: Esper Maduin (PFIN) 185s
-1 A Realm Reborn (PFIN) 196s
 1 Balthier and Fran (PFIN) 213s
-1 Choco, Seeker of Paradise (PFIN) 215s
 1 Emet-Selch, Unsundered // Hades, Sorcerer of Eld (PFIN) 218s
 1 Joshua, Phoenix's Dominant // Phoenix, Warden of Fire (PFIN) 229s
 1 Kefka, Court Mage // Kefka, Ruler of Ruin (PFIN) 231s
